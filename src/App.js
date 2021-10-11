@@ -1,10 +1,13 @@
 import './App.css';
+import GlobalStyle from "./components/GlobalStyle"
+import TestComponent from './components/TestComponent';
 
 function App() {
 	return (
-		<div className="App flex center">
-			<h1>Hello World!</h1>
-    	</div>
+		<>
+			<TestComponent />
+			<GlobalStyle />
+		</>
 	);
 }
 
