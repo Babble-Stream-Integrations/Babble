@@ -1,11 +1,17 @@
+/* Import React */
 import React from 'react'
+
+/* Import CSS */
 import './WebTemplate.css'
+
+/* Import Components */
+import Navigation from '../navbar/Navigation.js'
 
 const WebTemplate = () => {
     return (
-        <nav>
-            <h1>hi</h1>
-        </nav>
+        <>
+            <Navigation />
+        </>
     )
 }
 

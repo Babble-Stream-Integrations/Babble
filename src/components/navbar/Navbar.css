@@ -1,0 +1,20 @@
+.nav-container {
+    background-color: var(--mg);
+    height: 100vh;
+    width: 10rem;
+}
+
+.selected-page {
+    background-color: var(--dg);
+    width: 50px;
+    height: 50px;
+}
+
+.selected-pageq, .nav-icons {
+    color: var(--mo);
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
