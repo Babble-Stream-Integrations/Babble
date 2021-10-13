@@ -1,9 +1,10 @@
 import './App.css';
+import WebTemplate from './components/webtemplate/WebTemplate.js'
 
 function App() {
 	return (
-		<div className="App flex center">
-			<h1>Hello World!</h1>
+		<div className="">
+			<WebTemplate />
     	</div>
 	);
 }
