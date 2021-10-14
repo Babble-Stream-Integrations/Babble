@@ -9,9 +9,12 @@ import Navigation from '../navbar/Navigation.js'
 
 const WebTemplate = () => {
     return (
-        <>
-            <Navigation />
-        </>
+        <div className="bg-color">
+            <Navigation NavWidth="6rem" />
+            <div className="container">
+
+            </div>
+        </div>
     )
 }
 
