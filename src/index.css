@@ -60,6 +60,12 @@ body {
 	--ow2: #f2f2f4;
 }
 
+/* Universal Sizes */
+:root {
+	--sbsize: 6.25rem;
+}
+
+
 /* Universal Classes */
 .flex {
     display: flex;
