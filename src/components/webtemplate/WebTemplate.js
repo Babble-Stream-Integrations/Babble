@@ -12,7 +12,7 @@ const WebTemplate = () => {
         <div className="bg-color">
             <Navigation NavWidth="6.25rem" />
             <div className="container">
-                {/* Hier staat de conten in */}
+                {/* Hier staat de content in */}
                 <h1>hallo</h1>
             </div>
         </div>
