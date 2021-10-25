@@ -72,9 +72,9 @@ body {
 }
 
 .flex-center {
-	justify-content: center;
-	align-items: center;
-	text-align: center;
+	justify-content: center !important;
+	align-items: center !important;
+	text-align: center !important;
 }
 
 .flex-vertical {

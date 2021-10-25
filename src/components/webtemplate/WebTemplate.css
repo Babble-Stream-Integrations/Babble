@@ -1,3 +1,5 @@
-.container {
-    margin-left: var(--sbsize);
+@media (min-width: 969px) {
+    .container {
+        margin-left: var(--sbsize);
+    }
 }

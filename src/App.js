@@ -3,7 +3,7 @@ import WebTemplate from './components/webtemplate/WebTemplate.js'
 
 function App() {
 	return (
-		<div className="">
+		<div>
 			<WebTemplate />
     	</div>
 	);

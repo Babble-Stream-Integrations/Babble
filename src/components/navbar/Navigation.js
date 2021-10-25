@@ -33,15 +33,15 @@ const Navigation = ({ NavWidth }) => {
 
     return (
         <>
-            <div className="nav-container" style={{width: NavWidth}}>
-                <Navbar defaultExpanded collapseOnSelect className="nav-height">
+            <div className="nav-container nav-mobile">
+                <Navbar collapseOnSelect expand="md" className="nav-height nav-width">
                     <Navbar.Brand id="nav-babble-logo" className="flex flex-center logo-foreground">
-                        <Link to="/home">
+                        <Link to="/">
                             <img src={ logoImg } alt="Logo" className="nav-icons nav-logo" />
                         </Link>
                     </Navbar.Brand>
-                    <Nav className="flex flex-vertical flex-center flex-center nav-height" style={{marginTop: -Height}}>
-                        <NavLink to="/home" activeClassName="selected-page">
+                    <Nav className="flex flex-vertical flex-center flex-center nav-height nav-links nav-item-spacing" style={{marginTop: -Height}}>
+                        <NavLink exact to="/" activeClassName="selected-page">
                             <img src={ homeImg } alt="Home" className="nav-icons" />
                         </NavLink>
                         <NavLink to="/addons" activeClassName="selected-page">
