@@ -1,13 +1,25 @@
+// Styles
 import './App.css';
 import GlobalStyle from "./components/GlobalStyle"
-import TestComponent from './components/TestComponent';
+import "bootstrap/dist/css/bootstrap.min.css"
+import { Container } from 'react-bootstrap'
+
+// Components
+import SignUp from "./components/SignUp"
+import Login from "./components/Login"
 
 function App() {
 	return (
-		<>
-			<TestComponent />
+		<Container 
+			className="d-flex align-items-center
+			justify-content-center" style={{minHeight: "100vh"}}
+			>
+				<div className="w-100" style={{ maxWidth: "400px" }}>
+					<SignUp />
+				</div>
 			<GlobalStyle />
-		</>
+			
+		</Container>
 	);
 }
 
