@@ -27,13 +27,19 @@ export default function SignUp() {
                             <Form.Label>Password confirmation</Form.Label>
                             <Form.Control type="password" ref={passwordConfirmRef} required />
                         </Form.Group>
-                        <Button className="w-100" type="submit">Sign Up</Button>
+                        <Button className="w-100 mt-2" type="submit">Sign Up</Button>
+                        <div className="w-100 text-center mt-2">
+                            or
+                        </div>
+                        <div className="w-100 text-center mt-2">
+                            <Button className="w-100" type="submit"><img src="https://img.icons8.com/color/16/000000/google-logo.png" alt=""/><a> Login using Google</a></Button> 
+                        </div>
+                        <div className="w-100 text-center mt-2">
+                            Don't have an account? Register
+                        </div>
                     </Form>
                 </Card.Body>
             </Card>
-            <div className = "w-100 text-center mt-2">
-                Already have an account? Log In
-            </div>
         </>
     )
 }

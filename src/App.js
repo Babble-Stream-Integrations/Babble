@@ -7,6 +7,7 @@ import { Container } from 'react-bootstrap'
 // Components
 import SignUp from "./components/SignUp"
 import Login from "./components/Login"
+import Faq from './components/Faq';
 
 function App() {
 	return (
@@ -15,7 +16,7 @@ function App() {
 			justify-content-center" style={{minHeight: "100vh"}}
 			>
 				<div className="w-100" style={{ maxWidth: "400px" }}>
-					<SignUp />
+					<Login />
 				</div>
 			<GlobalStyle />
 			
