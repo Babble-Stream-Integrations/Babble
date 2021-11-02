@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import AppLogin from './AppLogin';
+import AppSignUp from './AppSignUp'
+import AppFaq from './AppFaq'
 import reportWebVitals from './reportWebVitals';
 // import './main.scss'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppSignUp />
   </React.StrictMode>,
   document.getElementById('root')
 );
