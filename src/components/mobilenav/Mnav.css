@@ -32,22 +32,26 @@
 
 /* Hamburger Menu! */
 .Mnav {
-    position: absolute !important;
+    position: absolute;
     
-    padding: 0 !important;
+    padding: 0;
 
     width: 100%;
     height: calc(100% - 87px);
 
     background-color: var(--lg);
 
-    text-transform: uppercase !important;
+    text-transform: uppercase;
 }
 
 .MnavLink {
     color: var(--mo);
-    text-decoration: none !important;
+    text-decoration: none;
     font-size: 1.5em;
+}
+
+.MnavLink:hover {
+    color: var(--mo);
 }
 
 .Mnav-gap {
