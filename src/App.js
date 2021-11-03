@@ -12,7 +12,7 @@ import './App.css';
 import Home from './pages/Home'
 import Addons from './pages/Addons.js'
 import Help from './pages/Help.js'
-import LogIn from './pages/LogIn.js'
+import LogIn from './pages/LogInMenu.js'
 
 /* Import Components */
 import Navigation from './components/navbar/Navigation.js';

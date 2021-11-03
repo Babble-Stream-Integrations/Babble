@@ -5,7 +5,7 @@
     max-width: none;
     width: auto;
 
-    color: white;
+    /* color: white; */
 }
 
 @media (min-width: 969px) {
