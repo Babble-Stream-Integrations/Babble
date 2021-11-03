@@ -1,13 +1,10 @@
 // Styles
-import './App.css';
-import GlobalStyle from "./components/GlobalStyle"
-import "bootstrap/dist/css/bootstrap.min.css"
 import { Container } from 'react-bootstrap'
 
 // Components
-import Login from "./components/Login"
+import SignUp from '../components/Login-SignUp/SignUp.js';
 
-function AppLogin() {
+function SignUpMenu() {
 	return (
 		<>
 			<Container 
@@ -15,14 +12,14 @@ function AppLogin() {
 				justify-content-center" style={{minHeight: "100vh"}}
 				>
 					<div className="w-100" style={{ maxWidth: '400px'}}>
-						<Login />
+						<SignUp />
 					</div>
 				
-				<GlobalStyle />
+				{/* <GlobalStyle /> */}
 				
 			</Container>
 		</>
 	);
 }
 
-export default AppLogin;
+export default SignUpMenu;

@@ -13,6 +13,7 @@ import Home from './pages/Home'
 import Addons from './pages/Addons.js'
 import Help from './pages/Help.js'
 import LogIn from './pages/LogInMenu.js'
+import SignUpMenu from './pages/SignUpMenu.js'
 
 /* Import Components */
 import Navigation from './components/navbar/Navigation.js';
@@ -61,6 +62,18 @@ function App() {
 						</div>
 					</div>
 				</Route>
+
+				<Route path="/signup">
+					<div className="bg-color">
+						{isDesktop && <Navigation NavWidth="6.25rem" />}
+						{isPhone && <Mnav />}
+						<div className="container">
+							{/* Hier staat de content in */}
+							<SignUpMenu />
+						</div>
+					</div>
+				</Route>
+
 				<Route path="/">
 					<div className="bg-color">
 						{isDesktop && <Navigation NavWidth="6.25rem" />}
