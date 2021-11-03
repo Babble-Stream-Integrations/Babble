@@ -10,11 +10,13 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video, nav {
 	margin: 0;
 	padding: 0;
 	border: 0;
 	vertical-align: baseline;
+
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -47,7 +49,7 @@ table {
 }
 
 body {
-	background-color: var(--lg);
+	background-color: var(--lg) !important;
 }
 
 /* Universal Colors */
@@ -68,7 +70,7 @@ body {
 
 /* Universal Classes */
 .flex {
-    display: flex;
+    display: flex !important;
 }
 
 .flex-center {
@@ -78,9 +80,9 @@ body {
 }
 
 .flex-vertical {
-	flex-direction: column;
+	flex-direction: column !important;
 }
 
 .flex-spread {
-	justify-content: space-between;
+	justify-content: space-between !important;
 }

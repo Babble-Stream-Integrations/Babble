@@ -33,8 +33,8 @@ const Navigation = ({ NavWidth }) => {
 
     return (
         <>
-            <div className="nav-container nav-mobile">
-                <Navbar collapseOnSelect expand="md" className="nav-height nav-width">
+            <div className="nav-container">
+                <Navbar className="nav-height nav-width main-nav flex-center">
                     <Navbar.Brand id="nav-babble-logo" className="flex flex-center logo-foreground">
                         <Link to="/">
                             <img src={ logoImg } alt="Logo" className="nav-icons nav-logo" />

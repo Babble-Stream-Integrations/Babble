@@ -1,18 +1,24 @@
 /* Import React */
-import React from 'react'
+import React from 'react';
+
+/* Import Helpers */
+import { useMatchMedia } from './helpers/useMatchMedia.js';
 
 /* Import React */
 import './App.css';
 
-/* Import Helpers */
-import { useMatchMedia } from './helpers/useMatchMedia.js'
+/* Import Pages */
+import Home from './pages/Home'
+import Addons from './pages/Addons.js'
+import Help from './pages/Help.js'
+import LogIn from './pages/LogIn.js'
 
 /* Import Components */
-import Navigation from './components/navbar/Navigation.js'
-import Mnav from './components/mobilenav/Mnav.js'
+import Navigation from './components/navbar/Navigation.js';
+import Mnav from './components/mobilenav/Mnav.js';
 
 /* Import Dependency */
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom';
 
 function App() {
 
@@ -22,7 +28,7 @@ function App() {
 
 
 	return (
-		<div>
+		<>
 			<Switch>
 				<Route path="/addons">
 					<div className="bg-color">
@@ -30,7 +36,7 @@ function App() {
 						{isPhone && <Mnav />}
 						<div className="container">
 							{/* Hier staat de content in */}
-							<h1 style={{color: "white"}}>Addons</h1>
+							<Addons />
 						</div>
 					</div>
 				</Route>
@@ -40,7 +46,7 @@ function App() {
 						{isPhone && <Mnav />}
 						<div className="container">
 							{/* Hier staat de content in */}
-							<h1 style={{color: "white"}}>Help</h1>
+							<Help />
 						</div>
 					</div>
 				</Route>
@@ -50,7 +56,7 @@ function App() {
 						{isPhone && <Mnav />}
 						<div className="container">
 							{/* Hier staat de content in */}
-							<h1 style={{color: "white"}}>Login</h1>
+							<LogIn />
 						</div>
 					</div>
 				</Route>
@@ -60,12 +66,12 @@ function App() {
 						{isPhone && <Mnav />}
 						<div className="container">
 							{/* Hier staat de content in */}
-							<h1 style={{color: "white"}}>Home</h1>
+							<Home />
 						</div>
 					</div>
 				</Route>
 			</Switch>
-    	</div>
+		</>
 	);
 }
 

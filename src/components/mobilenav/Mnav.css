@@ -6,14 +6,16 @@
 
 .Mnav-bar {
     z-index: 2;
+    padding: 0;
 }
 
 .Mnav-icons {
     color: var(--mo);
-    width: 48px;
-    height: 48px;
+    width: 58px;
+    height: 58px;
     padding: 5px; 
     margin: 5px;
+    cursor: auto;
 }
 
 .MhamburgerStyle {
@@ -30,17 +32,21 @@
 
 /* Hamburger Menu! */
 .Mnav {
-    position: absolute;
+    position: absolute !important;
+    
+    padding: 0 !important;
 
     width: 100%;
-    height: calc(100% - 71px);
+    height: calc(100% - 87px);
 
     background-color: var(--lg);
+
+    text-transform: uppercase !important;
 }
 
 .MnavLink {
     color: var(--mo);
-    text-decoration: none;
+    text-decoration: none !important;
     font-size: 1.5em;
 }
 

@@ -1,3 +1,10 @@
+.container {
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    width: auto;
+}
+
 @media (min-width: 969px) {
     .container {
         margin-left: var(--sbsize);
