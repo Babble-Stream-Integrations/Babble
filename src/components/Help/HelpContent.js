@@ -1,14 +1,14 @@
 import React from 'react'
 import { Accordion } from 'react-bootstrap'
 
-function Faq() {
+const HelpContent = () => {
     return (
         <>
-            <Accordion >
+            <Accordion>
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>Faq #1</Accordion.Header>
                     <Accordion.Body>
-                        Je tering moeder test. Hallo dit is een test hoi!
+                        Finn
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
@@ -16,4 +16,4 @@ function Faq() {
     )
 }
 
-export default Faq;
+export default HelpContent
