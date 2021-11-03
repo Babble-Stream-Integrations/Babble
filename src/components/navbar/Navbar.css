@@ -1,0 +1,55 @@
+.nav-container {
+    background-color: var(--dg);
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
+}
+
+.main-nav {
+    flex-wrap: wrap;
+}
+
+.selected-page {
+    background-color: var(--mg);
+    border-radius: 25%;
+}
+
+.nav-icons {
+    color: var(--mo);
+    width: 48px;
+    height: 48px;
+    padding: 5px; 
+    margin: 5px;
+}
+
+.nav-logo {
+    margin-top: 25px;
+    width: 60px;
+    height: 60px;
+}
+
+.nav-height {
+    height: 100vh;
+}
+
+.nav-width {
+    width: 6.25rem;
+}
+
+.logo-foreground {
+    z-index: 2;
+}
+
+.nav-item-spacing {
+    gap: 50px;
+}
+
+
+/* Overwrite Bootstrap */
+.navbar-brand {
+    margin-right: 0;
+}
+
+.navbar {
+    padding: 0;
+}
