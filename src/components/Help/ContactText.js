@@ -3,10 +3,10 @@ import React from 'react'
 /* Import CSS */
 import './Help.css'
 
-export default function AboutText() {
+export default function ContactText() {
     return (
         <>
-            <h1>About</h1>
+            <h1>Contact</h1>
         </>
     )
 }
