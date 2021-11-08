@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+.opensans {
+  font-family: "Open Sans", sans-serif;
+}
+
 h1 {
     color: white;
 }
@@ -6,4 +12,21 @@ h2 {
     font: Helvetica;
     font-size: 20px;
     color: white;
+}
+
+.section{
+    padding-bottom: 40px;
+    padding-right: 40px;
+}
+
+
+.header-text{
+    text-align: center;
+    font-weight: bold;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+.main-heading{
+    color: rgb(204,18,18);
 }
