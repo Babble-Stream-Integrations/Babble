@@ -44,26 +44,26 @@ function Help() {
 			<Container fluid="xxl">
 
 				<Row className="pt-5">
-					<Col md="auto">
+					<Col md="2" className="help-text">
 						<AboutText />
 					</Col>
-					<Col className="px-5">
+					<Col md="8"> 
 						<AboutContent />
 					</Col>
 				</Row>
 				<Row className="mt-5">
-					<Col md="auto">
+					<Col md="2">
 						<HelpText />
 					</Col>
-					<Col className="px-5">
+					<Col md="8">
 						<HelpContent />
 					</Col>
 				</Row>
 				<Row className="mt-5">
-					<Col md="auto">
+					<Col md="2">
 						<ContactText />
 					</Col>
-					<Col className="px-5">
+					<Col md="8">
 						<ContactContent />
 					</Col>
 				</Row>

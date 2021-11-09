@@ -49,7 +49,7 @@ table {
 }
 
 body {
-	background-color: var(--lg);
+	background-color: var(--mg);
 }
 
 /* Universal Colors */
@@ -60,6 +60,23 @@ body {
 	--lg: #252529;
 	--ow1: #d0d0d2;
 	--ow2: #f2f2f4;
+}
+
+/* Universal Background Colors */
+.uni-text-white {
+	color: white;
+}
+
+.uni-bg-lg {
+	background-color: var(--lg);
+}
+
+.uni-bg-mg {
+	background-color: var(--mg);
+}
+
+.uni-bg-dg {
+	background-color: var(--dg);
 }
 
 /* Universal Sizes */

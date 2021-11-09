@@ -7,7 +7,7 @@ export default function Login() {
     const passwordConfirmRef = useRef()
     return (
         <>
-            <Card id="login">
+            <Card id="login" className="uni-bg-lg uni-text-white">
                 <Card.Body>
                     <h2 className="text-center mb-4">Login</h2>
                     <Form>
