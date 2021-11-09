@@ -1,4 +1,4 @@
-.container {
+.Mcontainer {
     padding: 0;
     margin: 0;
 
@@ -6,10 +6,12 @@
     width: auto;
 
     color: white;
+
+    position:fixed;
 }
 
 @media (min-width: 969px) {
-    .container {
+    .Mcontainer {
         margin-left: var(--sbsize);
     }
 }

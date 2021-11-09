@@ -11,7 +11,7 @@ import './App.css';
 import Home from './pages/Home'
 import Addons from './pages/Addons.js'
 import Help from './pages/Help.js'
-import LogIn from './pages/LogIn.js'
+import LogIn from './pages/LogInMenu.js'
 
 /* Import Components */
 import Navigation from './components/navbar/Navigation.js';
@@ -34,7 +34,7 @@ function App() {
 					<div className="bg-color">
 						{isDesktop && <Navigation NavWidth="6.25rem" />}
 						{isPhone && <Mnav />}
-						<div className="container">
+						<div className="Mcontainer">
 							{/* Hier staat de content in */}
 							<Addons />
 						</div>
@@ -44,7 +44,7 @@ function App() {
 					<div className="bg-color">
 						{isDesktop && <Navigation NavWidth="6.25rem" />}
 						{isPhone && <Mnav />}
-						<div className="container">
+						<div className="Mcontainer">
 							{/* Hier staat de content in */}
 							<Help />
 						</div>
@@ -54,7 +54,7 @@ function App() {
 					<div className="bg-color">
 						{isDesktop && <Navigation NavWidth="6.25rem" />}
 						{isPhone && <Mnav />}
-						<div className="container">
+						<div className="Mcontainer">
 							{/* Hier staat de content in */}
 							<LogIn />
 						</div>
@@ -64,7 +64,7 @@ function App() {
 					<div className="bg-color">
 						{isDesktop && <Navigation NavWidth="6.25rem" />}
 						{isPhone && <Mnav />}
-						<div className="container">
+						<div className="Mcontainer">
 							{/* Hier staat de content in */}
 							<Home />
 						</div>
