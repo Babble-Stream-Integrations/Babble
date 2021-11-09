@@ -1,16 +1,24 @@
 import React, {useRef} from 'react'
 import {Form, Button, Card} from "react-bootstrap"
 
+import {fbsignup, fblogin} from './LoginFirebase.js'
+
 export default function SignUp() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
+
+    handleSubmit = (event) => {
+        fbsignup(emailRef, passwordRef);
+        event.preventDefault();
+    }
+
     return (
         <>
             <Card>
                 <Card.Body>
                     <h2 className="text-center mb-4">Sign Up</h2>
-                    <Form>
+                    <Form onSubmit={this.handleSubmit.bind(this)}>
                         {/*Email input*/}
                         <Form.Group id="email">
                             <Form.Label>Email</Form.Label>
