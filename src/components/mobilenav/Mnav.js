@@ -1,5 +1,5 @@
 /* Import React */
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
 
 /* Import CSS */
 import './Mnav.css'
@@ -13,10 +13,10 @@ import { Navbar } from 'react-bootstrap'
 import { Link } from 'react-router-dom'  
 
 
-const Mnav = () => {
+const Mnav = ({ setIsNone, isNone }) => {
 
-    /* State Mobile Nav */
-    const [isNone, setIsNone] = useState(true)
+    // /* State Mobile Nav */
+    // const [isNone, setIsNone] = useState(true)
 
     return (
         <div className="Mnav-container">
