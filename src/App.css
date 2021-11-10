@@ -5,7 +5,7 @@
     max-width: none;
     width: auto;
 
-    color: white;
+    color: var(--white);
 
     position:fixed;
 }
