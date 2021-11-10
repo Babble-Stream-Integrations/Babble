@@ -1,0 +1,10 @@
+.main-footer{
+    color: white;
+    background-color: #0e0e10;
+    padding-top: 3em;
+    padding-bottom: 20px;
+    position: relative;
+}
+.main-footer-text{
+    text-align: center;
+}

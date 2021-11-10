@@ -18,6 +18,7 @@ import SignUpMenu from './pages/SignUpMenu.js'
 /* Import Components */
 import Navigation from './components/navbar/Navigation.js';
 import Mnav from './components/mobilenav/Mnav.js';
+import Footer from "./components/Footer/Footer.js"
 
 /* Import Dependency */
 import { Switch, Route } from 'react-router-dom';
@@ -41,6 +42,7 @@ function App() {
 							<Addons />
 						</div>
 					</div>
+					<Footer />
 				</Route>
 				<Route path="/help">
 					<div className="bg-color">
@@ -49,8 +51,11 @@ function App() {
 						<div className="container">
 							{/* Hier staat de content in */}
 							<Help />
+							
 						</div>
 					</div>
+					<Footer />
+					
 				</Route>
 				<Route path="/login">
 					<div className="bg-color">
@@ -61,6 +66,7 @@ function App() {
 							<LogIn />
 						</div>
 					</div>
+					<Footer />
 				</Route>
 
 				<Route path="/signup">
@@ -72,6 +78,7 @@ function App() {
 							<SignUpMenu />
 						</div>
 					</div>
+					<Footer />
 				</Route>
 
 				<Route path="/">
@@ -83,6 +90,7 @@ function App() {
 							<Home />
 						</div>
 					</div>
+					<Footer />
 				</Route>
 			</Switch>
 		</>
