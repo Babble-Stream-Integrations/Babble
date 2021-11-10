@@ -25,6 +25,20 @@
     max-width: 800px;
 }
 
+.home-main-content {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.home-text-positioning {
+    margin-right: 35px;
+    margin-left: 35px;
+}
+
+.home-text-decoration {
+    line-height: 1.5;
+}
+
 /* Button */
 .home-start-button {
     color: var(--dg);
@@ -46,5 +60,9 @@
 
     .home-start-button {
         max-width: 400px;
+    }
+
+    .home-text-positioning {
+        margin: 0;
     }
 }
