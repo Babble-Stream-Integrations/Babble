@@ -1,16 +1,25 @@
 import React, {useRef} from 'react'
 import {Form, Button, Card} from "react-bootstrap"
 
+import {fblogin} from './LoginFirebase.js'
+
+
 export default function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
+
+    let login = (event) => {
+        fblogin(emailRef, passwordRef);
+        event.preventDefault();
+    }
+
     return (
         <>
             <Card id="login">
                 <Card.Body>
                     <h2 className="text-center mb-4">Login</h2>
-                    <Form>
+                    <Form onSubmit={login}>
                         {/*Email input*/}
                         <Form.Group id="email">
                             <Form.Label>Email</Form.Label>

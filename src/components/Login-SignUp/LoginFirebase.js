@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyCzNQ2O8_KEF7rcupBT8gNjB0_BIE7K4ig",
@@ -30,14 +30,15 @@ export function fbsignup(email, password) {
 	});
 }
 
-// export function fblogin() {
-// 	firebase.auth().signInWithEmailAndPassword(email, password)
-// 	.then((userCredential) => {
-// 		// Signed in
-// 		var user = userCredential.user;
-// 	})
-// 	.catch((error) => {
-// 		var errorCode = error.code;
-// 		var errorMessage = error.message;
-// 	});
-// }
+export function fblogin(email, password) {
+	signInWithEmailAndPassword(auth, email, password)
+	.then((userCredential) => {
+		// Signed in
+		var user = userCredential.user;
+		console.log(user)
+	})
+	.catch((error) => {
+		var errorCode = error.code;
+		var errorMessage = error.message;
+	});
+}
