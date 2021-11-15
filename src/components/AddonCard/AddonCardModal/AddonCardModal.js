@@ -41,11 +41,11 @@ function AddonCardModal( props ) {
                 <div>
                     <h4 className="uni-allcaps addoncard-subtitle-margin">Supported Platforms</h4>
                     <div>
-                        <div style={{ display: twitchShow ? "block" : "none" }} className="flex flex-middle">
+                        <div style={{ display: twitchShow ? "flex" : "none" }} className="flex-middle">
                             <img src={ TwitchLogo } alt="twitch icon" className="addoncard-platforms-picture" />
                             <h3>Twitch</h3>
                         </div>
-                        <div style={{ display: youtubeShow ? "block" : "none" }} className="flex flex-middle">
+                        <div style={{ display: youtubeShow ? "flex" : "none" }} className="flex-middle">
                             <img src={ YoutubeLogo } alt="youtube icon" className="addoncard-platforms-picture" />
                             <h3>YouTube</h3>
                         </div>
