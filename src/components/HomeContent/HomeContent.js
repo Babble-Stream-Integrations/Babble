@@ -10,8 +10,8 @@ import './HomeContent.css'
 
 const HomeContent = () => {
     return (
-        <div className="container H-max-width home-font-size home-overflow">
-            <div className="row home-row-positioning home-flex-gap">
+        <div className="container H-max-width title-font-size">
+            <div className="row page-row-positioning home-flex-gap">
                 <div className="col-md-3 flex-center">
                     <h1>Welcome</h1>
                 </div>

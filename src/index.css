@@ -81,6 +81,18 @@ body {
     background-color: var(--dg);
 }
 
+.uni-no-padding {
+	padding: 0;
+}
+
+.uni-allcaps {
+	text-transform: uppercase;
+}
+
+.uni-clickable-cursor {
+	cursor: pointer;
+}
+
 /* Universal Sizes */
 :root {
 	--sbsize: 6.25rem;
@@ -104,4 +116,9 @@ body {
 
 .flex-spread {
 	justify-content: space-between !important;
+}
+
+.flex-middle {
+	text-align: center !important;
+	align-items: center !important;
 }
