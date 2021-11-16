@@ -54,6 +54,8 @@
     font-weight: 500;
 
     margin-top: 15px;
+
+    
 }
 
 .addoncard-modal-img {
@@ -95,6 +97,11 @@
 
     top: 15px;
     right: 0px;
+}
+
+.addoncard-modal-button:disabled {
+    font-size: large;
+    background-color: gray;
 }
 
 @media (min-width: 979px) {

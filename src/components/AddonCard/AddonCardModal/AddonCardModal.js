@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { PropTypes } from 'prop-types'
 
 /* Import CSS */
 import '../AddonCard.css'
+
+/* Import Helpers */
+import { useMatchMedia } from '../../../helpers/useMatchMedia.js';
 
 /* Import Dependencies */
 import { Modal } from 'react-bootstrap'
@@ -18,6 +21,8 @@ import { GrClose } from 'react-icons/gr'
 function AddonCardModal( props ) {
     
     const {twitchShow, youtubeShow, ...rest } = props;
+
+    const PhoneSize = useMatchMedia("(max-width:968px)", true)
 
     return (
         <Modal
@@ -51,7 +56,8 @@ function AddonCardModal( props ) {
                         </div>
                     </div>
                 </div>
-                <button className="uni-allcaps addoncard-modal-button">Customize</button>
+                {PhoneSize && <button className="uni-allcaps addoncard-modal-button" disabled={ true }>Customize Desktop Only</button>}
+                {!PhoneSize && <button className="uni-allcaps addoncard-modal-button" disabled={ false }>Customize</button>}
             </Modal.Body>
         </Modal>
     );

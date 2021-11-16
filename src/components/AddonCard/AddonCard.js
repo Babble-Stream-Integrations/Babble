@@ -45,6 +45,7 @@ const AddonCard = ({ name, background, platforms, description }) => {
                 youtubeShow={ youtubeShow }
 
                 addonplatforms={ platforms }
+                addonname={ name }
             />
         </div>
     )
