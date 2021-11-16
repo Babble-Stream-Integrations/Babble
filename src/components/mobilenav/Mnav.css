@@ -7,6 +7,7 @@
 .Mnav-bar {
     z-index: 11;
     padding: 0;
+    height: 81px;
 }
 
 .Mnav-icons {
