@@ -20,39 +20,42 @@ import { GrClose } from 'react-icons/gr'
 
 function AddonCardModal( props ) {
     
-    const {twitchShow, youtubeShow, ...rest } = props;
+    const { setModalShow, twitchShow, youtubeShow, ...rest } = props;
 
     const PhoneSize = useMatchMedia("(max-width:968px)", true)
 
     return (
         <Modal
             {...rest}
+            animation={false}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
             className="uni-text-white"
         >
             <Modal.Header className="addoncard-modal-header">
-                <div>
-                    <img src={ props.addonbackground } alt="hi" className="addoncard-modal-img" />
-                    <GrClose className="addoncard-close-button-image" />
+                <div className="addoncard-modal-header-sizing">
+                    <img src={ props.addonbackground } alt="Image addon" className="addoncard-modal-img" />
+                    <GrClose className="addoncard-close-button-image" onClick={() => { setModalShow(false) }} />
                 </div>
             </Modal.Header>
-            <Modal.Body className="flex flex-vertical addoncard-flex-gap addoncard-body-positioning">
-                <div>
-                    <h4 className="uni-allcaps addoncard-subtitle-margin">{ props.addonname }</h4>
-                    <p>{ props.addondescription }</p>
-                </div>
-                <div>
-                    <h4 className="uni-allcaps addoncard-subtitle-margin">Supported Platforms</h4>
+            <Modal.Body className="flex flex-vertical addoncard-flex-gap">
+                <div className="addoncard-body-positioning">
                     <div>
-                        <div style={{ display: twitchShow ? "flex" : "none" }} className="flex-middle">
-                            <img src={ TwitchLogo } alt="twitch icon" className="addoncard-platforms-picture" />
-                            <h3>Twitch</h3>
-                        </div>
-                        <div style={{ display: youtubeShow ? "flex" : "none" }} className="flex-middle">
-                            <img src={ YoutubeLogo } alt="youtube icon" className="addoncard-platforms-picture" />
-                            <h3>YouTube</h3>
+                        <h4 className="uni-allcaps addoncard-subtitle-margin">{ props.addonname }</h4>
+                        <p>{ props.addondescription }</p>
+                    </div>
+                    <div>
+                        <h4 className="uni-allcaps addoncard-subtitle-margin">Supported Platforms</h4>
+                        <div>
+                            <div style={{ display: twitchShow ? "flex" : "none" }} className="flex-middle">
+                                <img src={ TwitchLogo } alt="twitch icon" className="addoncard-platforms-picture" />
+                                <h3>Twitch</h3>
+                            </div>
+                            <div style={{ display: youtubeShow ? "flex" : "none" }} className="flex-middle">
+                                <img src={ YoutubeLogo } alt="youtube icon" className="addoncard-platforms-picture" />
+                                <h3>YouTube</h3>
+                            </div>
                         </div>
                     </div>
                 </div>

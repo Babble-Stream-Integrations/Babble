@@ -43,6 +43,7 @@ const AddonCard = ({ name, background, platforms, description }) => {
 
                 twitchShow={ twitchShow }
                 youtubeShow={ youtubeShow }
+                setModalShow= { setModalShow }
 
                 addonplatforms={ platforms }
                 addonname={ name }
