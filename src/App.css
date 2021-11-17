@@ -1,4 +1,4 @@
-.container {
+.Mcontainer {
     padding: 0;
     margin: 0;
 
@@ -16,10 +16,23 @@
 
 .content-wrap{
     flex:1;
+
+    color: var(--white);
+
+    position:fixed;
+}
+
+.title-font-size {
+    font-size: large;
+}
+
+.page-row-positioning {
+    margin-top: 5vh;
+
 }
 
 @media (min-width: 969px) {
-    .container {
+    .Mcontainer {
         margin-left: var(--sbsize);
     }
 }
