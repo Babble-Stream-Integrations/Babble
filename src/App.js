@@ -31,69 +31,71 @@ function App() {
 
 
 	return (
-		<>
-			<Switch>
-				<Route path="/addons">
-					<div className="bg-color">
-						{isDesktop && <Navigation NavWidth="6.25rem" />}
-						{isPhone && <Mnav />}
-						<div className="container">
-							{/* Hier staat de content in */}
-							<Addons />
+		<div className="page-container">
+			<div className="content-wrap">
+				<Switch>
+					<Route path="/addons">
+						<div className="bg-color">
+							{isDesktop && <Navigation NavWidth="6.25rem" />}
+							{isPhone && <Mnav />}
+							<div className="container">
+								{/* Hier staat de content in */}
+								<Addons />
+							</div>
 						</div>
-					</div>
-					<Footer />
-				</Route>
-				<Route path="/help">
-					<div className="bg-color">
-						{isDesktop && <Navigation NavWidth="6.25rem" />}
-						{isPhone && <Mnav />}
-						<div className="container">
-							{/* Hier staat de content in */}
-							<Help />
-							
-						</div>
-					</div>
-					<Footer />
-					
-				</Route>
-				<Route path="/login">
-					<div className="bg-color">
-						{isDesktop && <Navigation NavWidth="6.25rem" />}
-						{isPhone && <Mnav />}
-						<div className="container">
-							{/* Hier staat de content in */}
-							<LogIn />
-						</div>
-					</div>
-					<Footer />
-				</Route>
+						<Footer />
+					</Route>
+					<Route path="/help">
+						<div className="bg-color">
+							{isDesktop && <Navigation NavWidth="6.25rem" />}
+							{isPhone && <Mnav />}
+							<div className="container">
+								{/* Hier staat de content in */}
+								<Help />
 
-				<Route path="/signup">
-					<div className="bg-color">
-						{isDesktop && <Navigation NavWidth="6.25rem" />}
-						{isPhone && <Mnav />}
-						<div className="container">
-							{/* Hier staat de content in */}
-							<SignUpMenu />
+							</div>
 						</div>
-					</div>
-					<Footer />
-				</Route>
+						<Footer />
 
-				<Route path="/">
-					<div className="bg-color">
-						{isDesktop && <Navigation NavWidth="6.25rem" />}
-						{isPhone && <Mnav />}
-						<div className="container">
-							{/* Hier staat de content in */}
-							<Home />
+					</Route>
+					<Route path="/login">
+						<div className="bg-color">
+							{isDesktop && <Navigation NavWidth="6.25rem" />}
+							{isPhone && <Mnav />}
+							<div className="container">
+								{/* Hier staat de content in */}
+								<LogIn />
+							</div>
 						</div>
-					</div>
-					<Footer />
-				</Route>
-			</Switch>
-		</>
+						<Footer />
+					</Route>
+
+					<Route path="/signup">
+						<div className="bg-color">
+							{isDesktop && <Navigation NavWidth="6.25rem" />}
+							{isPhone && <Mnav />}
+							<div className="container">
+								{/* Hier staat de content in */}
+								<SignUpMenu />
+							</div>
+						</div>
+						<Footer />
+					</Route>
+
+					<Route path="/">
+						<div className="bg-color">
+							{isDesktop && <Navigation NavWidth="6.25rem" />}
+							{isPhone && <Mnav />}
+							<div className="container">
+								{/* Hier staat de content in */}
+								<Home />
+							</div>
+						</div>
+						<Footer />
+					</Route>
+				</Switch>
+			</div>
+		</div>
 	);
 }
 
