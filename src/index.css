@@ -50,7 +50,7 @@ table {
 }
 
 body {
-	background-color: var(--lg);
+	background-color: var(--mg);
 }
 
 /* Universal Colors */
@@ -93,6 +93,23 @@ body {
 	cursor: pointer;
 }
 
+/* Universal Background Colors */
+.uni-text-white {
+	color: white;
+}
+
+.uni-bg-lg {
+	background-color: var(--lg);
+}
+
+.uni-bg-mg {
+	background-color: var(--mg);
+}
+
+.uni-bg-dg {
+	background-color: var(--dg);
+}
+
 /* Universal Sizes */
 :root {
 	--sbsize: 6.25rem;
@@ -122,3 +139,4 @@ body {
 	text-align: center !important;
 	align-items: center !important;
 }
+

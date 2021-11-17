@@ -5,6 +5,18 @@
     max-width: none;
     width: auto;
 
+    /* color: white; */
+}
+
+.page-container{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content-wrap{
+    flex:1;
+
     color: var(--white);
 
     position:fixed;
@@ -16,6 +28,7 @@
 
 .page-row-positioning {
     margin-top: 5vh;
+
 }
 
 @media (min-width: 969px) {

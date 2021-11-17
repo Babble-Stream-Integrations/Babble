@@ -7,16 +7,20 @@ import { useMatchMedia } from './helpers/useMatchMedia.js';
 
 /* Import React */
 import './App.css';
+// import GlobalStyle from './GlobalStyle.js';
 
 /* Import Pages */
 import Home from './pages/Home'
 import Addons from './pages/Addons.js'
 import Help from './pages/Help.js'
 import LogIn from './pages/LogInMenu.js'
+import SignUpMenu from './pages/SignUpMenu.js'
+
 
 /* Import Components */
 import Navigation from './components/navbar/Navigation.js';
 import Mnav from './components/mobilenav/Mnav.js';
+import Footer from "./components/Footer/Footer.js"
 
 /* Import Dependency */
 import { Switch, Route } from 'react-router-dom';
@@ -31,54 +35,74 @@ function App() {
     const [isNone, setIsNone] = useState(true)
 
 	return (
-		<>
-			<Switch>
-				{/* Addons pagina */}
-				<Route path="/addons">
-					<div className="bg-color">
-						{isDesktop && <Navigation NavWidth="6.25rem" />}
-						{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
-						<div className="Mcontainer" style={{ position: isNone ? "absolute" : "fixed" }}>
-							{/* Hier staat de content in */}
-							<Addons />
-						</div>
-					</div>
-				</Route>
-				{/* Help pagina */}
-				<Route path="/help">
-					<div className="bg-color">
-						{isDesktop && <Navigation NavWidth="6.25rem" />}
-						{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
-						<div className="Mcontainer" style={{ position: isNone ? "absolute" : "fixed" }}>
-							{/* Hier staat de content in */}
-							<Help />
-						</div>
-					</div>
-				</Route>
-				{/* Login pagina */}
-				<Route path="/login">
-					<div className="bg-color">
-						{isDesktop && <Navigation NavWidth="6.25rem" />}
-						{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
-						<div className="Mcontainer" style={{ position: isNone ? "absolute" : "fixed" }}>
-							{/* Hier staat de content in */}
-							<LogIn />
-						</div>
-					</div>
-				</Route>
-				{/* Home pagina */}
-				<Route path="/">
-					<div className="bg-color">
-						{isDesktop && <Navigation NavWidth="6.25rem" />}
-						{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
-						<div className="Mcontainer" style={{ position: isNone ? "absolute" : "fixed" }}>
-							{/* Hier staat de content in */}
-							<Home />
-						</div>
-					</div>
-				</Route>
-			</Switch>
-		</>
+		<div className="page-container">
+			<div className="content-wrap">
+
+			  <Switch>
+				  {/* Addons pagina */}
+          <Route path="/addons">
+            <div className="bg-color">
+              {isDesktop && <Navigation NavWidth="6.25rem" />}
+              {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
+              <div className="Mcontainer" style={{ position: isNone ? "absolute" : "fixed" }}>
+                {/* Hier staat de content in */}
+                <Addons />
+              </div>
+            </div>
+            <Footer />
+          </Route>
+          {/* Help pagina */}
+          <Route path="/help">
+            <div className="bg-color">
+              {isDesktop && <Navigation NavWidth="6.25rem" />}
+              {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
+              <div className="Mcontainer" style={{ position: isNone ? "absolute" : "fixed" }}>
+                {/* Hier staat de content in */}
+                <Help />
+              </div>
+            </div>
+            <Footer />
+          </Route>
+          {/* Login pagina */}
+          <Route path="/login">
+            <div className="bg-color">
+              {isDesktop && <Navigation NavWidth="6.25rem" />}
+              {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
+              <div className="Mcontainer" style={{ position: isNone ? "absolute" : "fixed" }}>
+                {/* Hier staat de content in */}
+                <LogIn />
+              </div>
+            </div>
+            <Footer />
+          </Route>
+          {/* Signup pagina */}
+          <Route path="/signup">
+            <div className="bg-color">
+              {isDesktop && <Navigation NavWidth="6.25rem" />}
+              {isPhone <Mnav setIsNone={setIsNone} isNone={isNone} />}
+              <div className="Mcontainer">
+                {/* Hier staat de content in */}
+                <SignUpMenu />
+              </div>
+            </div>
+            <Footer />
+          </Route>       
+        
+				  {/* Home pagina */}
+				  <Route path="/">
+					  <div className="bg-color">
+						  {isDesktop && <Navigation NavWidth="6.25rem" />}
+						  {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
+						  <div className="Mcontainer" style={{ position: isNone ? "absolute" : "fixed" }}>
+							  {/* Hier staat de content in */}
+							  <Home />
+						  </div>
+             </div>
+						<Footer />
+					</Route>
+				</Switch>
+			</div>
+		</div>
 	);
 }
 

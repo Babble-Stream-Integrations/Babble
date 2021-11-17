@@ -1,0 +1,36 @@
+h1 {
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    color: white;
+}
+
+h2 {
+    font-family: 'Segoe UI';
+    font-size: 20px;
+    color: white;
+}
+
+.section{
+    padding-bottom: 40px;
+    padding-right: 40px;
+}
+
+
+.header-text{
+    text-align: center;
+    font-weight: bold;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+.main-heading{
+    color: rgb(204,18,18);
+}
+
+@media (max-width: 979px) {
+
+    .help-text {
+        margin-bottom: 20px;
+    }
+
+}
