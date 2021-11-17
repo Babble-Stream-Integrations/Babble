@@ -12,22 +12,21 @@ import { HiMenu } from 'react-icons/hi'
 import { Navbar } from 'react-bootstrap'
 import { Link } from 'react-router-dom'  
 
-
+{/* State als props */}
 const Mnav = ({ setIsNone, isNone }) => {
-
-    // /* State Mobile Nav */
-    // const [isNone, setIsNone] = useState(true)
-
     return (
         <div className="Mnav-container">
             <Navbar id="Mnav" className="flex flex-spread Mnav-bar">
+                {/* Brand Babble */}
                 <Navbar.Brand className="flex flex-center logo-foreground">
                     <Link to="/">
                         <img src={ logoImg } alt="Logo" className="Mnav-icons" />
                     </Link>
                 </Navbar.Brand>
+                {/* Hamburger Menu */}
                 <span onClick={() => setIsNone((s) => !s)} className="MhamburgerStyle flex flex-center"><HiMenu className="Mhamburger"/></span>
             </Navbar>
+            {/* Navbar Zelf wanneer uitgeklapt */}
             <Navbar className="Mnav Mnav-gap flex-center flex-vertical" style={{ display: isNone ? "none" : "flex"}}>
                 <Link to="/" onClick={() => { setIsNone(true)}} className="MnavLink">
                     <h2>Home</h2>

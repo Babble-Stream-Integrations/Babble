@@ -33,6 +33,7 @@ function App() {
 	return (
 		<>
 			<Switch>
+				{/* Addons pagina */}
 				<Route path="/addons">
 					<div className="bg-color">
 						{isDesktop && <Navigation NavWidth="6.25rem" />}
@@ -43,6 +44,7 @@ function App() {
 						</div>
 					</div>
 				</Route>
+				{/* Help pagina */}
 				<Route path="/help">
 					<div className="bg-color">
 						{isDesktop && <Navigation NavWidth="6.25rem" />}
@@ -53,6 +55,7 @@ function App() {
 						</div>
 					</div>
 				</Route>
+				{/* Login pagina */}
 				<Route path="/login">
 					<div className="bg-color">
 						{isDesktop && <Navigation NavWidth="6.25rem" />}
@@ -63,6 +66,7 @@ function App() {
 						</div>
 					</div>
 				</Route>
+				{/* Home pagina */}
 				<Route path="/">
 					<div className="bg-color">
 						{isDesktop && <Navigation NavWidth="6.25rem" />}

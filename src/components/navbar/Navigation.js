@@ -22,6 +22,7 @@ const Navigation = ({ NavWidth }) => {
     // Declare Height state for centering navigation
     const [Height, setHeight] = useState(null);
 
+    {/* UseEffect om navbar in het midden te zetten zonder dat het logo in de weg komt */}
     useEffect(() => {
         let x = document.getElementById("nav-babble-logo").offsetHeight;
         if (Height === null) {
@@ -35,11 +36,13 @@ const Navigation = ({ NavWidth }) => {
         <>
             <div className="nav-container">
                 <Navbar className="nav-height nav-width main-nav flex-center">
+                    {/* Brand/Babble logo */}
                     <Navbar.Brand id="nav-babble-logo" className="flex flex-center logo-foreground">
                         <Link to="/">
                             <img src={ logoImg } alt="Logo" className="nav-icons nav-logo" />
                         </Link>
                     </Navbar.Brand>
+                    {/* De Navbar zelf */}
                     <Nav className="flex flex-vertical flex-center flex-center nav-height nav-links nav-item-spacing" style={{marginTop: -Height}}>
                         <NavLink exact to="/" activeClassName="selected-page">
                             <img src={ homeImg } alt="Home" className="nav-icons" />
@@ -60,6 +63,8 @@ const Navigation = ({ NavWidth }) => {
     )
 }
 
+
+{/* Default Props */}
 Navigation.defaultProps = {
     NavWidth: '8rem'
 }
