@@ -1,0 +1,16 @@
+.addons-max-width {
+    max-width: none;
+}
+
+.addons-flex-gap {
+    gap: 15px;
+}
+
+.addons-text-decoration {
+    line-height: 1.5;
+}
+
+.addon-main-content {
+    padding-right: 0;
+    padding-left: 0;
+}

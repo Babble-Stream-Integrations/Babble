@@ -10,8 +10,8 @@ import './HomeContent.css'
 
 const HomeContent = () => {
     return (
-        <div className="container H-max-width home-font-size home-overflow">
-            <div className="row home-row-positioning home-flex-gap">
+        <div className="container H-max-width title-font-size">
+            <div className="row page-row-positioning home-flex-gap">
                 <div className="col-md-3 flex-center">
                     <h1>Welcome</h1>
                 </div>
@@ -19,6 +19,7 @@ const HomeContent = () => {
                     <p className="home-text-positioning home-text-decoration">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum temporibus sint commodi repellendus? Esse est nam nulla adipisci, tenetur neque maxime laboriosam facere, sit, nesciunt perferendis et eaque! Aliquam, sit?
                     </p>
+                    {/* Button naar Addons */}
                     <button className="home-start-button home-text-positioning">Start Designing</button>
                     <img src={ NoImg } alt="Filler" className="home-noimage"/>
                     <p className="home-text-positioning home-text-decoration">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 

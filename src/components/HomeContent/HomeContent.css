@@ -6,16 +6,8 @@
     max-width: none;
 }
 
-.home-row-positioning {
-    margin-top: 5vh;
-}
-
 .home-flex-gap {
     gap: 15px;
-}
-
-.home-font-size {
-    font-size: large;
 }
 
 .home-noimage {
