@@ -11,7 +11,7 @@ function LogIn() {
 		<>
 			<Container 
 				className="d-flex align-items-center
-				justify-content-center" style={{minHeight: "100vh"}}
+				justify-content-center" style={{minHeight: "calc(100vh - 53px - 2vh)"}}
 				>
 					<div className="w-100" style={{ maxWidth: '400px'}}>
 						<Login />

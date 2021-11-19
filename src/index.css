@@ -51,6 +51,9 @@ table {
 
 body {
 	background-color: var(--mg);
+	height: 100vh;
+
+	overflow-y: overlay
 }
 
 /* Universal Colors */
@@ -85,6 +88,10 @@ body {
 	padding: 0;
 }
 
+.uni-no-margin {
+	margin: 0;
+}
+
 .uni-allcaps {
 	text-transform: uppercase;
 }
@@ -93,11 +100,15 @@ body {
 	cursor: pointer;
 }
 
-/* Universal Background Colors */
 .uni-text-white {
 	color: white;
 }
 
+.uni-text-decoration {
+	line-height: 1.5;
+}
+
+/* Universal Background Colors */
 .uni-bg-lg {
 	background-color: var(--lg);
 }

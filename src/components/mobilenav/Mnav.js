@@ -12,7 +12,7 @@ import { HiMenu } from 'react-icons/hi'
 import { Navbar } from 'react-bootstrap'
 import { Link } from 'react-router-dom'  
 
-{/* State als props */}
+/* State als props */
 const Mnav = ({ setIsNone, isNone }) => {
     return (
         <div className="Mnav-container">

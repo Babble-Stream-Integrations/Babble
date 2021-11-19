@@ -6,6 +6,14 @@ import './AddonsContent.css'
 /* Import Components */
 import AddonCard from '../AddonCard/AddonCard.js'
 
+/* Import Images */
+import AutoTitleImg from '../../assets/img/auto-stream-title-background.png'
+import SpotifyVotingImg from '../../assets/img/spotify-voting-background.png'
+import SpotifyMusicPoolImg from '../../assets/img/spotify-music-pool-background.png'
+import RaffleImg from '../../assets/img/raffle-background.png'
+import TrendingChatImg from '../../assets/img/trending-chat-background.png'
+
+
 const AddonsContent = () => {
 
     /* Array's platforms */
@@ -13,7 +21,7 @@ const AddonsContent = () => {
     const platformstest = ['Youtube']
 
     return (
-        <div className="container addons-max-width title-font-size">
+        <div className="container addons-max-width title-font-size"  style={{minHeight: "calc(100vh - 53px - 2vh)"}}>
             <div className="row page-row-positioning addons-flex-gap">
                 <div className="col-md-3 flex-center">
                     <h1>Templates</h1>
@@ -23,13 +31,16 @@ const AddonsContent = () => {
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima, fugit nostrum! Dicta obcaecati porro autem rem qui, sint nulla provident enim necessitatibus sed officia corporis tenetur, eos eaque dolor? Delectus.
                     </p>
                     <div className="addons-addoncard-container container uni-no-padding">
-                        <div className="row flex flex-center uni-no-padding">
-                            <AddonCard name="Raffle" platforms={platformsraffle} />
-                            <AddonCard platforms={platformstest} />
+                        <div className="row flex flex-center uni-no-margin addon-padding-cards addon-card-spacing">
+                            <AddonCard name="Spotify Music Pool" platforms={platformsraffle} background={ SpotifyMusicPoolImg } />
+                            <AddonCard name="Spotify Voting" platforms={platformstest} background={ SpotifyVotingImg } />
                         </div>
-                        <div className="row flex flex-center uni-no-padding">
-                            <AddonCard platforms={platformstest} />
-                            <AddonCard />
+                        <div className="row flex flex-center uni-no-margin addon-padding-cards addon-card-spacing">
+                            <AddonCard name="Auto Title" platforms={platformstest} background={ AutoTitleImg } />
+                            <AddonCard name="Raffle" platforms={platformsraffle} background={ RaffleImg } />
+                        </div>
+                        <div className="row flex flex-center uni-no-margin addon-padding-cards addon-card-spacing">
+                            <AddonCard name="Trending Chat" background={ TrendingChatImg }/>
                         </div>
                     </div>
                 </div>
