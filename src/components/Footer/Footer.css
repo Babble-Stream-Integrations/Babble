@@ -6,8 +6,6 @@
     padding-bottom: 20px;
 
     /* position: relative; */
-    position: sticky;
-
     margin: 0;
     margin-top: 2vh;
 
@@ -16,5 +14,14 @@
     bottom: 0; 
 }
 .main-footer-text{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.footer-list{
+    text-align: center;
+}
+
+.footer-headtext{
     text-align: center;
 }
