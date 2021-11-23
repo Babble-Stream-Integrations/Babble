@@ -3,14 +3,24 @@
 }
 
 .addons-flex-gap {
-    gap: 15px;
+    gap: 40px;
 }
 
 .addons-text-decoration {
     line-height: 1.5;
+    margin-bottom: 40px;
 }
 
 .addon-main-content {
     padding-right: 0;
     padding-left: 0;
+}
+
+.addon-padding-cards {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+.addon-card-spacing {
+    gap: 2rem;
 }

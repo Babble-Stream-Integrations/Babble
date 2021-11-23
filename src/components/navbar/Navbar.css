@@ -12,13 +12,19 @@
 
 .selected-page {
     background-color: var(--mg);
-    border-radius: 25%;
+    /* background-color: green; */
+    border-radius: 15%;
+}
+
+.nav-icons-sizing {
+    height: 70px;
+    width: 70px;
 }
 
 .nav-icons {
     color: var(--mo);
-    width: 48px;
-    height: 48px;
+    width: 45px;
+    height: 45px;
     padding: 5px; 
     margin: 5px;
 }
@@ -42,7 +48,7 @@
 }
 
 .nav-item-spacing {
-    gap: 50px;
+    gap: 30px;
 }
 
 

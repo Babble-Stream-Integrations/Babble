@@ -41,29 +41,29 @@ function Help() {
 					</div>
 				</div>
 			</Container> */}
-			<Container fluid="xxl">
+			<Container className="help-max-width title-font-size">
 
-				<Row className="pt-5">
-					<Col md="2" className="help-text">
+				<Row className="page-row-positioning">
+					<Col md="3" className="help-text flex-center">
 						<AboutText />
 					</Col>
-					<Col md="8"> 
+					<Col md="6" className="help-main-content"> 
 						<AboutContent />
 					</Col>
 				</Row>
 				<Row className="mt-5">
-					<Col md="2">
+					<Col md="3" className="flex-center">
 						<HelpText />
 					</Col>
-					<Col md="8">
+					<Col md="6" className="help-main-content">
 						<HelpContent />
 					</Col>
 				</Row>
 				<Row className="mt-5">
-					<Col md="2">
+					<Col md="3" className="flex-center">
 						<ContactText />
 					</Col>
-					<Col md="8">
+					<Col md="6" className="help-main-content">
 						<ContactContent />
 					</Col>
 				</Row>

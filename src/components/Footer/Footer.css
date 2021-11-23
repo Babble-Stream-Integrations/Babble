@@ -1,9 +1,19 @@
 .main-footer{
     color: white;
-    background-color: #0e0e10;
-    padding-top: 3em;
+    background-color: #0e0e10; 
+
+    padding-top: 1em;
     padding-bottom: 20px;
-    position: relative;
+
+    /* position: relative; */
+    position: sticky;
+
+    margin: 0;
+    margin-top: 2vh;
+
+    max-width: none;
+
+    bottom: 0; 
 }
 .main-footer-text{
     text-align: center;

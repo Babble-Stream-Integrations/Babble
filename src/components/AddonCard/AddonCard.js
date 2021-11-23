@@ -32,9 +32,9 @@ const AddonCard = ({ name, background, platforms, description }) => {
 
 
     return (
-        <div className="col-lg uni-no-padding addoncard-card-margin card-shadow uni-clickable-cursor">
+        <div className="col-lg uni-no-padding card-shadow uni-clickable-cursor">
             <div className="addoncard-card-container flex flex-center" style={{ backgroundImage: "url("+ background +")"}} onClick={() => {setModalShow(true); checkplatforms()}}>
-                <h1>{ name }</h1>
+                <h2 className="uni-allcaps addoncard-card-h2">{ name }</h2>
             </div>
 
             <AddonCardModal
@@ -47,6 +47,7 @@ const AddonCard = ({ name, background, platforms, description }) => {
 
                 addonplatforms={ platforms }
                 addonname={ name }
+                addonbackground={ background }
             />
         </div>
     )

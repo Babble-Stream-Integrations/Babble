@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { PropTypes } from 'prop-types'
 
 /* Import CSS */
@@ -35,14 +35,14 @@ function AddonCardModal( props ) {
         >
             <Modal.Header className="addoncard-modal-header">
                 <div className="addoncard-modal-header-sizing">
-                    <img src={ props.addonbackground } alt="Image addon" className="addoncard-modal-img" />
+                    <img src={ props.addonbackground } alt="addon" className="addoncard-modal-img" />
                     <GrClose className="addoncard-close-button-image" onClick={() => { setModalShow(false) }} />
                 </div>
             </Modal.Header>
             <Modal.Body className="flex flex-vertical addoncard-flex-gap">
                 <div className="addoncard-body-positioning">
                     <div>
-                        <h4 className="uni-allcaps addoncard-subtitle-margin">{ props.addonname }</h4>
+                        <h4 className="uni-allcaps addoncard-subtitle-margin uni-allcaps">{ props.addonname }</h4>
                         <p>{ props.addondescription }</p>
                     </div>
                     <div>
