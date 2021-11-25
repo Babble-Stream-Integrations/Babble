@@ -1,0 +1,68 @@
+.form-text {
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    color: white;
+}
+
+.rounded-border {
+    border-radius: 15px;
+}
+
+.card-login-style {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 100px;
+    margin-left: 100px;
+    border-radius: 15px;
+}
+
+.login-main-content {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.login-content {
+    margin-bottom: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-text-login-style {
+    padding-top: 20px;
+}
+
+.login-button:hover {
+    background-color: var(--mo);
+    border-color: var(--mo);
+    border-radius: 10px;
+}
+
+.login-button {
+    background-color: var(--mo);
+    border-color: var(--mo);
+    border-radius: 10px;
+}
+
+.login-google-button:hover {
+    background-color: var(--lg);
+    border-color: white;
+    border-radius: 10px;
+}
+
+.login-google-button {
+    background-color: var(--lg);
+    border-color: white;
+    border-radius: 10px;
+}
+
+.login-max-width {
+    max-width: none;
+}
+
+@media (max-width: 968px) {
+
+    .login-text {
+        margin-bottom: 20px;
+    }
+}

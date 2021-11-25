@@ -13,7 +13,7 @@ import './App.css';
 import Home from './pages/Home'
 import Addons from './pages/Addons.js'
 import Help from './pages/Help.js'
-import LogIn from './pages/LogInMenu.js'
+import Login from './components/Login-SignUp/Login'
 import SignUpMenu from './pages/SignUpMenu.js'
 
 
@@ -69,7 +69,7 @@ function App() {
               {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
               <div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
                 {/* Hier staat de content in */}
-                <LogIn />
+                <Login />
               </div>
             </div>
             <Footer />
