@@ -15,7 +15,7 @@ export default function Login() {
                     <Col md="3" className="login-text flex-center">
                         <LoginText />
                     </Col>
-                    <Col md="5" className="login-content">
+                    <Col md="6" className="login-content">
                         <LoginContent />
                     </Col>
                 </Row>
