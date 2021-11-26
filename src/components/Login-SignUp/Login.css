@@ -65,4 +65,24 @@
     .login-text {
         margin-bottom: 20px;
     }
+
+    .card-login-style {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+    border-radius: 15px;
+    }
+
+    .login-google-button {
+    background-color: var(--lg);
+    border-color: white;
+    border-radius: 10px;
+    }
+
+    .login-google-button:hover {
+    background-color: var(--lg);
+    border-color: white;
+    border-radius: 10px;
+    }
 }
