@@ -10,7 +10,7 @@ export default function Login() {
     
     return (
         <>
-            <Container className="help-max-width title-font-size">
+            <Container className="login-max-width title-font-size">
                 <Row className="page-row-positioning">
                     <Col md="3" className="login-text flex-center">
                         <LoginText />

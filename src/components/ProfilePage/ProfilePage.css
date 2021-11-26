@@ -1,0 +1,24 @@
+.padding-profile-page-content {
+    padding-bottom: 20px;
+}
+
+.profile-card {
+    background-color: var(--lg);
+    border-radius: 15px;
+}
+
+.profile-max-width {
+    max-width: none;
+}
+
+.profile-content-title-text {
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    color: var(--white);
+}
+
+.profile-content-text {
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    color: var(--ow3);
+}

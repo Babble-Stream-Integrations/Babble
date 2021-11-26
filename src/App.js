@@ -15,6 +15,7 @@ import Addons from './pages/Addons.js'
 import Help from './pages/Help.js'
 import Login from './components/Login-SignUp/Login'
 import SignUpMenu from './pages/SignUpMenu.js'
+import ProfilePage from './pages/ProfilePage.js'
 
 
 /* Import Components */
@@ -81,7 +82,7 @@ function App() {
               {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
               <div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
                 {/* Hier staat de content in */}
-                <SignUpMenu />
+                <ProfilePage />
               </div>
             </div>
             <Footer />
