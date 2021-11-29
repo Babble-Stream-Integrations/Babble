@@ -25,12 +25,14 @@ const LoginContent = () => {
                         </Form.Group>
 
                         <Row>
-                            <Col>
+                            
+                            <Col className="button-direction">
                                 <Button className="w-100 mt-5 login-button" type="submit">Login</Button>
                             </Col>
-                            <Col>
+                            <Col className="button-direction">
                                 <Button className="w-100 mt-5 login-google-button" type="submit"><img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo" /><a> Login using Google</a></Button>
                             </Col>
+                                
                             <div className="text-center mt-5 form-text">
                                 Password reset
                             </div>

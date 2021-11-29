@@ -5,6 +5,28 @@
 .profile-card {
     background-color: var(--lg);
     border-radius: 15px;
+    width: 75%
+    
+}
+
+.profile-page-content {
+    margin-bottom: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-content-wrapper {
+    margin-left: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    width: 80px;
+    height: 80px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .profile-max-width {
@@ -14,11 +36,21 @@
 .profile-content-title-text {
     font-family: 'Segoe UI';
     font-weight: bold;
+    font-size: 23px;
     color: var(--white);
 }
 
 .profile-content-text {
     font-family: 'Segoe UI';
     font-weight: bold;
+    font-size: 23px;
     color: var(--ow3);
+}
+
+.sign-out-text {
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 20px;
+    color: var(--ow1);
 }

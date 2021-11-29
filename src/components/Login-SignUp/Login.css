@@ -74,6 +74,10 @@
     border-radius: 15px;
     }
 
+    .button-direction {
+    flex-direction: column;
+    }
+
     .login-google-button {
     background-color: var(--lg);
     border-color: white;

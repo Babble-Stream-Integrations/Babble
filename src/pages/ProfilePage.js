@@ -13,7 +13,7 @@ function ProfilePage() {
                     <Col md="3" className="flex-center">
                         <ProfilePageText />
                     </Col>
-                    <Col md="6">
+                    <Col md="6" className="profile-page-content">
                         <ProfilePageContent />
                     </Col>
                 </Row>
