@@ -92,8 +92,8 @@
 }
 
 .addoncard-platforms-picture {
-    width: 35px;
-    height: auto;
+    width: 25px;
+    height: 24px;
 
     margin: 5px;
     margin-right: 25px;
@@ -115,6 +115,11 @@
 .addoncard-modal-button:disabled {
     font-size: large;
     background-color: gray;
+}
+
+.addons-text-position {
+    margin-right: 35px;
+    margin-left: 35px;
 }
 
 @media (min-width: 979px) {
