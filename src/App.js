@@ -30,7 +30,7 @@ function App() {
 
 	/* Const voor MatchMedia met een width */
     const isPhone = useMatchMedia("(max-width:968px)", true)
-    const isDesktop = useMatchMedia("(min-width:969px)",true )
+    const isDesktop = useMatchMedia("(min-width:969px)",true)
 
 	/* Mobile Navigation State */
     const [isNone, setIsNone] = useState(true)

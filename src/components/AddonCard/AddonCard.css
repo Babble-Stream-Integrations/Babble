@@ -92,7 +92,7 @@
 }
 
 .addoncard-platforms-picture {
-    width: 35px;
+    width: 25px;
     height: auto;
 
     margin: 5px;
@@ -117,6 +117,11 @@
     background-color: gray;
 }
 
+.addons-text-position {
+    margin-right: 35px;
+    margin-left: 35px;
+}
+
 @media (min-width: 979px) {
 
     .addoncard-card-margin {
@@ -126,5 +131,9 @@
 
     .addoncard-close-button-image {
         top: -65px;
+    }
+
+    .addons-text-position {
+        margin-left: 0;
     }
 }
