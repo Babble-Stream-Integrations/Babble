@@ -43,7 +43,7 @@ function Help() {
 			</Container> */}
 			<Container className="help-max-width title-font-size">
 
-				<Row className="page-row-positioning">
+				<Row className="page-row-positioning help-flex-gap">
 					<Col md="3" className="help-text flex-center">
 						<AboutText />
 					</Col>
@@ -51,7 +51,7 @@ function Help() {
 						<AboutContent />
 					</Col>
 				</Row>
-				<Row className="mt-5">
+				<Row className="mt-5 help-flex-gap">
 					<Col md="3" className="flex-center">
 						<HelpText />
 					</Col>
@@ -59,7 +59,7 @@ function Help() {
 						<HelpContent />
 					</Col>
 				</Row>
-				<Row className="mt-5">
+				<Row className="mt-5 help-flex-gap">
 					<Col md="3" className="flex-center">
 						<ContactText />
 					</Col>
