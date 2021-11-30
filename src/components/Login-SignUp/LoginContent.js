@@ -10,7 +10,7 @@ const LoginContent = () => {
     
     return (
         <>
-            <Card id="login" className="uni-bg-lg uni-text-white rounded-border">
+            <Card id="login" className="uni-bg-lg uni-text-white rounded-border login-responsive">
                 <Card.Body className="card-login-style">
                     <Form>
                         {/*Email input*/}
@@ -24,13 +24,13 @@ const LoginContent = () => {
                             <Form.Control type="password" ref={passwordRef} required className="form-input-login-style"/>
                         </Form.Group>
 
-                        <Row>
+                        <Row className="login-responsive">
                             
                             <Col className="button-direction">
-                                <Button className="w-100 mt-5 login-button" type="submit">Login</Button>
+                                <Button className="w-100 login-button login-margin-button" type="submit">Login</Button>
                             </Col>
                             <Col className="button-direction">
-                                <Button className="w-100 mt-5 login-google-button" type="submit"><img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo" /><a> Login using Google</a></Button>
+                                <Button className="w-100 login-google-button login-margin-button" type="submit"><img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo" /><a> Login using Google</a></Button>
                             </Col>
                                 
                             <div className="text-center mt-5 form-text">
