@@ -1,6 +1,6 @@
 import React from 'react'
 
-import AddonsContent from '../components/addonscontent/AddonsContent.js' 
+import AddonsContent from '../components/AddonContent/AddonsContent.js' 
 
 const Addons = () => {
     return (

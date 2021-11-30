@@ -27,7 +27,7 @@ const AddonsContent = () => {
                     <h1>Templates</h1>
                 </div>
                 <div className="col-md-6 addon-main-content">
-                    <p className="addons-text-decoration">
+                    <p className="addons-text-decoration addons-text-position">
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima, fugit nostrum! Dicta obcaecati porro autem rem qui, sint nulla provident enim necessitatibus sed officia corporis tenetur, eos eaque dolor? Delectus.
                     </p>
                     <div className="addons-addoncard-container container uni-no-padding">

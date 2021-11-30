@@ -35,6 +35,10 @@ h1 {
     margin-left: 35px;
 }
 
+.help-flex-gap {
+    gap: 40px;
+}
+
 @media (max-width: 968px) {
 
     .help-text {
