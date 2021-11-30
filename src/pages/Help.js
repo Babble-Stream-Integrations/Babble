@@ -19,31 +19,9 @@ import ContactText from "../components/Help/ContactText.js";
 function Help() {
 	return (
 		<>
-			{/* <Container fluid="xxl">
-				<div className="row">
-					<div className="header-text">
-						<AboutText />
-					</div>
-					<div className="col-md-12 text-center">
-						<AboutContent />
-					</div>
-					<div className="header-text">
-						<HelpText />
-					</div>
-					<div className="col-md-12 text-center">
-						<HelpContent />
-					</div>
-					<div className="header-text">
-						<ContactText />
-					</div>
-					<div className="col-md-12 text-center">
-						<ContactContent />
-					</div>
-				</div>
-			</Container> */}
 			<Container className="help-max-width title-font-size">
-
 				<Row className="page-row-positioning help-flex-gap">
+
 					<Col md="3" className="help-text flex-center">
 						<AboutText />
 					</Col>
