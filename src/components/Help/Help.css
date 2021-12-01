@@ -1,0 +1,53 @@
+h1 {
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    color: white;
+}
+
+.section{
+    padding-bottom: 40px;
+    padding-right: 40px;
+}
+
+
+.header-text{
+    text-align: center;
+    font-weight: bold;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+.main-heading{
+    color: rgb(204,18,18);
+}
+
+.help-max-width {
+    max-width: none;
+}
+
+.help-main-content {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.help-text-positioning {
+    margin-right: 35px;
+    margin-left: 35px;
+}
+
+.help-flex-gap {
+    gap: 40px;
+}
+
+@media (max-width: 968px) {
+
+    .help-text {
+        margin-bottom: 20px;
+    }
+}
+
+@media (min-width: 969px) {
+    .help-text-positioning {
+        margin: 0;
+    }
+}

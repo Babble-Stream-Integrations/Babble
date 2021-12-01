@@ -1,0 +1,36 @@
+.Mcontainer {
+    padding: 0;
+    margin: 0;
+
+    max-width: none;
+    width: auto;
+
+    /* color: white; */
+}
+
+.page-container{
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.content-wrap{
+    flex:1;
+
+    /* color: var(--white); */
+}
+
+.title-font-size {
+    font-size: large;
+}
+
+.page-row-positioning {
+    padding-top: 11vh;
+
+}
+
+@media (min-width: 969px) {
+    .Mcontainer {
+        margin-left: var(--sbsize);
+    }
+}
