@@ -1,0 +1,59 @@
+.Mnav-container {
+    width: 100%;
+    background-color: var(--dg);
+    z-index: 1;
+}
+
+.Mnav-bar {
+    z-index: 2;
+    padding: 0;
+}
+
+.Mnav-icons {
+    color: var(--mo);
+    width: 58px;
+    height: 58px;
+    padding: 5px; 
+    margin: 5px;
+    cursor: auto;
+}
+
+.MhamburgerStyle {
+    color: white;
+
+    width: 71px;
+    height: 71px;
+}
+
+.Mhamburger {
+    width: auto;
+    height: 50px;
+}
+
+/* Hamburger Menu! */
+.Mnav {
+    position: absolute;
+    
+    padding: 0;
+
+    width: 100%;
+    height: calc(100% - 87px);
+
+    background-color: var(--lg);
+
+    text-transform: uppercase;
+}
+
+.MnavLink {
+    color: var(--mo);
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+.MnavLink:hover {
+    color: var(--mo);
+}
+
+.Mnav-gap {
+    gap: 40px;
+}
