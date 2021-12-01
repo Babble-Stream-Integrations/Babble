@@ -1,0 +1,62 @@
+.nav-container {
+    background-color: var(--dg);
+    height: 100vh;
+    /* position: absolute; */
+    position: fixed;
+    z-index: 1;
+}
+
+.main-nav {
+    flex-wrap: wrap;
+}
+
+.selected-page {
+    background-color: var(--mg);
+    /* background-color: green; */
+    border-radius: 15%;
+}
+
+.nav-icons-sizing {
+    height: 70px;
+    width: 70px;
+}
+
+.nav-icons {
+    color: var(--mo);
+    width: 45px;
+    height: 45px;
+    padding: 5px; 
+    margin: 5px;
+}
+
+.nav-logo {
+    margin-top: 25px;
+    width: 60px;
+    height: 60px;
+}
+
+.nav-height {
+    height: 100vh;
+}
+
+.nav-width {
+    width: 6.25rem;
+}
+
+.logo-foreground {
+    z-index: 2;
+}
+
+.nav-item-spacing {
+    gap: 30px;
+}
+
+
+/* Overwrite Bootstrap */
+.navbar-brand {
+    margin-right: 0;
+}
+
+.navbar {
+    padding: 0;
+}

@@ -1,0 +1,154 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, nav {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+body {
+	line-height: 1.1;
+	overflow: auto;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body {
+	background-color: var(--mg);
+	height: 100vh;
+
+	overflow-y: overlay
+}
+
+/* Universal Colors */
+:root {
+	--mo: #ff8400;
+	--dg: #0e0e10;
+	--mg: #1a1a1d;
+	--lg: #252529;
+	--ow1: #d0d0d2;
+	--ow2: #f2f2f4;
+	--ow3: #828282;
+	--white: white;
+}
+
+/* Universal Background Colors */
+.uni-text-white {
+    color: var(--white);
+}
+
+.uni-bg-lg {
+    background-color: var(--lg);
+}
+
+.uni-bg-mg {
+    background-color: var(--mg);
+}
+
+.uni-bg-dg {
+    background-color: var(--dg);
+}
+
+.uni-no-padding {
+	padding: 0;
+}
+
+.uni-no-margin {
+	margin: 0;
+}
+
+.uni-allcaps {
+	text-transform: uppercase;
+}
+
+.uni-clickable-cursor {
+	cursor: pointer;
+}
+
+.uni-text-white {
+	color: white;
+}
+
+.uni-text-decoration {
+	line-height: 1.5;
+}
+
+/* Universal Background Colors */
+.uni-bg-lg {
+	background-color: var(--lg);
+}
+
+.uni-bg-mg {
+	background-color: var(--mg);
+}
+
+.uni-bg-dg {
+	background-color: var(--dg);
+}
+
+/* Universal Sizes */
+:root {
+	--sbsize: 6.25rem;
+}
+
+
+/* Universal Classes */
+.flex {
+    display: flex !important;
+}
+
+.flex-center {
+	justify-content: center !important;
+	align-items: center !important;
+	text-align: center !important;
+}
+
+.flex-vertical {
+	flex-direction: column !important;
+}
+
+.flex-spread {
+	justify-content: space-between !important;
+}
+
+.flex-middle {
+	text-align: center !important;
+	align-items: center !important;
+}
+
