@@ -60,6 +60,10 @@
     max-width: none;
 }
 
+.login-margin-button {
+    margin-top: 3rem;
+}
+
 @media (max-width: 968px) {
 
     .login-text {
@@ -74,10 +78,6 @@
     border-radius: 15px;
     }
 
-    .button-direction {
-    flex-direction: column;
-    }
-
     .login-google-button {
     background-color: var(--lg);
     border-color: white;
@@ -88,5 +88,23 @@
     background-color: var(--lg);
     border-color: white;
     border-radius: 10px;
+    }
+
+    .login-responsive {
+        flex-direction: column;
+
+        width: 100%;
+
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .button-direction {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .login-margin-button {
+        margin-top: 20px;
     }
 }
