@@ -86,8 +86,8 @@ function App() {
               </div>
             </div>
             <Footer />
-          </Route>       
-        
+          </Route>
+
 				  {/* Home pagina */}
             <Route path="/">
               <div className="bg-color">

@@ -6,8 +6,14 @@ import "../Login-SignUp/Login.css"
 import LoginText from "./LoginText.js";
 import LoginContent from './LoginContent.js';
 
+import {fblogin, googlelogin} from './LoginFirebase.js'
+
+
+import {fblogin, googlelogin} from './LoginFirebase.js'
+
+
 export default function Login() {
-    
+
     return (
         <>
             <Container className="login-max-width title-font-size">
