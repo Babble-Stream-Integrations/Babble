@@ -5,12 +5,7 @@ import { Container, Row, Col} from "react-bootstrap"
 import "../Login-SignUp/Login.css"
 import LoginText from "./LoginText.js";
 import LoginContent from './LoginContent.js';
-
 import {fblogin, googlelogin} from './LoginFirebase.js'
-
-
-import {fblogin, googlelogin} from './LoginFirebase.js'
-
 
 export default function Login() {
 
