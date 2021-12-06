@@ -58,7 +58,8 @@ body {
 
 /* Universal Colors */
 :root {
-	--mo: #ff8400;
+    --mo: #ff8400;
+    --black: black;
 	--dg: #0e0e10;
 	--mg: #1a1a1d;
 	--lg: #252529;
