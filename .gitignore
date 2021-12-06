@@ -1,4 +1,3 @@
-# erase me
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -25,3 +24,6 @@ yarn-error.log*
 
 # firbase cache
 .cache
+
+# ToDo
+ToDo.md

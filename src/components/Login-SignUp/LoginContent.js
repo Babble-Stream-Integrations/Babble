@@ -15,7 +15,7 @@ const LoginContent = () => {
         fblogin(emailRef, passwordRef);
         event.preventDefault();
     }
-    
+
     return (
         <>
             <Card id="login" className="uni-bg-lg uni-text-white rounded-border login-responsive">
@@ -33,14 +33,14 @@ const LoginContent = () => {
                         </Form.Group>
 
                         <Row className="login-responsive">
-                            
+
                             <Col className="button-direction">
                                 <Button className="w-100 login-button login-margin-button" type="submit">Login</Button>
                             </Col>
                             <Col className="button-direction">
                                 <Button className="w-100 mt-5 login-google-button" onClick={googlelogin}><img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo" /><a> Login using Google</a></Button>
                             </Col>
-                                
+
                             <div className="text-center mt-5 form-text">
                                 Password reset
                             </div>
@@ -48,7 +48,7 @@ const LoginContent = () => {
                                 Register an account
                             </div>
                         </Row>
-                        
+
                     </Form>
                 </Card.Body>
             </Card>

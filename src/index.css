@@ -7,8 +7,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video, nav {
 	margin: 0;
@@ -20,13 +20,14 @@ time, mark, audio, video, nav {
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
 body {
-	line-height: 1;
+	line-height: 1.1;
+	overflow: auto;
 }
 
 ol, ul {
@@ -49,7 +50,10 @@ table {
 }
 
 body {
-	background-color: var(--lg);
+	background-color: var(--mg);
+	height: 100vh;
+
+	overflow-y: overlay
 }
 
 /* Universal Colors */
@@ -60,6 +64,62 @@ body {
 	--lg: #252529;
 	--ow1: #d0d0d2;
 	--ow2: #f2f2f4;
+	--ow3: #828282;
+	--white: white;
+}
+
+/* Universal Background Colors */
+.uni-text-white {
+    color: var(--white);
+}
+
+.uni-bg-lg {
+    background-color: var(--lg);
+}
+
+.uni-bg-mg {
+    background-color: var(--mg);
+}
+
+.uni-bg-dg {
+    background-color: var(--dg);
+}
+
+.uni-no-padding {
+	padding: 0;
+}
+
+.uni-no-margin {
+	margin: 0;
+}
+
+.uni-allcaps {
+	text-transform: uppercase;
+}
+
+.uni-clickable-cursor {
+	cursor: pointer;
+}
+
+.uni-text-white {
+	color: white;
+}
+
+.uni-text-decoration {
+	line-height: 1.5;
+}
+
+/* Universal Background Colors */
+.uni-bg-lg {
+	background-color: var(--lg);
+}
+
+.uni-bg-mg {
+	background-color: var(--mg);
+}
+
+.uni-bg-dg {
+	background-color: var(--dg);
 }
 
 /* Universal Sizes */
@@ -86,3 +146,9 @@ body {
 .flex-spread {
 	justify-content: space-between !important;
 }
+
+.flex-middle {
+	text-align: center !important;
+	align-items: center !important;
+}
+

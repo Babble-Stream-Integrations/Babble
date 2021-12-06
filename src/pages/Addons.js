@@ -1,10 +1,12 @@
 import React from 'react'
 
+import AddonsContent from '../components/AddonContent/AddonsContent.js' 
+
 const Addons = () => {
     return (
-        <div>
-            
-        </div>
+        <>
+            <AddonsContent />
+        </>
     )
 }
 
