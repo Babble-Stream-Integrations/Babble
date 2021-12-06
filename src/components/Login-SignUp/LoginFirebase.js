@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 
 const firebaseConfig = {
@@ -22,7 +22,7 @@ const provider = new GoogleAuthProvider();
 export function fbsignup(email, password) {
 	createUserWithEmailAndPassword(auth, email, password)
 	.then((userCredential) => {
-		// Signed in 
+		// Signed in
 		var user = userCredential.user;
 	})
 	.catch((error) => {
@@ -54,6 +54,9 @@ export function googlelogin() {
 			// The signed-in user info.
 			const user = result.user;
 			console.log(user)
+			console.log(user['displayName']);
+			console.log(user['email']);
+			console.log(user['photoURL']);
 			// ...
 		}).catch((error) => {
 			// Handle Errors here.
@@ -65,4 +68,9 @@ export function googlelogin() {
 			const credential = GoogleAuthProvider.credentialFromError(error);
 			// ...
 		});
+}
+
+export function signout() {
+	//staat hier voor wanneer dingen willen toevoegen nadat iemand dit doet, zoals error handling.
+	signOut(auth)
 }
