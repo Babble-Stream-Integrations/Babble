@@ -29,75 +29,74 @@ import { Switch, Route } from 'react-router-dom';
 function App() {
 
 	/* Const voor MatchMedia met een width */
-    const isPhone = useMatchMedia("(max-width:968px)", true)
-    const isDesktop = useMatchMedia("(min-width:969px)",true)
+	const isPhone = useMatchMedia("(max-width:968px)", true)
+	const isDesktop = useMatchMedia("(min-width:969px)",true)
 
 	/* Mobile Navigation State */
-    const [isNone, setIsNone] = useState(true)
+	const [isNone, setIsNone] = useState(true)
 
 	return (
 		<div className="page-container">
 			<div className="content-wrap">
-			  <Switch>
-				  {/* Addons pagina */}
-          <Route path="/addons">
-            <div className="bg-color">
-              {isDesktop && <Navigation />}
-              {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
-              <div className="Mcontainer uni-text-white" style={{ position: isNone ? "static" : "fixed" }}>
-                {/* Hier staat de content in */}
-                <Addons />
-              </div>
-            </div>
-            <Footer />
-          </Route>
-          {/* Help pagina */}
-          <Route path="/help">
-            <div className="bg-color">
-              {isDesktop && <Navigation />}
-              {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
-              <div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
-                {/* Hier staat de content in */}
-                <Help />
-              </div>
-            </div>
-            <Footer />
-          </Route>
-          {/* Login pagina */}
-          <Route path="/login">
-            <div className="bg-color">
-              {isDesktop && <Navigation />}
-              {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
-              <div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
-                {/* Hier staat de content in */}
-                <Login />
-              </div>
-            </div>
-            <Footer />
-          </Route>
-          {/* Signup pagina */}
-          <Route path="/signup">
-            <div className="bg-color">
-              {isDesktop && <Navigation />}
-              {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
-              <div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
-                {/* Hier staat de content in */}
-                <ProfilePage />
-              </div>
-            </div>
-            <Footer />
-          </Route>       
-        
-				  {/* Home pagina */}
-            <Route path="/">
-              <div className="bg-color">
-                {isDesktop && <Navigation />}
-                {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
-                <div className="Mcontainer uni-text-white" style={{ position: isNone ? "static" : "fixed" }}>
-                  {/* Hier staat de content in */}
-                  <Home />
-                </div>
-              </div>
+				<Switch>
+					{/* Addons pagina */}
+					<Route path="/addons">
+						<div className="bg-color">
+							{isDesktop && <Navigation />}
+							{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
+							<div className="Mcontainer uni-text-white" style={{ position: isNone ? "static" : "fixed" }}>
+								{/* Hier staat de content in */}
+								<Addons />
+							</div>
+						</div>
+						<Footer />
+					</Route>
+					{/* Help pagina */}
+					<Route path="/help">
+						<div className="bg-color">
+							{isDesktop && <Navigation />}
+							{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
+							<div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
+								{/* Hier staat de content in */}
+								<Help />
+							</div>
+						</div>
+						<Footer />
+					</Route>
+					{/* Login pagina */}
+					<Route path="/login">
+						<div className="bg-color">
+							{isDesktop && <Navigation />}
+							{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
+							<div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
+								{/* Hier staat de content in */}
+								<Login />
+							</div>
+						</div>
+						<Footer />
+					</Route>
+					{/* Signup pagina */}
+					<Route path="/signup">
+						<div className="bg-color">
+							{isDesktop && <Navigation />}
+							{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
+							<div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
+								{/* Hier staat de content in */}
+								<ProfilePage />
+							</div>
+						</div>
+						<Footer />
+					</Route>
+					{/* Home pagina */}
+					<Route path="/">
+						<div className="bg-color">
+							{isDesktop && <Navigation />}
+							{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
+							<div className="Mcontainer uni-text-white" style={{ position: isNone ? "static" : "fixed" }}>
+								{/* Hier staat de content in */}
+								<Home />
+							</div>
+						</div>
 						<Footer />
 					</Route>
 				</Switch>

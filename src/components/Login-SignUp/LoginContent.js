@@ -4,15 +4,23 @@ import { Card, Form, Button, Row, Col } from 'react-bootstrap'
 //style
 import "../Login-SignUp/Login.css"
 
+//firebase
+import {fblogin, googlelogin} from './LoginFirebase.js'
+
 const LoginContent = () => {
     const emailRef = useRef()
     const passwordRef = useRef()
-    
+
+    let login = (event) => {
+        fblogin(emailRef, passwordRef);
+        event.preventDefault();
+    }
+
     return (
         <>
             <Card id="login" className="uni-bg-lg uni-text-white rounded-border login-responsive">
                 <Card.Body className="card-login-style">
-                    <Form>
+                    <Form onSubmit={login}>
                         {/*Email input*/}
                         <Form.Group id="email">
                             <Form.Label className="form-text">Email</Form.Label>
@@ -25,14 +33,14 @@ const LoginContent = () => {
                         </Form.Group>
 
                         <Row className="login-responsive">
-                            
+
                             <Col className="button-direction">
                                 <Button className="w-100 login-button login-margin-button sign-in-text" type="submit">SIGN IN</Button>
                             </Col>
                             <Col className="button-direction">
-                                <Button className="w-100 login-google-button login-margin-button" type="submit"><img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo" /><a> Login using Google</a></Button>
+                                <Button className="w-100 mt-5 login-google-button" onClick={googlelogin}><img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo" /><a> Login using Google</a></Button>
                             </Col>
-                                
+
                             <div className="text-center mt-5 form-text">
                                 Password reset
                             </div>
@@ -40,7 +48,7 @@ const LoginContent = () => {
                                 Register an account
                             </div>
                         </Row>
-                        
+
                     </Form>
                 </Card.Body>
             </Card>
