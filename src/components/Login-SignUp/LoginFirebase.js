@@ -1,7 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+		 signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
+import { useState } from "react";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyCzNQ2O8_KEF7rcupBT8gNjB0_BIE7K4ig",
@@ -45,7 +47,7 @@ export function fblogin(email, password) {
 	});
 }
 
-export function googlelogin() {
+export function googlelogin(setLoginData) {
 	signInWithPopup(auth, provider)
 		.then((result) => {
 			// This gives you a Google Access Token. You can use it to access the Google API.
@@ -53,7 +55,7 @@ export function googlelogin() {
 			const token = credential.accessToken;
 			// The signed-in user info.
 			const user = result.user;
-			console.log(user)
+			console.log(user);
 			console.log(user['displayName']);
 			console.log(user['email']);
 			console.log(user['photoURL']);

@@ -34,6 +34,7 @@ function App() {
 
 	/* Mobile Navigation State */
 	const [isNone, setIsNone] = useState(true)
+	const [loginData, setLoginData] = useState('')
 
 	return (
 		<div className="page-container">
@@ -70,7 +71,7 @@ function App() {
 							{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
 							<div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
 								{/* Hier staat de content in */}
-								<Login />
+								<Login setLoginData={setLoginData} />
 							</div>
 						</div>
 						<Footer />
@@ -82,7 +83,7 @@ function App() {
 							{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
 							<div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
 								{/* Hier staat de content in */}
-								<ProfilePage />
+								<ProfilePage loginData={loginData} />
 							</div>
 						</div>
 						<Footer />

@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, Image, Row, Col } from 'react-bootstrap'
+
+/*Import Function */
+import { googlelogin } from '../Login-SignUp/LoginFirebase.js'
 
 import testlogo from "../../assets/img/test-profile-picture.png"
 //style
+const user = {};
 
 
-function ProfilePageContent() {
+function ProfilePageContent(props) {
+
+    console.log(props.loginData)
+
     return (
         <>
             <Card className="profile-card">
@@ -15,7 +22,7 @@ function ProfilePageContent() {
                             PROFILE PICTURE
                         </div>
 
-                        <Image src={testlogo} roundedCircle className="profile-picture"/>
+                        <Image src={user['photoURL']} roundedCircle className="profile-picture"/>
 
                         <div className="profile-content-title-text">
                             USERNAME

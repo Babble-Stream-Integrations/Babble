@@ -7,8 +7,8 @@ import LoginText from "./LoginText.js";
 import LoginContent from './LoginContent.js';
 import {fblogin, googlelogin} from './LoginFirebase.js'
 
-export default function Login() {
-
+export default function Login({ setLoginData }) {
+ 
     return (
         <>
             <Container className="login-max-width title-font-size">
@@ -17,7 +17,7 @@ export default function Login() {
                         <LoginText />
                     </Col>
                     <Col md="6" className="login-content">
-                        <LoginContent />
+                        <LoginContent setLoginData={setLoginData} />
                     </Col>
                 </Row>
             </Container>
