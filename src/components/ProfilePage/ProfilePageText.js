@@ -5,9 +5,9 @@ import '../ProfilePage/ProfilePage.css'
 
 function ProfilePageText() {
     return (
-        <h1>
+        <div className="page-title-text">
             Profile
-        </h1>
+        </div>
     )
 }
 

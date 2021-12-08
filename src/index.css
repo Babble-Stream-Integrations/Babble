@@ -153,3 +153,11 @@ body {
 	align-items: center !important;
 }
 
+/* Universal title text style */
+.page-title-text {
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    font-size: 40px;
+    color: var(--white);
+}
+

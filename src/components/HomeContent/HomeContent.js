@@ -14,7 +14,9 @@ const HomeContent = () => {
         <div className="container H-max-width title-font-size">
             <div className="row page-row-positioning home-flex-gap">
                 <div className="col-md-3 flex-center">
-                    <h1>Welcome</h1>
+                    <div className="page-title-text">
+                        Welcome
+                    </div>
                 </div>
                 <div className="col-md-6 flex flex-vertical home-main-content home-flex-gap">
                     <p className="home-text-positioning home-text-decoration">
