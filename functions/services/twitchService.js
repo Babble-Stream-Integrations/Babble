@@ -30,7 +30,7 @@ twitchService.checkChat = () => {
 }
 
 async function postToRaffle() {
-	const raffleData = require('../routes/twitch').raffleData;
+	const raffleData = require('../routes/twitchRaffle').raffleData;
 
 	const response = await fetch('http://localhost:3000/twitch/start-raffle', {
 		method: 'post',

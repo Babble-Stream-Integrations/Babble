@@ -1,6 +1,10 @@
-const functions = require('firebase-functions');
+const functions = require('firebase-functions').region('europe-west1');
 const express = require('express');
 const path = require('path');
+
+const twitchService = require('./services/twitchService');
+const twitchRaffleRoutes = require('./routes/twitchRaffle').router;
+const youtubeRaffleRoutes = require('./routes/youtubeRaffle');
 
 const app = express();
 
@@ -8,14 +12,11 @@ app.use(express.urlencoded({
 	extended: true
 }));
 
-const twitchService = require('./services/twitchService');
+app.use(express.static('/public'));
+
 twitchService.checkChat();
-
-const twitchRoutes = require('./routes/twitch').router;
-app.use('/twitch', twitchRoutes);
-
-const youtubeRoutes = require('./routes/youtube');
-app.use('/yt', youtubeRoutes);
+app.use('/api/raffle/twitch', twitchRaffleRoutes);
+app.use('/api/raffle/yt', youtubeRaffleRoutes);
 
 app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '../public/index2.html'))

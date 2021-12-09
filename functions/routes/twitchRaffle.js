@@ -15,17 +15,17 @@ router.get('/callback', (req, res) => {
 	const code = req.query;
 	console.log(code);
 	twitchAuth.getTokensWithCode(code);
-	res.redirect('/');
+	res.redirect('http://localhost:5000/babble-d6ef3/europe-west1/app/');
 });
 
-router.post('/start-raffle', (req, res) => {
+router.post('/start', (req, res) => {
 	if (Object.keys(req.body).length === 0) {
 		twitchRaffle.startRaffle(raffleData);
 	} else {
 		twitchRaffle.startRaffle(req.body);
 		raffleData = req.body;
 	}
-	res.redirect('/');
+	res.redirect('http://localhost:5000/babble-d6ef3/europe-west1/app/');
 });
 
 module.exports.router = router;
