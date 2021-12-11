@@ -5,7 +5,7 @@ import { Card, Form, Button, Row, Col } from 'react-bootstrap'
 import "../Login-SignUp/Login.css"
 
 //firebase
-import { fblogin, googlelogin } from './LoginFirebase.js'
+import { fblogin, googlelogin } from '../../auth/firebase.js'
 
     const LoginContent = ({ setLoginData }) => {
     const emailRef = useRef()
@@ -38,7 +38,7 @@ import { fblogin, googlelogin } from './LoginFirebase.js'
                                 <Button className="w-100 login-button login-margin-button" type="submit">Login</Button>
                             </Col>
                             <Col className="button-direction">
-                                <Button className="w-100 mt-5 login-google-button" onClick={() => {googlelogin(setLoginData)}}><img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo" /><a> Login using Google</a></Button>
+                                <Button className="w-100 mt-5 login-google-button" onClick={() => {googlelogin()}}><img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo" /><a> Login using Google</a></Button>
                             </Col>
 
                             <div className="text-center mt-5 form-text">

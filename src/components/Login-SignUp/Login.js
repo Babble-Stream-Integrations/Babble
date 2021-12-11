@@ -5,10 +5,9 @@ import { Container, Row, Col} from "react-bootstrap"
 import "../Login-SignUp/Login.css"
 import LoginText from "./LoginText.js";
 import LoginContent from './LoginContent.js';
-import {fblogin, googlelogin} from './LoginFirebase.js'
 
 export default function Login({ setLoginData }) {
- 
+
     return (
         <>
             <Container className="login-max-width title-font-size">
@@ -17,7 +16,7 @@ export default function Login({ setLoginData }) {
                         <LoginText />
                     </Col>
                     <Col md="6" className="login-content">
-                        <LoginContent setLoginData={setLoginData} />
+                        <LoginContent/>
                     </Col>
                 </Row>
             </Container>

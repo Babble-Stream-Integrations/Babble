@@ -3,8 +3,6 @@ import { getAnalytics } from "firebase/analytics";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,
 		 signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
-import { useState } from "react";
-
 const firebaseConfig = {
 	apiKey: "AIzaSyCzNQ2O8_KEF7rcupBT8gNjB0_BIE7K4ig",
 	authDomain: "babble-d6ef3.firebaseapp.com",
@@ -20,16 +18,15 @@ const analytics = getAnalytics(app);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-
 export function fbsignup(email, password) {
 	createUserWithEmailAndPassword(auth, email, password)
 	.then((userCredential) => {
 		// Signed in
-		var user = userCredential.user;
+		const user = userCredential.user;
 	})
 	.catch((error) => {
-		var errorCode = error.code;
-		var errorMessage = error.message;
+		const errorCode = error.code;
+		const errorMessage = error.message;
 		// ..
 	});
 }
@@ -38,27 +35,31 @@ export function fblogin(email, password) {
 	signInWithEmailAndPassword(auth, email, password)
 	.then((userCredential) => {
 		// Signed in
-		var user = userCredential.user;
+		const user = userCredential.user;
 		console.log(user)
 	})
 	.catch((error) => {
-		var errorCode = error.code;
-		var errorMessage = error.message;
+		const errorCode = error.code;
+		const errorMessage = error.message;
 	});
 }
 
-export function googlelogin(setLoginData) {
+export function googlelogin() {
 	signInWithPopup(auth, provider)
 		.then((result) => {
 			// This gives you a Google Access Token. You can use it to access the Google API.
 			const credential = GoogleAuthProvider.credentialFromResult(result);
 			const token = credential.accessToken;
 			// The signed-in user info.
-			const user = result.user;
-			console.log(user);
-			console.log(user['displayName']);
-			console.log(user['email']);
-			console.log(user['photoURL']);
+			// const user = result.user;
+			// console.log(user);
+			// console.log(user['displayName']);
+			// console.log(user['email']);
+			// // console.log(user['photoURL']);
+			// console.log(authContext)
+			// const { user } = React.useContext(authContext)
+			// user = result.user;
+			// console.log(user);
 			// ...
 		}).catch((error) => {
 			// Handle Errors here.
