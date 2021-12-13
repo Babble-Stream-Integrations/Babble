@@ -1,5 +1,5 @@
 const tmi = require('tmi.js');
-// const fetch = require('node-fetch');
+const { default: axios } = require('axios');
 
 const twitchService = {};
 
@@ -29,16 +29,16 @@ twitchService.checkChat = () => {
 	});
 }
 
-async function postToRaffle() {
+function postToRaffle() {
 	const raffleData = require('../routes/twitchRaffle').raffleData;
 
-	const response = await fetch('http://localhost:3000/twitch/start-raffle', {
-		method: 'post',
-		body: JSON.stringify(raffleData),
-		headers: {'Content-Type': 'application/json'}
-	});
-	// const data = await response.json();
-	// console.log('data: ', data);
+	axios.post('http://localhost:5000/babble-d6ef3/europe-west1/app/api/raffle/twitch/start', raffleData)
+		.then(function (response) {
+			console.log(response);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
 }
 
 module.exports = twitchService;

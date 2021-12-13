@@ -1,6 +1,6 @@
 const clientID = "4l677vx5awpv96fou6fy1c68czce91";
 const clientSecret = "6c166zmuwpwc49dt70bz3hiq9aoq98";
-const redirectURL = "http://localhost:3000/callback-twitch";
+const redirectURL = "http://localhost:5000/babble-d6ef3/europe-west1/app/api/raffle/twitch/callback";
 const state = "yoassboevink";
 
 const scopes = "chat:edit chat:read";

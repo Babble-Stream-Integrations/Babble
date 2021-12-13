@@ -155,11 +155,10 @@ const respond = (newMessages, data) => {
 					}
 				});
 			} else {
-				console.log(data.subPrivilege);
 				if (data.subPrivilege > 1 && data.subPrivilege > data.memberPrivilege) {
 					checkSub(message.authorDetails.channelId).then(function(results){
 						if (results == true) {
-							for (let i = 0; i < data.subPrivilege - 1; i++) {
+							for (let i = 0; i < data.subPrivilege; i++) {
 								raffleUsersEntered.push(author);
 							}
 						}
@@ -167,13 +166,14 @@ const respond = (newMessages, data) => {
 				} else if (data.memberPrivilege > data.subPrivilege) {
 					checkMember(message.authorDetails.channelId).then(function(results){
 						if (results == true) {
-							for (let i = 0; i < data.memberPrivilege - 1; i++) {
+							for (let i = 0; i < data.memberPrivilege; i++) {
 								raffleUsersEntered.push(author);
 							}
 						}
 					});
+				} else {
+					raffleUsersEntered.push(author);
 				}
-				raffleUsersEntered.push(author);
 			}
 		}
 	});
