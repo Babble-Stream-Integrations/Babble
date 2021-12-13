@@ -123,11 +123,11 @@
 	<br><br><br>
 
 	<div id="youtube">
-		<a href="api/raffle/yt/auth"><button>Authorize</button></a>
-		<a href="api/raffle/yt/find-active-chat"><button>Find Chat</button></a>
-		<a href="api/raffle/yt/get-variable"><button>Get Variable</button></a>
+		<a href="app/api/raffle/yt/auth"><button>Authorize</button></a>
+		<a href="app/api/raffle/yt/find-active-chat"><button>Find Chat</button></a>
+		<a href="app/api/raffle/yt/get-variable"><button>Get Variable</button></a>
 		<br><br>
-		<form action="app/api/raffle/yt/start" method="post">
+		<form action="app/app/api/raffle/yt/start" method="post">
 			<label for="duration">Duration (Minutes): </label>
 			<input type="number" id="duration" name="duration" min="1" max="60" value="1" autofocus required><br>
 
@@ -168,9 +168,9 @@
 	</div>
 
 	<div id="twitch">
-		<a href="api/raffle/twitch/auth"><button>Authorize</button></a>
+		<a href="app/api/raffle/twitch/auth"><button>Authorize</button></a>
 		<br><br>
-		<form action='api/raffle/twitch/start' method="post" id="twitchRaffleForm" name="twitchRaffleForm">
+		<form action='app/api/raffle/twitch/start' method="post" id="twitchRaffleForm" name="twitchRaffleForm">
 			<label for="duration">Duration (Minutes): </label>
 			<input type="number" id="duration" name="duration" min="1" max="60" value="1" autofocus required><br>
 

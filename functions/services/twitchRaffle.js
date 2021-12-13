@@ -1,5 +1,6 @@
 const { default: axios } = require('axios');
 const tmi = require('tmi.js');
+const accessToken = require('./twitchAuth').accessToken
 
 const appAccessToken = 'rsr1i6cybvvc8uh2obfh04hfvtzj6s';
 
@@ -7,6 +8,7 @@ const twitchRaffle = {};
 
 twitchRaffle.startRaffle = async(data) => {
 	console.log(data);
+	console.log(accessToken);
 
 	console.log('Start Twitch Raffle');
 
@@ -61,7 +63,7 @@ const filterMessage = async(channel, tags, message, data, raffleUsersEntered) =>
 					"Client-Id" : "4l677vx5awpv96fou6fy1c68czce91"
 				}
 			}).then(response => {
-				console.log(response)
+				console.log(response.data)
 			})
 			.catch(error => {
 				console.log(error.response)

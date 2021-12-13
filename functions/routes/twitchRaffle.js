@@ -14,8 +14,8 @@ router.get('/auth', (req, res) => {
 router.get('/callback', (req, res) => {
 	const code = req.query;
 	console.log(code);
-	twitchAuth.getTokensWithCode(code);
-	res.redirect('http://localhost:5000/babble-d6ef3/europe-west1/app/');
+	twitchAuth.getTokensWithCode(res, code);
+	res.redirect('http://localhost:5000/babble-d6ef3/europe-west1/app');
 });
 
 router.post('/start', (req, res) => {
@@ -25,7 +25,7 @@ router.post('/start', (req, res) => {
 		twitchRaffle.startRaffle(req.body);
 		raffleData = req.body;
 	}
-	res.redirect('http://localhost:5000/babble-d6ef3/europe-west1/app/');
+	res.redirect('http://localhost:5000/babble-d6ef3/europe-west1/app');
 });
 
 module.exports.router = router;
