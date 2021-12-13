@@ -16,12 +16,13 @@ import Help from './pages/Help.js'
 import Login from './components/Login-SignUp/Login'
 import SignUpMenu from './pages/SignUpMenu.js'
 import ProfilePage from './pages/ProfilePage.js'
+import AddonSettings from './pages/AddonSettings.js'
 
 
 /* Import Components */
 import Navigation from './components/navbar/Navigation.js';
 import Mnav from './components/mobilenav/Mnav.js';
-import Footer from "./components/Footer/Footer.js"
+import Footer from "./components/Footer/Footer.js";
 
 /* Import Dependency */
 import { Switch, Route } from 'react-router-dom';
@@ -76,7 +77,7 @@ function App() {
 						<Footer />
 					</Route>
 					{/* Signup pagina */}
-					<Route path="/signup">
+					<Route path="/profilepage">
 						<div className="bg-color">
 							{isDesktop && <Navigation />}
 							{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
@@ -87,6 +88,18 @@ function App() {
 						</div>
 						<Footer />
 					</Route>
+                    {/* addonsettings pagina */}
+                    <Route path="/addonsettings">
+                        <div className="bg-color">
+                            {isDesktop && <Navigation />}
+                            {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
+                            <div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
+                                {/* Hier staat de content in */}
+                                <AddonSettings />
+                            </div>
+                        </div>
+                        <Footer />
+                    </Route>
 					{/* Home pagina */}
 					<Route path="/">
 						<div className="bg-color">

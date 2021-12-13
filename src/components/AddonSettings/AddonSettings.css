@@ -1,0 +1,110 @@
+/* AddonSettings head page */
+.setting-option-component-margin-col {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.setting-option-component-margin-row {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.test-test {
+    width: 200px;
+}
+
+/* Setting option #1 */
+.addon-settings-form-input-small {
+    width: 25%;
+}
+
+/* Setting option #2 */
+
+.addon-settings-title-subtext {
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--white);
+}
+
+.addon-settings-switch:checked {
+    color: var(--mo);
+}
+
+.form-check-input:checked {
+    background-color: var(--mo) !important;
+    border-color: var(--mo)
+}
+
+/* Setting option #3 */
+.addon-settings-title-text{   
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    font-size: 23px;
+    color: var(--white);
+}
+
+.addon-settings-dropdown-button{
+    border-radius: 10px !important;
+    background-color: var(--lg) !important;
+    border-color: var(--white) !important;
+    border-width: 2px !important;
+}
+
+.addon-settings-dropdown-button:hover{
+    border-radius: 10px !important;
+    background-color: var(--lg) !important;
+    border-color: var(--white) !important;
+    border-width: 2px !important;
+}
+
+.addon-settings-dropdown-button:active:focus {
+    border-radius: 10px !important;
+    background-color: var(--lg) !important;
+    border-color: var(--white) !important;
+    border-width: 2px !important;
+}
+
+
+.addon-settings-margin{
+    margin-top: 15px;
+}
+
+.addon-settings-dropdown-menu{
+    background-color: var(--lg);
+    border-color: var(--white);
+    border-width: 2px;
+}
+
+.addon-settings-dropdown-menu-items{
+    color: var(--white);
+    border-color: var(--white);
+    border-width: 2px; 
+}
+
+/* Setting option #4 */
+.addon-settings-form-input-large {
+    width: 75%;
+}
+
+/* Save button */
+
+.save-button:hover {
+    margin-left: 40px;
+    width: 25%;
+    background-color: var(--mo);
+    border-color: var(--mo);
+    border-radius: 10px;
+    color: var(--black);
+    font-weight: bold;
+}
+
+.save-button {
+    margin-left: 40px;
+    width: 25%;
+    background-color: var(--mo);
+    border-color: var(--mo);
+    border-radius: 10px;
+    color: var(--black);
+    font-weight: bold;
+}
