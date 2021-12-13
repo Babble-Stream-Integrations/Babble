@@ -9,7 +9,6 @@ h1 {
     padding-right: 40px;
 }
 
-
 .header-text{
     text-align: center;
     font-weight: bold;
@@ -37,6 +36,47 @@ h1 {
 
 .help-flex-gap {
     gap: 40px;
+}
+/* Accordion */
+.help-accordion-header, .help-accordion-item {
+	border: none;
+}
+
+.help-accordion-item {
+	margin-bottom: 15px;
+	background-color: var(--dg);
+}
+
+.help-accordion-body {
+	background-color: var(--lg);
+	color: var(--white);
+}
+
+/* Manipulate bootstrap classes */
+.accordion-button {
+	background-color: var(--dg);
+	color: var(--white);
+	background-image: none;
+}
+
+.accordion-button:not(.collapsed)::after, .accordion-button::after {
+	background-image: none;
+}
+
+.accordion-button:not(.collapsed) {
+	color: var(--white);
+	background-color: var(--dg);
+}
+
+.accordion-item:first-of-type > .accordion-header > .accordion-button {
+	border-top-left-radius: initial;
+	border-top-right-radius: initial;
+	display: block;
+}
+
+.accordion-item:last-of-type > .accordion-header > .accordion-button {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
 }
 
 @media (max-width: 968px) {
