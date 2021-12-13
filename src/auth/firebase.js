@@ -15,8 +15,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const auth = getAuth();
-const provider = new GoogleAuthProvider();
+export const auth = getAuth();
+export const provider = new GoogleAuthProvider();
 
 export function fbsignup(email, password) {
 	createUserWithEmailAndPassword(auth, email, password)
@@ -51,16 +51,14 @@ export function googlelogin() {
 			const credential = GoogleAuthProvider.credentialFromResult(result);
 			const token = credential.accessToken;
 			// The signed-in user info.
-			// const user = result.user;
-			// console.log(user);
+			const user = result.user;
+			console.log(user);
 			// console.log(user['displayName']);
 			// console.log(user['email']);
-			// // console.log(user['photoURL']);
-			// console.log(authContext)
-			// const { user } = React.useContext(authContext)
-			// user = result.user;
+			// console.log(user['photoURL']);
 			// console.log(user);
 			// ...
+			return user;
 		}).catch((error) => {
 			// Handle Errors here.
 			const errorCode = error.code;

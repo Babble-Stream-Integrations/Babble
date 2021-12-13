@@ -5,7 +5,7 @@ import ProfilePageContent from '../components/ProfilePage/ProfilePageContent.js'
 import { Container, Row, Col } from 'react-bootstrap';
 import ProfilePageText from '../components/ProfilePage/ProfilePageText.js';
 
-function ProfilePage({ loginData }) {
+function ProfilePage(props) {
     return (
         <>
             <Container className="profile-max-width title-font-size">
@@ -14,7 +14,7 @@ function ProfilePage({ loginData }) {
                         <ProfilePageText />
                     </Col>
                     <Col md="6" className="profile-page-content">
-                        <ProfilePageContent loginData={loginData} />
+                        <ProfilePageContent userName = {props.userName} email = {props.email} profilePicture = {props.profilePicture}  />
                     </Col>
                 </Row>
             </Container>
@@ -23,4 +23,3 @@ function ProfilePage({ loginData }) {
 }
 
 export default ProfilePage
-

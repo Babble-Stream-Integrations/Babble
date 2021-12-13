@@ -6,7 +6,7 @@ import "../Login-SignUp/Login.css"
 import LoginText from "./LoginText.js";
 import LoginContent from './LoginContent.js';
 
-export default function Login({ setLoginData }) {
+export default function Login(props) {
 
     return (
         <>
@@ -16,7 +16,7 @@ export default function Login({ setLoginData }) {
                         <LoginText />
                     </Col>
                     <Col md="6" className="login-content">
-                        <LoginContent/>
+                        <LoginContent setUserName = {props.setUserName} setEmail = {props.setEmail} setProfilePicture = {props.setProfilePicture} />
                     </Col>
                 </Row>
             </Container>
