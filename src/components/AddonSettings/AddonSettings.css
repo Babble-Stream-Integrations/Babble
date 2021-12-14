@@ -3,7 +3,7 @@
 .addon-settings-card {
     background-color: var(--lg);
     border-radius: 15px;
-    width: 100%;
+    width: auto;
     margin-top: 20px;
 }
 
@@ -116,6 +116,17 @@
     color: var(--black);
     font-weight: bold;
 }
+
+/* @media screen 
+    and (min-device-width: 1200px) 
+    and (max-device-width: 1600px) 
+    and (-webkit-min-device-pixel-ratio: 1) { 
+
+    .addon-settings-card {
+        width:100%;
+    }
+
+} */
 
 @media (max-width: 968px) {
 
