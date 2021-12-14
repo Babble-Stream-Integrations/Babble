@@ -62,6 +62,7 @@ body {
     --black: black;
 	--dg: #0e0e10;
 	--mg: #1a1a1d;
+	--footer: #121214;
 	--lg: #252529;
 	--ow1: #d0d0d2;
 	--ow2: #f2f2f4;
@@ -161,3 +162,22 @@ body {
     color: var(--white);
 }
 
+
+/* Custom Scrollbar */
+html {
+	scroll-behavior: smooth;
+	overflow: overlay;
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: var(--dg);
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--white);
+	border-radius: 25px;
+}

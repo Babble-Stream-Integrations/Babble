@@ -1,6 +1,6 @@
 /* Import React */
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 /* Import Helpers */
 import { useMatchMedia } from './helpers/useMatchMedia.js';
@@ -21,13 +21,16 @@ import AddonSettings from './pages/AddonSettings.js'
 
 /* Import Components */
 import Navigation from './components/navbar/Navigation.js';
-import Mnav from './components/mobilenav/Mnav.js';
-import Footer from "./components/Footer/Footer.js";
+import Mnav from './components/MobileNav/Mnav.js';
+import Footer from "./components/Footer/Footer.js"
 
 /* Import Dependency */
 import { Switch, Route } from 'react-router-dom';
 
 function App() {
+
+	/* Set Title State */
+	const [title, setTitle] = useState('Home - Babble Stream Integration')
 
 	/* Const voor MatchMedia met een width */
 	const isPhone = useMatchMedia("(max-width:968px)", true)
@@ -36,6 +39,11 @@ function App() {
 	/* Mobile Navigation State */
 	const [isNone, setIsNone] = useState(true)
 
+	useEffect(() => {
+		// This will run when the page first loads and whenever the title changes
+		document.title = title;
+	  }, [title]);
+
 	return (
 		<div className="page-container">
 			<div className="content-wrap">
@@ -43,7 +51,7 @@ function App() {
 					{/* Addons pagina */}
 					<Route path="/addons">
 						<div className="bg-color">
-							{isDesktop && <Navigation />}
+							{isDesktop && <Navigation setTitle={setTitle} />}
 							{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
 							<div className="Mcontainer uni-text-white" style={{ position: isNone ? "static" : "fixed" }}>
 								{/* Hier staat de content in */}
@@ -55,7 +63,7 @@ function App() {
 					{/* Help pagina */}
 					<Route path="/help">
 						<div className="bg-color">
-							{isDesktop && <Navigation />}
+							{isDesktop && <Navigation setTitle={setTitle} />}
 							{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
 							<div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
 								{/* Hier staat de content in */}
@@ -67,7 +75,7 @@ function App() {
 					{/* Login pagina */}
 					<Route path="/login">
 						<div className="bg-color">
-							{isDesktop && <Navigation />}
+							{isDesktop && <Navigation setTitle={setTitle} />}
 							{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
 							<div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
 								{/* Hier staat de content in */}
@@ -79,7 +87,7 @@ function App() {
 					{/* Signup pagina */}
 					<Route path="/profilepage">
 						<div className="bg-color">
-							{isDesktop && <Navigation />}
+							{isDesktop && <Navigation setTitle={setTitle} />}
 							{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
 							<div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
 								{/* Hier staat de content in */}
@@ -103,7 +111,7 @@ function App() {
 					{/* Home pagina */}
 					<Route path="/">
 						<div className="bg-color">
-							{isDesktop && <Navigation />}
+							{isDesktop && <Navigation setTitle={setTitle} />}
 							{isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
 							<div className="Mcontainer uni-text-white" style={{ position: isNone ? "static" : "fixed" }}>
 								{/* Hier staat de content in */}
