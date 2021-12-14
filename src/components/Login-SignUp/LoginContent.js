@@ -2,13 +2,17 @@ import React, {useRef} from 'react'
 import { Card, Form, Button, Row, Col } from 'react-bootstrap'
 import {signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth, provider } from '../../auth/firebase';
+
+/* Import Dependencies */
+import { Link } from 'react-router-dom'
+
 //style
 import "../Login-SignUp/Login.css";
 
 //firebase
 // import { fblogin, googlelogin } from '../../auth/firebase.js'
 
-function LoginContent(props) {
+function LoginContent({ setUserState}) {
     const emailRef = useRef()
     const passwordRef = useRef()
 
@@ -17,7 +21,7 @@ function LoginContent(props) {
     //     event.preventDefault();
     // }
 
-	function login() {
+	const login = () => {
 		signInWithPopup(auth, provider)
 		.then((result) => {
 			// This gives you a Google Access Token. You can use it to access the Google API.
@@ -25,10 +29,13 @@ function LoginContent(props) {
 			const token = credential.accessToken;
 			// The signed-in user info.
 			const user = result.user;
-			console.log(user);
-			props.setUserName(user.displayName);
-			props.setEmail(user.email);
-			props.setProfilePicture(user.photoURL);
+			// console.log(user);
+			// props.setUserName('test');
+			// props.setEmail(user.email);
+			// props.setProfilePicture(user.photoURL);
+			setUserState(user.displayName, user.email, user.photoURL)
+			console.log(setUserState);
+			console.log(user.displayName);
 			// ...
 		}).catch((error) => {
 			// Handle Errors here.
@@ -62,7 +69,9 @@ function LoginContent(props) {
 								<Button className="w-100 login-button login-margin-button" type="submit">Login</Button>
 							</Col>
 							<Col className="button-direction">
-								<Button className="w-100 mt-5 login-google-button" onClick={login}><img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo" /><a> Login using Google</a></Button>
+								<Link to='/signup'><Button className="w-100 mt-5 login-google-button" onClick={() =>{login()}}>
+									<img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo" /><a> Login using Google</a>
+								</Button></Link>
 							</Col>
 								<div className="text-center mt-5 form-text">
 								Password reset

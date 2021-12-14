@@ -16,7 +16,7 @@ export default function Login(props) {
                         <LoginText />
                     </Col>
                     <Col md="6" className="login-content">
-                        <LoginContent setUserName = {props.setUserName} setEmail = {props.setEmail} setProfilePicture = {props.setProfilePicture} />
+                        <LoginContent setUserState={props.setUserState} /*setUserName = {props.setUserName} setEmail = {props.setEmail} setProfilePicture = {props.setProfilePicture}*/ />
                     </Col>
                 </Row>
             </Container>
