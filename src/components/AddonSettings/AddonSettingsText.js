@@ -1,12 +1,12 @@
 import React from 'react'
 
 //style
-import '../ProfilePage/ProfilePage.css'
+import '../AddonSettings/AddonSettings.css'
 
 function ProfilePageText() {
     return (
         <div className="page-title-text">
-            Profile
+            Settings
         </div>
     )
 }

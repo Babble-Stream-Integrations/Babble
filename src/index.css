@@ -58,7 +58,8 @@ body {
 
 /* Universal Colors */
 :root {
-	--mo: #ff8400;
+    --mo: #ff8400;
+    --black: black;
 	--dg: #0e0e10;
 	--mg: #1a1a1d;
 	--footer: #121214;
@@ -151,6 +152,14 @@ body {
 .flex-middle {
 	text-align: center !important;
 	align-items: center !important;
+}
+
+/* Universal title text style */
+.page-title-text {
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    font-size: 40px;
+    color: var(--white);
 }
 
 

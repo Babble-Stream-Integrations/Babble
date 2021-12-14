@@ -6,7 +6,9 @@ import './Login.css'
 export default function LoginText() {
     return (
         <>
-            <h1>Login</h1>
+            <div className="page-title-text">
+                Login
+            </div>
         </>
     )
 }

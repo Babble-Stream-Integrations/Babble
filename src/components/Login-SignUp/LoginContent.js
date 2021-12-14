@@ -35,7 +35,7 @@ const LoginContent = () => {
                         <Row className="login-responsive">
 
                             <Col className="button-direction">
-                                <Button className="w-100 login-button login-margin-button" type="submit">Login</Button>
+                                <Button className="w-100 login-button login-margin-button sign-in-text" type="submit">SIGN IN</Button>
                             </Col>
                             <Col className="button-direction">
                                 <Button className="w-100 mt-5 login-google-button" onClick={googlelogin}><img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo" /><a> Login using Google</a></Button>

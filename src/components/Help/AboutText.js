@@ -6,7 +6,9 @@ import './Help.css'
 export default function AboutText() {
     return (
         <>
-            <h1>About</h1>
+            <div className="page-title-text">
+                About
+            </div>
         </>
     )
 }
