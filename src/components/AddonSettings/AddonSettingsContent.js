@@ -15,8 +15,8 @@ function ProfilePageContent() {
 
     return (
         <>
-            <Card className="profile-card">
-                <Card.Body className="profile-card-body">
+            <Card className="addon-settings-card">
+                <Card.Body className="addon-settings-card-body">
                     <Row className="setting-option-component-margin-row">
                         <Col className="setting-option-component-margin-col">
                             <AddonSettingsOption1 />

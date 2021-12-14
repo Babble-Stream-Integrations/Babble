@@ -1,4 +1,12 @@
 /* AddonSettings head page */
+
+.addon-settings-card {
+    background-color: var(--lg);
+    border-radius: 15px;
+    width: 100%;
+    margin-top: 20px;
+}
+
 .setting-option-component-margin-col {
     margin-top: 40px;
     margin-bottom: 40px;
@@ -107,4 +115,20 @@
     border-radius: 10px;
     color: var(--black);
     font-weight: bold;
+}
+
+@media (max-width: 968px) {
+
+    .profile-content-wrapper {
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+    .profile-card {
+    background-color: var(--lg);
+    border-radius: 15px;
+    width: 100%;
+    
+}
 }
