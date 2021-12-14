@@ -21,7 +21,7 @@ import AddonSettings from './pages/AddonSettings.js'
 
 /* Import Components */
 import Navigation from './components/navbar/Navigation.js';
-import Mnav from './components/MobileNav/Mnav.js';
+import Mnav from './components/mobilenav/Mnav.js';
 import Footer from "./components/Footer/Footer.js"
 
 /* Import Dependency */
