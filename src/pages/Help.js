@@ -1,5 +1,3 @@
-// Styles
-import "../components/Help/Help.css"
 
 // import GlobalStyle from "../helpers/GlobalStyle.js"
 import React from "react";
@@ -15,6 +13,8 @@ import HelpText from '../components/Help/HelpText.js';
 import ContactContent from "../components/Help/ContactContent.js";
 import ContactText from "../components/Help/ContactText.js";
 
+// Styles
+import '../components/Help/Help.css';
 
 function Help() {
 	return (
@@ -25,7 +25,7 @@ function Help() {
 					<Col md="3" className="help-text flex-center">
 						<AboutText />
 					</Col>
-					<Col md="6" className="help-main-content"> 
+					<Col md="6" className="help-main-content">
 						<AboutContent />
 					</Col>
 				</Row>
@@ -45,7 +45,7 @@ function Help() {
 						<ContactContent />
 					</Col>
 				</Row>
-				
+
 			</Container>
 		</>
 	);

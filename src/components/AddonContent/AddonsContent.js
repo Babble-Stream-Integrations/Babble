@@ -24,7 +24,9 @@ const AddonsContent = () => {
         <div className="container addons-max-width title-font-size"  style={{minHeight: "calc(100vh - 53px - 2vh)"}}>
             <div className="row page-row-positioning addons-flex-gap">
                 <div className="col-md-3 flex-center">
-                    <h1>Templates</h1>
+                    <div className="page-title-text">
+                        Templates
+                    </div>
                 </div>
                 <div className="col-md-6 addon-main-content">
                     <p className="addons-text-decoration addons-text-position">
