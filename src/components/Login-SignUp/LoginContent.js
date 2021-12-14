@@ -69,7 +69,7 @@ function LoginContent({ setUserState}) {
 								<Button className="w-100 login-button login-margin-button" type="submit">Login</Button>
 							</Col>
 							<Col className="button-direction">
-								<Link to='/signup'><Button className="w-100 mt-5 login-google-button" onClick={() =>{login()}}>
+								<Link to='/profilepage'><Button className="w-100 mt-5 login-google-button" onClick={() =>{login()}}>
 									<img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo" /><a> Login using Google</a>
 								</Button></Link>
 							</Col>
