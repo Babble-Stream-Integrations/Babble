@@ -20,7 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+	"serve": "firebase serve --only functions"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +40,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:5000/babble-d6ef3/us-central1/app"
 }
