@@ -1,6 +1,8 @@
 const { google } = require('googleapis');
 const util = require('util');
 const fs = require('fs')
+const dotenv = require('dotenv');
+dotenv.config()
 
 const writeFilePromise = util.promisify(fs.writeFile);
 const readFilePromise = util.promisify(fs.readFile);
@@ -28,15 +30,12 @@ const youtube = google.youtube('v3');
 
 const Oauth2 = google.auth.OAuth2;
 
-const clientID = "702193958045-mog7ismh8cv9j9gipkjkrj6h0rhkf6rh.apps.googleusercontent.com";
-const clientSecret = "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";
-const redirectURI = "http://localhost:5000/babble-d6ef3/europe-west1/app/api/raffle/youtube/callback";
-const apiKey = "AIzaSyC-Nwezpbnq6gJAFWflaxRtymKgYMCVUpE";
+const clientID = process.env.YR_CLIENTID;
+const clientSecret = process.env.YR_CLIENTSECRET;
+const redirectURI = process.env.YR_REDIRECTURI;
+const apiKey = process.env.YR_APIKEY;
 
-const scope = [
-	'https://www.googleapis.com/auth/youtube.readonly',
-	'https://www.googleapis.com/auth/youtube.channel-memberships.creator'
-];
+const scope = process.env.YR_SCOPES;
 
 const auth = new Oauth2(clientID, clientSecret, redirectURI);
 

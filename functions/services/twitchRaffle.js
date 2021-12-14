@@ -1,6 +1,8 @@
 const { default: axios } = require('axios');
 const tmi = require('tmi.js');
-const accessToken = require('./twitchAuth').accessToken
+const fs = require('fs');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const appAccessToken = 'rsr1i6cybvvc8uh2obfh04hfvtzj6s';
 
@@ -8,17 +10,18 @@ const twitchRaffle = {};
 
 twitchRaffle.startRaffle = async(data) => {
 	console.log(data);
-	console.log(accessToken);
 
 	console.log('Start Twitch Raffle');
+
+	User = getUser();
 
 	const client = new tmi.Client({
 		options: {
 			debug: true
 		},
 		identity: {
-			username: 'jobodev',
-			password: 'oauth:703yewp5pgp66q3n7avb6ttrdua138'
+			username: process.env.TBOT_NAME,
+			password: process.env.TBOT_TOKEN
 		},
 		channels: [ 'joj3o', 'osjesleben' ]
 	});
@@ -60,7 +63,7 @@ const filterMessage = async(channel, tags, message, data, raffleUsersEntered) =>
 			axios.get('https://api.twitch.tv/helix/users/follows?from_id='+tags['user-id']+'', {
 				headers: {
 					Authorization : "Bearer " + appAccessToken,
-					"Client-Id" : "4l677vx5awpv96fou6fy1c68czce91"
+					"Client-Id" : process.env.CLIENTID
 				}
 			}).then(response => {
 				console.log(response.data)
@@ -98,5 +101,14 @@ const filterMessage = async(channel, tags, message, data, raffleUsersEntered) =>
 // 	console.log(raffleUsersEntered);
 // 	raffleUsersEntered = [];
 // }
+
+function getUser() {
+	fs.readFile('../../twitchToken.json', (err, data) => {
+		if(err) {
+			throw err;
+		}
+		console.log(data.toString());
+	});
+}
 
 module.exports = twitchRaffle;

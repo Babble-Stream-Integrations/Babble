@@ -1,14 +1,15 @@
 const { default: axios } = require('axios');
+const fs = require('fs');
+const dotenv = require('dotenv');
+dotenv.config()
 
 const twitchAuth = {};
 
-const clientID = "4l677vx5awpv96fou6fy1c68czce91";
-const clientSecret = "sml05e4sz02rfncxqwk69k5kvq5f0g";
-const redirectURL = "http://localhost:5000/babble-d6ef3/europe-west1/app/api/raffle/twitch/callback";
-const state = "yoassboevink";
-const scopes = "chat:edit chat:read";
-
-let accessToken = null;
+const clientID = process.env.TR_CLIENTID;
+const clientSecret = process.env.TR_CLIENTSECRET;
+const redirectURL = process.env.TR_REDIRECTURI;
+const state = process.env.TR_STATE;
+const scopes = process.env.TR_SCOPES;
 
 twitchAuth.getCode = response => {
 	const authUrl = "https://id.twitch.tv/oauth2/authorize" +
@@ -31,7 +32,13 @@ twitchAuth.getTokensWithCode = async (response, code) => {
 		redirect_uri : redirectURL
 	} }).then(response => {
 		console.log(response.data)
-		accessToken = response.data.access_token
+		fs.writeFile('../../twitchToken.json', response.data, (err) => {
+			if(err) {
+				console.log('error');
+				throw err;
+			}
+			console.log("Data has been written to file successfully.");
+		});
 	})
 	.catch(error => {
 		console.log(error.response)
@@ -39,4 +46,3 @@ twitchAuth.getTokensWithCode = async (response, code) => {
 }
 
 module.exports = twitchAuth;
-module.exports.accessToken = accessToken
