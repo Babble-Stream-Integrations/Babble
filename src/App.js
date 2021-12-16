@@ -113,7 +113,7 @@ function App() {
                     {/* addonsettings pagina */}
                     <Route path="/addonsettings">
                         <div className="bg-color">
-                            {isDesktop && <Navigation />}
+                            {isDesktop && <Navigation setTitle={setTitle} />}
                             {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
                             <div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
                                 {/* Hier staat de content in */}
