@@ -1,6 +1,6 @@
 .main-footer{
     color: white;
-    background-color: #0e0e10; 
+    background-color: var(--footer);
 
     padding-top: 1em;
     padding-bottom: 20px;
@@ -11,7 +11,7 @@
 
     max-width: none;
 
-    bottom: 0; 
+    bottom: 0;
 }
 .main-footer-text{
     margin-top: 20px;

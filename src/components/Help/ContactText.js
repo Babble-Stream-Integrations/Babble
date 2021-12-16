@@ -6,7 +6,9 @@ import './Help.css'
 export default function ContactText() {
     return (
         <>
-            <h1>Contact</h1>
+            <div className="page-title-text">
+                Contact
+            </div>
         </>
     )
 }

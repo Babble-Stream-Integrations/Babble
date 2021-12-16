@@ -1,7 +1,7 @@
 import React, {useRef} from 'react'
 import {Form, Button, Card} from "react-bootstrap"
 
-import {fbsignup} from './LoginFirebase.js'
+import {fbsignup} from '../../auth/firebase.js'
 
 export default function SignUp() {
     const emailRef = useRef()
@@ -39,7 +39,7 @@ export default function SignUp() {
                             or
                         </div>
                         <div className="w-100 text-center mt-2">
-                            <Button className="w-100" type="submit"><img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo"/><a> Login using Google</a></Button> 
+                            <Button className="w-100" type="submit"><img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google Logo"/><a> Login using Google</a></Button>
                         </div>
                         <div className="w-100 text-center mt-2">
                             Don't have an account? Register

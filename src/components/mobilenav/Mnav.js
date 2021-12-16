@@ -1,16 +1,16 @@
 /* Import React */
-// import React, { useState } from 'react'
+import React from 'react'
 
 /* Import CSS */
 import './Mnav.css'
 
-/* Import assets */ 
+/* Import assets */
 import logoImg from '../../assets/icons/BabbleLogoMinimal.png'
 import { HiMenu } from 'react-icons/hi'
 
 /* Import Dependencies */
 import { Navbar } from 'react-bootstrap'
-import { Link } from 'react-router-dom'  
+import { Link } from 'react-router-dom'
 
 /* State als props */
 const Mnav = ({ setIsNone, isNone }) => {
