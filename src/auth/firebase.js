@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
+import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+		 signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyCzNQ2O8_KEF7rcupBT8gNjB0_BIE7K4ig",
@@ -15,19 +15,18 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const auth = getAuth();
-const provider = new GoogleAuthProvider();
-
+export const auth = getAuth();
+export const provider = new GoogleAuthProvider();
 
 export function fbsignup(email, password) {
 	createUserWithEmailAndPassword(auth, email, password)
 	.then((userCredential) => {
-		// Signed in 
-		var user = userCredential.user;
+		// Signed in
+		const user = userCredential.user;
 	})
 	.catch((error) => {
-		var errorCode = error.code;
-		var errorMessage = error.message;
+		const errorCode = error.code;
+		const errorMessage = error.message;
 		// ..
 	});
 }
@@ -36,12 +35,12 @@ export function fblogin(email, password) {
 	signInWithEmailAndPassword(auth, email, password)
 	.then((userCredential) => {
 		// Signed in
-		var user = userCredential.user;
+		const user = userCredential.user;
 		console.log(user)
 	})
 	.catch((error) => {
-		var errorCode = error.code;
-		var errorMessage = error.message;
+		const errorCode = error.code;
+		const errorMessage = error.message;
 	});
 }
 
@@ -53,8 +52,13 @@ export function googlelogin() {
 			const token = credential.accessToken;
 			// The signed-in user info.
 			const user = result.user;
-			console.log(user)
+			console.log(user);
+			// console.log(user['displayName']);
+			// console.log(user['email']);
+			// console.log(user['photoURL']);
+			// console.log(user);
 			// ...
+			return user;
 		}).catch((error) => {
 			// Handle Errors here.
 			const errorCode = error.code;
@@ -65,4 +69,9 @@ export function googlelogin() {
 			const credential = GoogleAuthProvider.credentialFromError(error);
 			// ...
 		});
+}
+
+export function signout() {
+	//staat hier voor wanneer dingen willen toevoegen nadat iemand dit doet, zoals error handling.
+	signOut(auth)
 }

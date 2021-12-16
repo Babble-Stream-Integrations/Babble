@@ -5,8 +5,8 @@
 .profile-card {
     background-color: var(--lg);
     border-radius: 15px;
-    width: 75%
-    
+    width: 75%;
+    margin-top: 20px;
 }
 
 .profile-page-content {
@@ -20,6 +20,11 @@
     margin-left: 40px;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.edit-button-desktop {
+    float: right;
+    margin-right: 20px;
 }
 
 .profile-picture {
@@ -53,4 +58,20 @@
     font-size: 15px;
     margin-top: 20px;
     color: var(--ow1);
+}
+
+@media (max-width: 968px) {
+
+    .profile-content-wrapper {
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+    .profile-card {
+    background-color: var(--lg);
+    border-radius: 15px;
+    width: 100%;
+    
+}
 }
