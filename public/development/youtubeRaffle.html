@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>LiveBot</title>
+	<style>
+		/* Tooltip container */
+		.tooltip {
+			position: relative;
+			display: inline-block;
+			border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+		}
+
+		/* Tooltip text */
+		.tooltip .tooltiptext {
+			visibility: hidden;
+			width: 550px;
+			background-color: black;
+			color: #fff;
+			text-align: center;
+			padding: 5px 0;
+			border-radius: 6px;
+
+		/* Position the tooltip text - see examples below! */
+			position: absolute;
+			z-index: 1;
+		}
+
+		/* Show the tooltip text when you mouse over the tooltip container */
+		.tooltip:hover .tooltiptext {
+			visibility: visible;
+		}
+	</style>
+</head>
+<body>
+	<h1>LiveBot</h1>
+	<a href="http://localhost:5001/babble-d6ef3/europe-west1/app/api/raffle/twitch"><button id="twitch" style="background-color: rgb(144, 0, 211);">Switch to Twitch</button></a>
+
+	<br><br><br>
+
+	<a href="yt/auth"><button>Authorize</button></a>
+	<a href="yt/find-active-chat"><button>Find Chat</button></a>
+	<a href="yt/get-variable"><button>Get Variable</button></a>
+
+	<br><br>
+
+	<form action="yt/start" method="post">
+		<label for="duration">Duration (Minutes): </label>
+		<input type="number" id="duration" name="duration" min="1" max="60" value="1" autofocus required><br>
+
+		<label for="enterMessage">Message to enter: </label>
+		<input type="text" id="enterMessage" name="enterMessage" value="!join" placeholder="!join" required><br>
+
+		<label for="subOnly">Subscribers only: </label>
+		<input type="hidden" name="subOnly" value="0">
+		<input type="checkbox" id="subOnly" name="subOnly" value="1">
+		<div class="tooltip">Info
+			<span class="tooltiptext">Only works when viewer's subscriptions are public, which are private by default. Setting the livestream to sub only chat would be easier.</span>
+		</div><br>
+
+		<label for="memberOnly">Members only: </label>
+		<input type="hidden" name="memberOnly" value="0">
+		<input type="checkbox" id="memberOnly" name="memberOnly" value="1"><br>
+
+		<label for="subPrivilege">Subscriber chance increase: </label>
+		<input type="number" id="subPrivilege" name="subPrivilege" min="1" max="10" value="3" required><br>
+
+		<label for="memberPrivilege">Member chance increase: </label>
+		<input type="number" id="memberPrivilege" name="memberPrivilege" min="1" max="10" value="1" required><br>
+
+		<label for="winnerAmount">Amount of Winners drawn: </label>
+		<input type="number" id="winnerAmount" name="winnerAmount" min="1" max="100" value="3" required><br>
+
+		<label for="duplicateWinners">Duplicate Winners: </label>
+		<input type="hidden" name="duplicateWinners" value="0">
+		<input type="checkbox" id="duplicateWinners" name="duplicateWinners" value="1" checked><br>
+
+		<label for="announceWinners">Announce winners: </label>
+		<input type="hidden" name="announceWinners" value="0">
+		<input type="checkbox" id="announceWinners" name="announceWinners" value="1" checked><br>
+
+		<input type="submit" value="Submit">
+		<input type="reset" value="Reset">
+	</form>
+</body>
+</html>

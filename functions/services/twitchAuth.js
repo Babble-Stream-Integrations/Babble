@@ -23,7 +23,6 @@ twitchAuth.getCode = response => {
 }
 
 twitchAuth.getTokensWithCode = async (response, code) => {
-	console.log(code.code);
 	await axios.post("https://id.twitch.tv/oauth2/token", null,  { params: {
 		client_id : clientID,
 		client_secret : clientSecret,
@@ -31,14 +30,8 @@ twitchAuth.getTokensWithCode = async (response, code) => {
 		grant_type : "authorization_code",
 		redirect_uri : redirectURL
 	} }).then(response => {
-		console.log(response.data)
-		fs.writeFile('../../twitchToken.json', response.data, (err) => {
-			if(err) {
-				console.log('error');
-				throw err;
-			}
-			console.log("Data has been written to file successfully.");
-		});
+		console.log(response.data.access_token);
+		process.env.TWITCH_ACCESS_TOKEN = response.data.access_token;
 	})
 	.catch(error => {
 		console.log(error.response)

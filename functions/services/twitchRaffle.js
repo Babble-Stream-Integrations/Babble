@@ -1,75 +1,92 @@
 const { default: axios } = require('axios');
 const tmi = require('tmi.js');
-const fs = require('fs');
 const dotenv = require('dotenv');
 dotenv.config();
-
-const appAccessToken = 'rsr1i6cybvvc8uh2obfh04hfvtzj6s';
 
 const twitchRaffle = {};
 
 twitchRaffle.startRaffle = async(data) => {
+	console.log('Start Twitch Raffle');
 	console.log(data);
 
-	console.log('Start Twitch Raffle');
+	if (process.env.TWITCH_ACCESS_TOKEN == undefined) {
+		throw new Error('No Twitch User Acess Token')
+	}
 
-	User = getUser();
+	let userName = process.env.TBOT_NAME
+	let userPassword = process.env.TBOT_TOKEN
 
-	const client = new tmi.Client({
-		options: {
-			debug: true
-		},
-		identity: {
-			username: process.env.TBOT_NAME,
-			password: process.env.TBOT_TOKEN
-		},
-		channels: [ 'joj3o', 'osjesleben' ]
-	});
-
-	let raffleUsersEntered = [];
-	let noDefaults = false;
-
-	client.connect().then(() => {
-		if (Object.keys(data).length === 1) {
-			client.say('#osjesleben', 'Please enter default values in the Babble editor first');
-			noDefaults = true;
-		} else {
-			client.say('#osjesleben', 'Raffle started! Type !join to enter');
+	axios.get('https://api.twitch.tv/helix/users', {
+		headers: {
+			Authorization : "Bearer " + process.env.TWITCH_ACCESS_TOKEN,
+			"Client-Id" : process.env.TR_CLIENTID
 		}
-	});
+	}).then(response => {
+		userID = response.data.data[0].id;
+		if (data.myAccount.at(-1) === '1') {
+			userName = response.data.data[0].login;
+			userPassword = 'oauth:' + process.env.TWITCH_ACCESS_TOKEN
+		}
+
+		const client = new tmi.Client({
+			options: {
+				debug: true
+			},
+			identity: {
+				username: userName,
+				password: userPassword
+			},
+			channels: [ 'joj3o', 'osjesleben' ]
+		});
+
+		let raffleUsersEntered = [];
+		let noDefaults = false;
+
+		client.connect().then(() => {
+			if (Object.keys(data).length === 1) {
+				client.say('#osjesleben', 'Please enter default values in the Babble editor first');
+				noDefaults = true;
+			} else {
+				client.say('#osjesleben', 'Raffle started! Type !join to enter');
+			}
+		});
 
 
-	client.on('message', (channel, tags, message, self) => {
-		// Ignore echoed messages.
-		if(self) return;
+		client.on('message', (channel, tags, message, self) => {
+			// Ignore echoed messages.
+			if(self) return;
 
-		filterMessage(channel, tags, message, data, raffleUsersEntered);
-	});
+			filterMessage(channel, tags, message, data, raffleUsersEntered);
+		});
 
-	setTimeout(function() {
-		if (noDefaults == true) {
+		setTimeout(function() {
+			if (noDefaults == true) {
+				client.disconnect();
+				return;
+			}
+			console.log(raffleUsersEntered);
+			if (data.announceWinners.at(-1) === '1') {client.say('#osjesleben', 'The winners of the raffle are: ' + raffleUsersEntered.join(", "))};
 			client.disconnect();
-			return;
-		}
-		console.log(raffleUsersEntered);
-		if (data.announceWinners.at(-1) === '1') {client.say('#osjesleben', 'The winners of the raffle are: ' + raffleUsersEntered.join(", "))};
-		client.disconnect();
-	}, (data.duration * (60/4) * 1000));
+		}, (data.duration * (60/4) * 1000));
+	})
+	.catch(error => {
+		console.log(error)
+	})
 }
 
 const filterMessage = async(channel, tags, message, data, raffleUsersEntered) => {
 	if(message.toLowerCase() === data.enterMessage && !raffleUsersEntered.includes(tags.username)) {
 		if (data.followOnly.at(-1) === '1') {
-			axios.get('https://api.twitch.tv/helix/users/follows?from_id='+tags['user-id']+'', {
+			axios.get('https://api.twitch.tv/helix/users/follows?from_id='+tags['user-id']+'&to_id='+userID+'', {
 				headers: {
 					Authorization : "Bearer " + appAccessToken,
-					"Client-Id" : process.env.CLIENTID
+					"Client-Id" : process.env.TR_CLIENTID
 				}
 			}).then(response => {
 				console.log(response.data)
 			})
 			.catch(error => {
-				console.log(error.response)
+				console.log(error)
 			})
 		} else if (data.subOnly.at(-1) === '1') {
 			console.log('oi');
@@ -101,14 +118,5 @@ const filterMessage = async(channel, tags, message, data, raffleUsersEntered) =>
 // 	console.log(raffleUsersEntered);
 // 	raffleUsersEntered = [];
 // }
-
-function getUser() {
-	fs.readFile('../../twitchToken.json', (err, data) => {
-		if(err) {
-			throw err;
-		}
-		console.log(data.toString());
-	});
-}
 
 module.exports = twitchRaffle;
