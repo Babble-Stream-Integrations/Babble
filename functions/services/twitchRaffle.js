@@ -22,6 +22,7 @@ twitchRaffle.startRaffle = async(data) => {
 			"Client-Id" : process.env.TR_CLIENTID
 		}
 	}).then(response => {
+		const userChannel = '#' + response.data.data[0].login;
 		userID = response.data.data[0].id;
 		if (data.myAccount.at(-1) === '1') {
 			userName = response.data.data[0].login;
@@ -36,7 +37,7 @@ twitchRaffle.startRaffle = async(data) => {
 				username: userName,
 				password: userPassword
 			},
-			channels: [ 'joj3o', 'osjesleben' ]
+			channels: [ response.data.data[0].login ]
 		});
 
 		let raffleUsersEntered = [];
@@ -44,10 +45,10 @@ twitchRaffle.startRaffle = async(data) => {
 
 		client.connect().then(() => {
 			if (Object.keys(data).length === 1) {
-				client.say('#osjesleben', 'Please enter default values in the Babble editor first');
+				client.say(userChannel, 'Please enter default values in the Babble editor first');
 				noDefaults = true;
 			} else {
-				client.say('#osjesleben', 'Raffle started! Type !join to enter');
+				client.say(userChannel, 'Raffle started! Type !join to enter');
 			}
 		});
 
@@ -56,7 +57,7 @@ twitchRaffle.startRaffle = async(data) => {
 			// Ignore echoed messages.
 			if(self) return;
 
-			filterMessage(channel, tags, message, data, raffleUsersEntered);
+			sortUser(channel, tags, message, data, raffleUsersEntered, userID);
 		});
 
 		setTimeout(function() {
@@ -64,54 +65,105 @@ twitchRaffle.startRaffle = async(data) => {
 				client.disconnect();
 				return;
 			}
-			console.log(raffleUsersEntered);
-			if (data.announceWinners.at(-1) === '1') {client.say('#osjesleben', 'The winners of the raffle are: ' + raffleUsersEntered.join(", "))};
+			if (data.announceWinners.at(-1) === '1') {
+				client.say(userChannel, 'The winners of the raffle are: ' +
+				pickWinner(raffleUsersEntered, int(data.winnerAmount, data.duplicateWinners)).join(", "))};
 			client.disconnect();
-		}, (data.duration * (60/4) * 1000));
+		}, (data.duration * 60 * 1000));
 	})
 	.catch(error => {
 		console.log(error)
 	})
 }
 
-const filterMessage = async(channel, tags, message, data, raffleUsersEntered) => {
+const sortUser = async(channel, tags, message, data, raffleUsersEntered, userID) => {
 	if(message.toLowerCase() === data.enterMessage && !raffleUsersEntered.includes(tags.username)) {
-		if (data.followOnly.at(-1) === '1') {
-			axios.get('https://api.twitch.tv/helix/users/follows?from_id='+tags['user-id']+'&to_id='+userID+'', {
-				headers: {
-					Authorization : "Bearer " + appAccessToken,
-					"Client-Id" : process.env.TR_CLIENTID
+		// Subscriber, Follower or Pleb
+		const status = getStatus(tags['user-id'], userID, tags.subscriber, tags['display-name'])
+
+		// Subscriber only
+		if (data.subOnly.at(-1) === '1') {
+			if (status === 'Subscriber') {
+				for (let i = 0; i < data.subPrivilege; i++) {
+					raffleUsersEntered.push(tags['display-name']);
 				}
-			}).then(response => {
-				console.log(response.data)
-			})
-			.catch(error => {
-				console.log(error)
-			})
-		} else if (data.subOnly.at(-1) === '1') {
-			console.log('oi');
+			}
+		// Follower only
+		} else if (data.followOnly.at(-1) === '1') {
+			if (status === 'Follower') {
+				for (let i = 0; i < data.followPrivilege; i++) {
+					raffleUsersEntered.push(['display-name']);
+				}
+			}
+		// Everyone
 		} else {
-			if (data.subPrivilege > 1 && data.subPrivilege > data.memberPrivilege) {
-				checkSub(message.authorDetails.channelId).then(function(results){
-					if (results == true) {
-						for (let i = 0; i < data.subPrivilege; i++) {
-							raffleUsersEntered.push(tags.username);
-						}
-					}
-				});
-			} else if (data.memberPrivilege > data.subPrivilege) {
-				checkMember(message.authorDetails.channelId).then(function(results){
-					if (results == true) {
-						for (let i = 0; i < data.memberPrivilege; i++) {
-							raffleUsersEntered.push(tags.username);
-						}
-					}
-				});
-			} else {
-				raffleUsersEntered.push(tags.username);
+			if (status === 'Subscriber') {
+				for (let i = 0; i < data.subPrivilege; i++) {
+					raffleUsersEntered.push(tags['display-name']);
+				}
+			} else if (status === 'Follower') {
+				for (let i = 0; i < data.followPrivilege; i++) {
+					raffleUsersEntered.push(tags['display-name']);
+				}
+			} else if (status === 'Pleb') {
+				raffleUsersEntered.push(tags['display-name']);
 			}
 		}
 	}
+}
+
+function getStatus(viewerID, streamerID, isSubscribed, username) {
+
+	// Is the viewer subscribed?
+	if (isSubscribed === true) {
+		console.log(username, 'is subscribed!');
+		return 'Subscriber'
+	}
+
+	// Is the viewer following?
+	axios.get('https://api.twitch.tv/helix/users/follows?from_id='+viewerID+'&to_id='+streamerID+'', {
+		headers: {
+		Authorization : "Bearer " + process.env.TWITCH_ACCESS_TOKEN,
+		"Client-Id" : process.env.TR_CLIENTID
+	}
+	}).then(response => {
+		if (response.data.total === 1) {
+			// Following
+			return 'Follower'
+		} else {
+			// Not following
+			return 'Pleb'
+		}
+	})
+	.catch(error => {
+		console.log(error)
+	})
+}
+
+function pickWinner(raffleUsersEntered, winnerAmount, duplicateWinners) {
+	let winnerArray = [];
+	for (let i = 0; i < winnerAmount; i++) {
+		if (raffleUsersEntered.length !== 0) {
+			const random = Math.floor(Math.random() * raffleUsersEntered.length);
+			winnerArray.push(raffleUsersEntered[random]);
+			if (duplicateWinners.at(-1) === '0') {
+				let i = 0;
+				const arrayItem = raffleUsersEntered[random];
+				while (i < raffleUsersEntered.length) {
+					if (raffleUsersEntered[i] === arrayItem) {
+						raffleUsersEntered.splice(i, 1);
+					} else {
+						++i;
+					}
+				}
+			} else {
+				raffleUsersEntered.splice(random, 1);
+			}
+
+		}
+	}
+	console.log('Users entered:', raffleUsersEntered);
+	console.log('Winners:', winnerArray);
 }
 
 // const endRaffle = () => {
