@@ -6,7 +6,7 @@ import AddonSettingsText from "../components/AddonSettings/AddonSettingsText";
 import { Container, Row, Col } from 'react-bootstrap';
 
 
-function ProfilePage() {
+function AddonSettings() {
     return (
         <>
             <Container className="profile-max-width title-font-size">
@@ -23,5 +23,4 @@ function ProfilePage() {
     )
 }
 
-export default ProfilePage
-
+export default AddonSettings

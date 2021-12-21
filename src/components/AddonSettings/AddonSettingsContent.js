@@ -6,6 +6,7 @@ import AddonSettingsOption1 from '../AddonSettings/AddonSettingsOption1.js';
 import AddonSettingsOption2 from '../AddonSettings/AddonSettingsOption2.js';
 import AddonSettingsOption3 from '../AddonSettings/AddonSettingsOption3.js';
 import AddonSettingsOption4 from '../AddonSettings/AddonSettingsOption4.js';
+import AddonSettingsOption5 from '../AddonSettings/AddonSettingsOption5.js';
 import AddonSettingsSaveButton from './AddonSettingsSaveButton.js';
 
 //style
@@ -31,6 +32,11 @@ function ProfilePageContent() {
                         </Col>
                         <Col className="setting-option-component-margin-col">
                             <AddonSettingsOption4 />
+                        </Col>
+                    </Row>
+                    <Row className="setting-option-component-margin-row">
+                        <Col className="setting-option-component-margin-col">
+                            <AddonSettingsOption5 />
                         </Col>
                     </Row>
                     <Row>

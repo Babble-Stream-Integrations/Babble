@@ -17,6 +17,7 @@ import Login from './components/Login-SignUp/Login'
 import SignUpMenu from './pages/SignUpMenu.js'
 import ProfilePage from './pages/ProfilePage.js'
 import AddonSettings from './pages/AddonSettings.js'
+import RaffleSettings from './pages/RaffleSettings.js'
 
 
 /* Import Components */
@@ -118,6 +119,17 @@ function App() {
                             <div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
                                 {/* Hier staat de content in */}
                                 <AddonSettings />
+                            </div>
+                        </div>
+                        <Footer />
+                    </Route>
+                    <Route path="/rafflesettings">
+                        <div className="bg-color">
+                            {isDesktop && <Navigation setTitle={setTitle} />}
+                            {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
+                            <div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
+                                {/* Hier staat de content in */}
+                                <RaffleSettings />
                             </div>
                         </div>
                         <Footer />

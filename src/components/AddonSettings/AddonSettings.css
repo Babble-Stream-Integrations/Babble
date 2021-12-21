@@ -17,10 +17,6 @@
     margin-right: 20px;
 }
 
-.test-test {
-    width: 200px;
-}
-
 /* Setting option #1 */
 .addon-settings-form-input-small {
     width: 25%;
@@ -129,6 +125,16 @@
 /* Save button */
 
 .save-button:hover {
+    margin-left: 40px;
+    width: 25%;
+    background-color: var(--mo);
+    border-color: var(--mo);
+    border-radius: 10px;
+    color: var(--black);
+    font-weight: bold;
+}
+
+.save-button:focus {
     margin-left: 40px;
     width: 25%;
     background-color: var(--mo);
