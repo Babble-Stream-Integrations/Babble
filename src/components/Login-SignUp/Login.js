@@ -5,9 +5,8 @@ import { Container, Row, Col} from "react-bootstrap"
 import "../Login-SignUp/Login.css"
 import LoginText from "./LoginText.js";
 import LoginContent from './LoginContent.js';
-import {fblogin, googlelogin} from './LoginFirebase.js'
 
-export default function Login() {
+export default function Login(props) {
 
     return (
         <>
@@ -17,7 +16,7 @@ export default function Login() {
                         <LoginText />
                     </Col>
                     <Col md="6" className="login-content">
-                        <LoginContent />
+                        <LoginContent setUserState={props.setUserState} /*setUserName = {props.setUserName} setEmail = {props.setEmail} setProfilePicture = {props.setProfilePicture}*/ />
                     </Col>
                 </Row>
             </Container>

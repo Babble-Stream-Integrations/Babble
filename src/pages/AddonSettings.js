@@ -1,20 +1,21 @@
 import React from 'react'
 
 //components
-import ProfilePageContent from '../components/ProfilePage/ProfilePageContent.js';
+import AddonSettingsContent from "../components/AddonSettings/AddonSettingsContent";
+import AddonSettingsText from "../components/AddonSettings/AddonSettingsText";
 import { Container, Row, Col } from 'react-bootstrap';
-import ProfilePageText from '../components/ProfilePage/ProfilePageText.js';
 
-function ProfilePage(props) {
+
+function ProfilePage() {
     return (
         <>
             <Container className="profile-max-width title-font-size">
                 <Row className="page-row-positioning">
                     <Col md="3" className="flex-center">
-                        <ProfilePageText />
+                        <AddonSettingsText />
                     </Col>
                     <Col md="6" className="profile-page-content">
-                        <ProfilePageContent userName = {props.userName} email = {props.email} profilePicture = {props.profilePicture}  />
+                        <AddonSettingsContent />
                     </Col>
                 </Row>
             </Container>
@@ -23,3 +24,4 @@ function ProfilePage(props) {
 }
 
 export default ProfilePage
+

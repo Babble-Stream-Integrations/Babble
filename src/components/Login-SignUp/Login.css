@@ -44,6 +44,12 @@
     border-radius: 10px;
 }
 
+.sign-in-text {
+    font-family: 'Segoe UI';
+    font-weight: bold;
+    color: var(--black);
+}
+
 .login-google-button:hover {
     background-color: var(--lg);
     border-color: white;
