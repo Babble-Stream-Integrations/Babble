@@ -1,8 +1,7 @@
 const { google } = require('googleapis');
 const util = require('util');
 const fs = require('fs')
-const dotenv = require('dotenv');
-dotenv.config()
+const dotenv = require('dotenv').config();
 
 const writeFilePromise = util.promisify(fs.writeFile);
 const readFilePromise = util.promisify(fs.readFile);

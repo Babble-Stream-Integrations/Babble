@@ -1,7 +1,6 @@
 const tmi = require('tmi.js');
 const { default: axios } = require('axios');
-const dotenv = require('dotenv');
-dotenv.config()
+const dotenv = require('dotenv').config();
 
 const twitchService = {};
 

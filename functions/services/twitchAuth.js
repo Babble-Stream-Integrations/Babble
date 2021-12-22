@@ -1,7 +1,6 @@
 const { default: axios } = require('axios');
 const fs = require('fs');
-const dotenv = require('dotenv');
-dotenv.config()
+const dotenv = require('dotenv').config();
 
 const twitchAuth = {};
 
