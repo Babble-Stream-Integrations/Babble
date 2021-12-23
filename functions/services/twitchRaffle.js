@@ -67,9 +67,8 @@ twitchRaffle.startRaffle = async(data) => {
 				return;
 			}
 			if (data.announceWinners.at(-1) === '1') {
-				client.say(userChannel, 'The winners of the raffle are: ' + raffleUsersEntered)
-				// client.say(userChannel, 'The winners of the raffle are: ' +
-				// pickWinner(raffleUsersEntered, parseInt(data.winnerAmount), data.duplicateWinners).join(", "))
+				client.say(userChannel, 'The winners of the raffle are: ' +
+				pickWinner(raffleUsersEntered, parseInt(data.winnerAmount), data.duplicateWinners).join(", "))
 			};
 			client.disconnect();
 		}, (data.duration * (60/4) * 1000));
@@ -116,32 +115,19 @@ function sortUser(data, raffleUsersEntered, displayName, viewerID, streamerID, i
 }
 
 const enterRaffle = async(data, raffleUsersEntered, displayName, status) => {
+	const followOnly = (data.followOnly.at(-1) === '1') ? true : false;
+	const subOnly = (data.subOnly.at(-1) === '1') ? true : false;
 
-	// Subscriber only
-	if (data.subOnly.at(-1) === '1') {
-		if (status === 'Subscriber') {
-			for (let i = 0; i < data.subPrivilege; i++) {
-				raffleUsersEntered.push(displayName);
-			}
+	if (status === 'Subscriber') {
+		for (let i = 0; i < data.subPrivilege; i++) {
+			raffleUsersEntered.push(displayName);
 		}
-	// Follower only
-	} else if (data.followOnly.at(-1) === '1') {
-		if (status === 'Follower') {
-			for (let i = 0; i < data.followPrivilege; i++) {
-				raffleUsersEntered.push(displayName);
-			}
+	} else if (status === 'Follower' && !subOnly) {
+		for (let i = 0; i < data.followPrivilege; i++) {
+			raffleUsersEntered.push(displayName);
 		}
-	// Everyone
 	} else {
-		if (status === 'Subscriber') {
-			for (let i = 0; i < data.subPrivilege; i++) {
-				raffleUsersEntered.push(displayName);
-			}
-		} else if (status === 'Follower') {
-			for (let i = 0; i < data.followPrivilege; i++) {
-				raffleUsersEntered.push(displayName);
-			}
-		} else if (status === 'Pleb') {
+		if (!subOnly && !followOnly) {
 			raffleUsersEntered.push(displayName);
 		}
 	}
@@ -172,6 +158,7 @@ function pickWinner(raffleUsersEntered, winnerAmount, duplicateWinners) {
 		}
 	}
 	console.log('Winners:', winnerArray);
+	return winnerArray
 }
 
 module.exports = twitchRaffle;
