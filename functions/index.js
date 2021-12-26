@@ -31,6 +31,7 @@ app.get('/api/raffle/twitch', (req, res) =>
 );
 
 app.get('/api/message', (req, res) => {
+	console.log('Sofia');
 	res.send({ message: 'Hello world!' });
 });
 

@@ -1,6 +1,9 @@
 const { default: axios } = require('axios');
 const tmi = require('tmi.js');
 const dotenv = require('dotenv').config();
+const fs = require('fs');
+const qs = require('qs')
+const twitchAuth = require('./twitchAuth');
 
 const twitchRaffle = {};
 
@@ -8,9 +11,9 @@ twitchRaffle.startRaffle = async(data) => {
 	console.log('Start Twitch Raffle');
 	console.log(data);
 
-	if (process.env.TWITCH_ACCESS_TOKEN == undefined) {
-		throw new Error('No Twitch User Acess Token')
-	}
+	// if (process.env.TWITCH_ACCESS_TOKEN == undefined) {
+	// 	throw new Error('No Twitch User Acess Token')
+	// }
 
 	let userName = process.env.TBOT_NAME
 	let userPassword = process.env.TBOT_TOKEN
@@ -74,7 +77,51 @@ twitchRaffle.startRaffle = async(data) => {
 		}, (data.duration * (60/4) * 1000));
 	})
 	.catch(error => {
-		console.log(error)
+		console.log(error.message)
+		console.log(error.response.status);
+		if (error.response.status === 401) {
+			if (fs.existsSync('./twitchToken.txt')) {
+				let refreshToken;
+				try {
+					refreshToken = fs.readFileSync('./twitchToken.txt', 'utf8')
+					console.log(data)
+				} catch (err) {
+					console.error(err)
+				}
+
+				axios({
+					method: 'post',
+					url: 'https://id.twitch.tv/oauth2/token',
+					data: qs.stringify({
+						grant_type: 'refresh_token',
+						refresh_token: refreshToken,
+						client_id: process.env.TR_CLIENTID,
+						client_secret: process.env.TR_CLIENTSECRET
+					}),
+					headers: {
+						'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+					}
+				})
+				.then(function (response) {
+					console.log(response.data);
+					process.env.TWITCH_ACCESS_TOKEN = response.data.access_token;
+					twitchRaffle.startRaffle(data);
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+			} else {
+				axios.get('http://localhost:5001/babble-d6ef3/europe-west1/app/api/raffle/twitch/auth')
+				.then(function (response) {
+					// handle success
+					console.log(response);
+				})
+				.catch(function (error) {
+					// handle error
+					console.log(error);
+				})
+			}
+		}
 	})
 }
 

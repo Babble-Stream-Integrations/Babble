@@ -29,8 +29,14 @@ twitchAuth.getTokensWithCode = async (response, code) => {
 		grant_type : "authorization_code",
 		redirect_uri : redirectURL
 	} }).then(response => {
-		console.log(response.data.access_token);
+		console.log(response.data);
 		process.env.TWITCH_ACCESS_TOKEN = response.data.access_token;
+		try {
+			fs.writeFileSync('./twitchToken.txt', response.data.refresh_token)
+			//file written successfully
+		} catch (err) {
+			console.error(err)
+		}
 	})
 	.catch(error => {
 		console.log(error.response)
