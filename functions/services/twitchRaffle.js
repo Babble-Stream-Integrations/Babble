@@ -20,8 +20,8 @@ twitchRaffle.startRaffle = async(data) => {
 
 	axios.get('https://api.twitch.tv/helix/users', {
 		headers: {
-			Authorization : "Bearer " + process.env.TWITCH_ACCESS_TOKEN,
-			"Client-Id" : process.env.TR_CLIENTID
+			Authorization : 'Bearer ' + process.env.TWITCH_ACCESS_TOKEN,
+			'Client-Id' : process.env.TR_CLIENTID
 		}
 	}).then(response => {
 		const userChannel = '#' + response.data.data[0].login;
@@ -71,7 +71,7 @@ twitchRaffle.startRaffle = async(data) => {
 			}
 			if (data.announceWinners.at(-1) === '1') {
 				client.say(userChannel, 'The winners of the raffle are: ' +
-				pickWinner(raffleUsersEntered, parseInt(data.winnerAmount), data.duplicateWinners).join(", "))
+				pickWinner(raffleUsersEntered, parseInt(data.winnerAmount), data.duplicateWinners).join(', '))
 			};
 			client.disconnect();
 		}, (data.duration * (60/4) * 1000));
@@ -139,8 +139,8 @@ function sortUser(data, raffleUsersEntered, displayName, viewerID, streamerID, i
 		// Is the viewer following?
 		axios.get('https://api.twitch.tv/helix/users/follows?from_id='+viewerID+'&to_id='+streamerID+'', {
 			headers: {
-			Authorization : "Bearer " + process.env.TWITCH_ACCESS_TOKEN,
-			"Client-Id" : process.env.TR_CLIENTID
+			Authorization : 'Bearer ' + process.env.TWITCH_ACCESS_TOKEN,
+			'Client-Id' : process.env.TR_CLIENTID
 		}
 		}).then(response => {
 			if (response.data.total === 1) {
