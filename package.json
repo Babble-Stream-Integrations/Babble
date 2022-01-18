@@ -45,6 +45,5 @@
   },
   "engines": {
     "node": ">=16 <=16"
-  },
-  "proxy": "http://localhost:5001/babble-d6ef3/europe-west1/app"
+  }
 }
