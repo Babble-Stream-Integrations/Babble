@@ -7,7 +7,7 @@ import { auth, provider } from '../../auth/firebase';
 import { Link } from 'react-router-dom'
 
 //style
-import "../Login-SignUp/Login.css";
+import "./Login.css";
 
 //firebase
 // import { fblogin, googlelogin } from '../../auth/firebase.js'
