@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "firebase serve --only functions"
+	"serve": "firebase emulators:start --only functions"
   },
   "eslintConfig": {
     "extends": [
@@ -45,5 +45,5 @@
   "engines": {
     "node": ">=16 <=16"
   },
-  "proxy": "http://localhost:5000/babble-d6ef3/europe-west1/app"
+  "proxy": "http://localhost:5001/babble-d6ef3/europe-west1/app"
 }
