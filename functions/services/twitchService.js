@@ -1,5 +1,6 @@
 const tmi = require('tmi.js');
 const { default: axios } = require('axios');
+const dotenv = require('dotenv').config();
 
 const twitchService = {};
 
@@ -9,8 +10,8 @@ twitchService.checkChat = () => {
 				debug: true
 		},
 		identity: {
-				username: 'jobodev',
-				password: 'oauth:703yewp5pgp66q3n7avb6ttrdua138'
+				username: process.env.TBOT_NAME,
+				password: process.env.TBOT_TOKEN
 		},
 		channels: [ 'joj3o', 'osjesleben' ]
 	});
@@ -22,7 +23,7 @@ twitchService.checkChat = () => {
 		if(self) return;
 
 		if(message.toLowerCase() === '!startraffle') {
-			// "@alca, heya!"
+			// '@alca, heya!'
 			client.say(channel, 'Quick Access Raffle!');
 			postToRaffle();
 		}
