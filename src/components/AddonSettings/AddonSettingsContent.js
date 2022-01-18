@@ -2,10 +2,10 @@ import React from 'react'
 import { Card, Image, Row, Col } from 'react-bootstrap'
 
 //components
-import AddonSettingsOption1 from '../AddonSettings/AddonSettingsOption1.js';
-import AddonSettingsOption2 from '../AddonSettings/AddonSettingsOption2.js';
-import AddonSettingsOption3 from '../AddonSettings/AddonSettingsOption3.js';
-import AddonSettingsOption4 from '../AddonSettings/AddonSettingsOption4.js';
+import AddonSettingsOption1 from './AddonSettingsOption1.js';
+import AddonSettingsOption2 from './AddonSettingsOption2.js';
+import AddonSettingsOption3 from './AddonSettingsOption3.js';
+import AddonSettingsOption4 from './AddonSettingsOption4.js';
 import AddonSettingsSaveButton from './AddonSettingsSaveButton.js';
 
 //style

@@ -13,7 +13,7 @@ import './App.css';
 import Home from './pages/Home'
 import Addons from './pages/Addons.js'
 import Help from './pages/Help.js'
-import Login from './components/Login-SignUp/Login'
+import Login from './components/login-SignUp/Login'
 import SignUpMenu from './pages/SignUpMenu.js'
 import ProfilePage from './pages/ProfilePage.js'
 import AddonSettings from './pages/AddonSettings.js'
@@ -21,8 +21,8 @@ import AddonSettings from './pages/AddonSettings.js'
 
 /* Import Components */
 import Navigation from './components/navbar/Navigation.js';
-import Mnav from './components/mobilenav/Mnav.js';
-import Footer from "./components/Footer/Footer.js"
+import Mnav from './components/mobileNav/Mnav.js';
+import Footer from "./components/footer/Footer.js"
 
 //import function
 import { googlelogin } from './auth/firebase.js';

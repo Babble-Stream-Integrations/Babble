@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Row, Form } from 'react-bootstrap'
 
 //style
-import '../AddonSettings/AddonSettings.css'
+import './AddonSettings.css'
 
 function AddonSettingsOption2() {
     const [show, setShow] = useState(true);
