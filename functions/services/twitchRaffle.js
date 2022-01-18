@@ -1,6 +1,9 @@
 const { default: axios } = require('axios');
 const tmi = require('tmi.js');
 const dotenv = require('dotenv').config();
+const fs = require('fs');
+const qs = require('qs')
+const twitchAuth = require('./twitchAuth');
 
 const twitchRaffle = {};
 
@@ -8,17 +11,17 @@ twitchRaffle.startRaffle = async(data) => {
 	console.log('Start Twitch Raffle');
 	console.log(data);
 
-	if (process.env.TWITCH_ACCESS_TOKEN == undefined) {
-		throw new Error('No Twitch User Acess Token')
-	}
+	// if (process.env.TWITCH_ACCESS_TOKEN == undefined) {
+	// 	throw new Error('No Twitch User Acess Token')
+	// }
 
 	let userName = process.env.TBOT_NAME
 	let userPassword = process.env.TBOT_TOKEN
 
 	axios.get('https://api.twitch.tv/helix/users', {
 		headers: {
-			Authorization : "Bearer " + process.env.TWITCH_ACCESS_TOKEN,
-			"Client-Id" : process.env.TR_CLIENTID
+			Authorization : 'Bearer ' + process.env.TWITCH_ACCESS_TOKEN,
+			'Client-Id' : process.env.TR_CLIENTID
 		}
 	}).then(response => {
 		const userChannel = '#' + response.data.data[0].login;
@@ -68,13 +71,57 @@ twitchRaffle.startRaffle = async(data) => {
 			}
 			if (data.announceWinners.at(-1) === '1') {
 				client.say(userChannel, 'The winners of the raffle are: ' +
-				pickWinner(raffleUsersEntered, parseInt(data.winnerAmount), data.duplicateWinners).join(", "))
+				pickWinner(raffleUsersEntered, parseInt(data.winnerAmount), data.duplicateWinners).join(', '))
 			};
 			client.disconnect();
 		}, (data.duration * (60/4) * 1000));
 	})
 	.catch(error => {
-		console.log(error)
+		console.log(error.message)
+		console.log(error.response.status);
+		if (error.response.status === 401) {
+			if (fs.existsSync('./twitchToken.txt')) {
+				let refreshToken;
+				try {
+					refreshToken = fs.readFileSync('./twitchToken.txt', 'utf8')
+					console.log(data)
+				} catch (err) {
+					console.error(err)
+				}
+
+				axios({
+					method: 'post',
+					url: 'https://id.twitch.tv/oauth2/token',
+					data: qs.stringify({
+						grant_type: 'refresh_token',
+						refresh_token: refreshToken,
+						client_id: process.env.TR_CLIENTID,
+						client_secret: process.env.TR_CLIENTSECRET
+					}),
+					headers: {
+						'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+					}
+				})
+				.then(function (response) {
+					console.log(response.data);
+					process.env.TWITCH_ACCESS_TOKEN = response.data.access_token;
+					twitchRaffle.startRaffle(data);
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+			} else {
+				axios.get('http://localhost:5001/babble-d6ef3/europe-west1/app/api/raffle/twitch/auth')
+				.then(function (response) {
+					// handle success
+					console.log(response);
+				})
+				.catch(function (error) {
+					// handle error
+					console.log(error);
+				})
+			}
+		}
 	})
 }
 
@@ -92,8 +139,8 @@ function sortUser(data, raffleUsersEntered, displayName, viewerID, streamerID, i
 		// Is the viewer following?
 		axios.get('https://api.twitch.tv/helix/users/follows?from_id='+viewerID+'&to_id='+streamerID+'', {
 			headers: {
-			Authorization : "Bearer " + process.env.TWITCH_ACCESS_TOKEN,
-			"Client-Id" : process.env.TR_CLIENTID
+			Authorization : 'Bearer ' + process.env.TWITCH_ACCESS_TOKEN,
+			'Client-Id' : process.env.TR_CLIENTID
 		}
 		}).then(response => {
 			if (response.data.total === 1) {

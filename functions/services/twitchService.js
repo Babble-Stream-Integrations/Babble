@@ -23,7 +23,7 @@ twitchService.checkChat = () => {
 		if(self) return;
 
 		if(message.toLowerCase() === '!startraffle') {
-			// "@alca, heya!"
+			// '@alca, heya!'
 			client.say(channel, 'Quick Access Raffle!');
 			postToRaffle();
 		}

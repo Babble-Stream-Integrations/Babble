@@ -11,26 +11,32 @@ const state = process.env.TR_STATE;
 const scopes = process.env.TR_SCOPES;
 
 twitchAuth.getCode = response => {
-	const authUrl = "https://id.twitch.tv/oauth2/authorize" +
-		"?response_type=" + "code" +
-		"&force_verify=" + "true" +
-		"&client_id=" + clientID +
-		"&redirect_uri=" + redirectURL +
-		"&scope=" + scopes +
-		"&state=" + state + ""
+	const authUrl = 'https://id.twitch.tv/oauth2/authorize' +
+		'?response_type=' + 'code' +
+		'&force_verify=' + 'true' +
+		'&client_id=' + clientID +
+		'&redirect_uri=' + redirectURL +
+		'&scope=' + scopes +
+		'&state=' + state + ''
 	response.redirect(authUrl);
 }
 
 twitchAuth.getTokensWithCode = async (response, code) => {
-	await axios.post("https://id.twitch.tv/oauth2/token", null,  { params: {
+	await axios.post('https://id.twitch.tv/oauth2/token', null,  { params: {
 		client_id : clientID,
 		client_secret : clientSecret,
 		code : code.code,
-		grant_type : "authorization_code",
+		grant_type : 'authorization_code',
 		redirect_uri : redirectURL
 	} }).then(response => {
-		console.log(response.data.access_token);
+		console.log(response.data);
 		process.env.TWITCH_ACCESS_TOKEN = response.data.access_token;
+		try {
+			fs.writeFileSync('./twitchToken.txt', response.data.refresh_token)
+			//file written successfully
+		} catch (err) {
+			console.error(err)
+		}
 	})
 	.catch(error => {
 		console.log(error.response)

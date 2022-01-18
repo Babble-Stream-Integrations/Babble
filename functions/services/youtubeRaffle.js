@@ -68,7 +68,7 @@ auth.on('tokens', (tokens) => {
 // Check if previous tokens exist to avoid authentication every server restart
 const checkTokens = async () => {
 	try {
-		if (fs.existsSync("./tokens.json")) {
+		if (fs.existsSync('./tokens.json')) {
 			const tokens = await read('./tokens.json');
 			if (tokens) {
 				console.log('Setting tokens');
@@ -107,7 +107,7 @@ const checkSub = async channelId => {
 			return true;
 		}
 	} catch (err) {
-		console.log("Catched bish");
+		console.log('Catched bish');
 		console.log(err.message);
 	}
 	return false;
@@ -122,7 +122,7 @@ const checkMember = async channelId => {
 		console.log(response.data);
 
 	} catch (err) {
-		console.log("Catched!");
+		console.log('Catched!');
 		console.log(err.message);
 	}
 	return false
@@ -137,7 +137,7 @@ const respond = (newMessages, data) => {
 			if (data.subOnly.at(-1) == 1) {
 				checkSub(message.authorDetails.channelId).then(function(results){
 					if (results == true) {
-						console.log(author, "is subscribed!");
+						console.log(author, 'is subscribed!');
 						for (let i = 0; i < data.subPrivilege; i++) {
 							raffleUsersEntered.push(author);
 						}
@@ -146,7 +146,7 @@ const respond = (newMessages, data) => {
 			} else if (data.memberOnly.at(-1) == 1) {
 				checkMember(message.authorDetails.channelId).then(function(results){
 					if (results == true) {
-						console.log(author, "is a Member!");
+						console.log(author, 'is a Member!');
 						for (let i = 0; i < data.memberPrivilege; i++) {
 							raffleUsersEntered.push(author);
 						}
@@ -210,7 +210,7 @@ const printMessage = message => {
 }
 
 const startTrackingChat = async(data) => {
-	console.log("Start raffle");
+	console.log('Start raffle');
 	interval = setInterval(function() { getChatMessages(data); }, intervalTime);
 }
 
