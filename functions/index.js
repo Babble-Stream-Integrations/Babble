@@ -1,10 +1,16 @@
 const functions = require('firebase-functions').region('europe-west1');
 const express = require('express');
 const path = require('path');
+const { initializeApp, applicationDefault, cert, getApps, getApp } = require('firebase-admin/app');
+const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
 
 const twitchService = require('./services/twitchService');
 const twitchRaffleRoutes = require('./routes/twitchRaffle').router;
 const youtubeRaffleRoutes = require('./routes/youtubeRaffle');
+
+getApps().length === 0 ? initializeApp() : getApp();
+
+const db = getFirestore();
 
 const app = express();
 
@@ -39,6 +45,18 @@ app.get('/api/function', (req, res) => {
 	let x = 1
 	x++;
 	console.log('Anton heeft zoveel ballen:', x);
+});
+
+app.post('/api/adduser', (req, res) => {
+	const data = {
+		email: req.body.email,
+		nick_name: req.body.displayName,
+		user_uid: req.body.uid
+		};
+		
+	// Add a new document in collection "users" with ID 'email'
+	const response = db.collection('users').doc(req.body.uid).set(data);
+	res.redirect('/');
 });
 
 exports.app = functions.https.onRequest(app);
