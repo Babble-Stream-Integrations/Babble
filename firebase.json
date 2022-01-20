@@ -1,10 +1,22 @@
 {
   "hosting": {
-    "public": "build",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
-    ]
+      "**/node_modules/**",
+	  "YetFilledIn.md",
+	  "README.old.md"
+    ],
+	"rewrites": [
+		{
+		  "source": "**",
+		  "destination": "/index.html"
+		},
+		{ 
+			"source": "/api/**", 
+			"function": "app" 
+		}
+	]
   }
 }

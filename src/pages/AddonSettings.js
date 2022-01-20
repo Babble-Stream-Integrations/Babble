@@ -1,8 +1,8 @@
 import React from 'react'
 
 //components
-import AddonSettingsContent from "../components/AddonSettings/AddonSettingsContent";
-import AddonSettingsText from "../components/AddonSettings/AddonSettingsText";
+import AddonSettingsContent from "../components/addonSettings/AddonSettingsContent";
+import AddonSettingsText from "../components/addonSettings/AddonSettingsText";
 import { Container, Row, Col } from 'react-bootstrap';
 
 

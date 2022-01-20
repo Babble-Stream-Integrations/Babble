@@ -1,7 +1,7 @@
 import React from 'react'
 
 //style
-import '../AddonSettings/AddonSettings.css'
+import './AddonSettings.css'
 
 function ProfilePageText() {
     return (
