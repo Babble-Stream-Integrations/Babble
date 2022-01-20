@@ -1,0 +1,110 @@
+.raffle-settings-content {
+    margin-bottom: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.raffle-settings-card {
+    background-color: var(--lg);
+    border-radius: 15px;
+    margin-top: 20px;
+    width: auto;
+}
+
+/* buttons */
+
+.authorize-button-box {
+    margin-top: 20px;
+}
+
+.authorize-button {
+    width: 25%;
+    background-color: var(--mo);
+    border-color: var(--mo);
+    border-radius: 10px;
+    color: var(--black);
+    font-weight: bold;
+}
+
+.authorize-button:focus {
+    width: 25%;
+    background-color: var(--mo);
+    border-color: var(--mo);
+    border-radius: 10px;
+    color: var(--black);
+    font-weight: bold;
+}
+
+.authorize-button:hover {
+    width: 25%;
+    background-color: var(--mo);
+    border-color: var(--mo);
+    border-radius: 10px;
+    color: var(--black);
+    font-weight: bold;
+}
+
+.submit-button-box {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.submit-button {
+    width: 25%;
+    background-color: var(--mo);
+    border-color: var(--mo);
+    border-radius: 10px;
+    color: var(--black);
+    font-weight: bold;
+}
+
+.submit-button:focus {
+    width: 25%;
+    background-color: var(--mo);
+    border-color: var(--mo);
+    border-radius: 10px;
+    color: var(--black);
+    font-weight: bold;
+}
+
+.submit-button:hover {
+    width: 25%;
+    background-color: var(--mo);
+    border-color: var(--mo);
+    border-radius: 10px;
+    color: var(--black);
+    font-weight: bold;
+}
+
+.reset-button {
+    width: 25%;
+    background-color: var(--lg);
+    border-color: var(--white);
+    border-radius: 10px;
+    color: var(--white);
+    font-weight: bold;
+}
+
+.reset-button:focus {
+    width: 25%;
+    background-color: var(--lg);
+    border-color: var(--white);
+    border-radius: 10px;
+    color: var(--white);
+    font-weight: bold;
+}
+
+.reset-button:hover {
+    width: 25%;
+    background-color: var(--lg);
+    border-color: var(--white);
+    border-radius: 10px;
+    color: var(--white);
+    font-weight: bold;
+}
+
+.reset-button-box {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
