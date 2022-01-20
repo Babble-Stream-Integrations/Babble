@@ -21,8 +21,8 @@ import AddonSettings from './pages/AddonSettings.js'
 
 /* Import Components */
 import Navigation from './components/navbar/Navigation.js';
-import Mnav from './components/mobileNav/Mnav.js';
-import Footer from "./components/footer/Footer.js"
+import Mnav from './components/mobilenav/Mnav.js';
+import Footer from './components/footer/Footer.js';
 
 //import function
 import { googlelogin } from './auth/firebase.js';

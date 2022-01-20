@@ -5,7 +5,7 @@ import { PropTypes } from 'prop-types'
 import './AddonCard.css'
 
 /* Import Components */
-import AddonCardModal from './AddonCardModal/AddonCardModal.js'
+import AddonCardModal from './addonCardModal/AddonCardModal.js'
 
 /* Import Standard Image */
 import StandardImage from '../../assets/img/noimage.jpg'
