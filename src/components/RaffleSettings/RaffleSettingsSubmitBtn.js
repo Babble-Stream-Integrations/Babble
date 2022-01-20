@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 
 //style
-import '../RaffleSettings/RaffleSettings.css';
+import './RaffleSettings.css';
 
 function RaffleSettingsSubmitBtn() {
     return (

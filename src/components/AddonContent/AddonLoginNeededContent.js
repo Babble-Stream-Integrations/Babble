@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, Button, Row } from 'react-bootstrap'
 
 //style
-import '../AddonCard/AddonCard.css';
+import '../addonCard/AddonCard.css';
 
 function AddonLoginNeededContent() {
     return (

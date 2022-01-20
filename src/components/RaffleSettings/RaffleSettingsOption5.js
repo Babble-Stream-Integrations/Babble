@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Form } from 'react-bootstrap'
 
 //style
-import '../AddonSettings/AddonSettings.css'
+import '../addonSettings/AddonSettings.css'
 
 function RaffleSettingsOption4() {
     return (

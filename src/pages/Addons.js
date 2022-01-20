@@ -1,8 +1,8 @@
 import React from 'react'
 
-import AddonsContent from '../components/AddonContent/AddonsContent.js';
-import NoAddons from '../components/AddonContent/NoAddon.js';
-import AddonLoginNeeded from '../components/AddonContent/AddonLoginNeeded.js';
+import AddonsContent from '../components/addonContent/AddonsContent.js';
+import NoAddons from '../components/addonContent/NoAddon.js';
+import AddonLoginNeeded from '../components/addonContent/AddonLoginNeeded.js';
 import { Row } from 'react-bootstrap';
 
 const Addons = () => {

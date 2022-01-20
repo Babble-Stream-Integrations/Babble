@@ -1,11 +1,11 @@
 import React from 'react'
 
 //style
-import '../components/RaffleSettings/RaffleSettings.css'
+import '../components/raffleSettings/RaffleSettings.css'
 
 //components
-import RaffleSettingsContent from "../components/RaffleSettings/RaffleSettingsContent.js";
-import RaffleSettingsText from "../components/RaffleSettings/RaffleSettingsText.js";
+import RaffleSettingsContent from "../components/raffleSettings/RaffleSettingsContent.js";
+import RaffleSettingsText from "../components/raffleSettings/RaffleSettingsText.js";
 import { Container, Row, Col } from 'react-bootstrap';
 
 

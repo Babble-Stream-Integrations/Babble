@@ -1,10 +1,10 @@
 import React from 'react'
 
-import YourAddon from '../AddonContent/YourAddonsText.js';
+import YourAddon from '../addonContent/YourAddonsText.js';
 
 //style
-import '../AddonCard/AddonCard.css';
-import '../AddonContent/AddonsContent.css';
+import '../addonCard/AddonCard.css';
+import '../addonContent/AddonsContent.css';
 import { Row, Col } from 'react-bootstrap';
 
 function NoAddon() {

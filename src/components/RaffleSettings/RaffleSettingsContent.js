@@ -1,25 +1,25 @@
-import React from 'react';
+import React from 'react'
 
 import { Card, Row, Col } from 'react-bootstrap';
 
 //style
-import '../RaffleSettings/RaffleSettings.css'
+import './RaffleSettings.css'
 
 //Buttons
-import RaffleSettingsAuthorizeBtn from '../RaffleSettings/RaffleSettingsAuthorizeBtn.js';
-import RaffleSettingsSubmitBtn from '../RaffleSettings/RaffleSettingsSubmitBtn.js';
-import RaffleSettingsResetBtn from '../RaffleSettings/RaffleSettingsResetBtn.js';
+import RaffleSettingsAuthorizeBtn from './RaffleSettingsAuthorizeBtn.js';
+import RaffleSettingsSubmitBtn from './RaffleSettingsSubmitBtn.js';
+import RaffleSettingsResetBtn from './RaffleSettingsResetBtn.js';
 
 //Settings
-import RaffleSettingsOption1 from '../RaffleSettings/RaffleSettingsOption1.js';
-import RaffleSettingsOption2 from '../RaffleSettings/RaffleSettingsOption2.js';
-import RaffleSettingsOption3 from '../RaffleSettings/RaffleSettingsOption3.js';
-import RaffleSettingsOption4 from '../RaffleSettings/RaffleSettingsOption4.js';
-import RaffleSettingsOption5 from '../RaffleSettings/RaffleSettingsOption5.js';
-import RaffleSettingsOption6 from '../RaffleSettings/RaffleSettingsOption6.js';
-import RaffleSettingsOption7 from '../RaffleSettings/RaffleSettingsOption7.js';
-import RaffleSettingsOption8 from '../RaffleSettings/RaffleSettingsOption8.js';
-import RaffleSettingsOption9 from '../RaffleSettings/RaffleSettingsOption9.js';
+import RaffleSettingsOption1 from './RaffleSettingsOption1.js';
+import RaffleSettingsOption2 from './RaffleSettingsOption2.js';
+import RaffleSettingsOption3 from './RaffleSettingsOption3.js';
+import RaffleSettingsOption4 from './RaffleSettingsOption4.js';
+import RaffleSettingsOption5 from './RaffleSettingsOption5.js';
+import RaffleSettingsOption6 from './RaffleSettingsOption6.js';
+import RaffleSettingsOption7 from './RaffleSettingsOption7.js';
+import RaffleSettingsOption8 from './RaffleSettingsOption8.js';
+import RaffleSettingsOption9 from './RaffleSettingsOption9.js';
 
 
 function RaffleSettingsContent() {

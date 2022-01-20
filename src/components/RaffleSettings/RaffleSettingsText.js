@@ -1,7 +1,7 @@
 import React from 'react'
 
 //style
-import '../RaffleSettings/RaffleSettings.css'
+import './RaffleSettings.css'
 
 function RaffleSettings() {
     return (
