@@ -19,6 +19,11 @@ router.get('/find-active-chat', (req, res) => {
 	res.redirect('http://localhost:5001/babble-d6ef3/europe-west1/app/api/raffle/yt');
 });
 
+router.get('/save-tokens', (req, res) => {
+	youtubeRaffle.saveTokens();
+	res.redirect('http://localhost:5001/babble-d6ef3/europe-west1/app/api/raffle/yt');
+})
+
 router.post('/start', (req, res) => {
 	console.log(req.body);
 	youtubeRaffle.startRaffle(req.body);

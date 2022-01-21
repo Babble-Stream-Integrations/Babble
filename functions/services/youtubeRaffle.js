@@ -2,6 +2,12 @@ const { google } = require('googleapis');
 const util = require('util');
 const fs = require('fs')
 const dotenv = require('dotenv').config();
+const { initializeApp, applicationDefault, cert, getApps, getApp } = require('firebase-admin/app');
+const { getFirestore, Timestamp, FieldValue, setLogFunction } = require('firebase-admin/firestore');
+
+getApps().length === 0 ? initializeApp() : getApp();
+
+const db = getFirestore();
 
 const writeFilePromise = util.promisify(fs.writeFile);
 const readFilePromise = util.promisify(fs.readFile);
@@ -34,7 +40,10 @@ const clientSecret = process.env.YR_CLIENTSECRET;
 const redirectURI = process.env.YR_REDIRECTURI;
 const apiKey = process.env.YR_APIKEY;
 
-const scope = process.env.YR_SCOPES;
+const scope = [
+    "https://www.googleapis.com/auth/youtube",
+    "https://www.googleapis.com/auth/youtube.channel-memberships.creator"
+];
 
 const auth = new Oauth2(clientID, clientSecret, redirectURI);
 
@@ -50,7 +59,7 @@ youtubeRaffle.getCode = response => {
 
 youtubeRaffle.getTokensWithCode = async code => {
 	const credentials = await auth.getToken(code);
-	youtubeService.authorize(credentials);
+	youtubeRaffle.authorize(credentials);
 };
 
 youtubeRaffle.authorize = ({tokens}) => {
@@ -132,7 +141,6 @@ const respond = (newMessages, data) => {
 	newMessages.forEach(message => {
 		const messageText = message.snippet.displayMessage.toLowerCase();
 		const author = message.authorDetails.displayName;
-		console.log('Message:', messageText, ' || Author:', author);
 		if (messageText == data.enterMessage && !raffleUsersEntered.includes(author)) {
 			if (data.subOnly.at(-1) == 1) {
 				checkSub(message.authorDetails.channelId).then(function(results){
@@ -209,33 +217,77 @@ const printMessage = message => {
 	return '[' + hour + ':' + minutes + '] ' + 'User: ' + user + ' | Message: ' + messageText;
 }
 
+const postMessage = async (messageText, myAccount) => {
+	let accessToken;
+	// let chosenAccount;
+	// if (!myAccount) {
+
+	// } else {
+	// 	chosenAccount = auth;
+	// }
+	// const botDoc = db.collection('bots').doc('JoJ3o');
+	// const doc = await botDoc.get();
+	// if (!doc.exists) {
+	// 	console.log('No such document!');
+	// } else {
+	// 	raffleTokens = doc.data().raffle_tokens;
+	// }
+	// const tokens = await read('./botTokens.json');
+	// console.log(tokens);
+	const botTokens = {
+		access_token: 'ya29.A0ARrdaM_absohyKzAY-lohzsS7IMB4UAcQLu6OHf3gPY6-RNxncL0pA1KsRU28aOmKzzMWKtHrNcnvYoH6p4vnJ8jUWw_BmPxdxdeP15AIQvF2lKEgE-HIKaLGGdypxZbMjTfr9aMxR2JquffAU7iwPg3Njsd',
+		refresh_token: '1//09vbtJpBbmX5CCgYIARAAGAkSNwF-L9IrIEriez5qZfrvhLI8Rf_3fTlXUMB0E1C2DdCx9ekG9X46pUWhS1-RhpJUWmaSlh8TrTo',
+		scope: 'https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.channel-memberships.creator',
+		token_type: 'Bearer',
+		expiry_date: 1642759807991
+	}
+
+	const botAuth = new Oauth2(clientID, clientSecret, redirectURI);
+	botAuth.setCredentials(botTokens);
+
+	const response = youtube.liveChatMessages.insert({
+		auth: botAuth,
+		part: 'snippet',
+		resource: {
+			snippet: {
+				liveChatId: liveChatID,
+				type: 'textMessageEvent',
+				textMessageDetails: {
+					messageText
+				}
+			}
+		}
+	})
+}
+
 const startTrackingChat = async(data) => {
 	console.log('Start raffle');
+	postMessage('Raffle started! Type ' + data.enterMessage + ' to enter', data.myAccount.at(-1))
 	interval = setInterval(function() { getChatMessages(data); }, intervalTime);
 }
 
-const stopTrackingChat = async(winnerAmount, duplicateWinners) => {
+const stopTrackingChat = async(data) => {
 	console.log('Stop raffle');
 	clearInterval(interval);
 	raffleStarted = false;
 	console.log(raffleUsersEntered);
-	pickWinner(winnerAmount, duplicateWinners);
+	pickWinner(data);
 	raffleUsersEntered = [];
 }
 
 youtubeRaffle.startRaffle = async(data) => {
 	console.log('Start');
 	startTrackingChat(data);
-	setTimeout(function() {stopTrackingChat(data.winnerAmount, data.duplicateWinners);}, (data.duration * (60/2) * 1000));
+	setTimeout(function() {stopTrackingChat(data);}, (data.duration * (60/2) * 1000));
 }
 
-const pickWinner = (winnerAmount, duplicateWinners) => {
+const pickWinner = (data) => {
 	let winnerArray = [];
-	for (let i = 0; i < winnerAmount; i++) {
+	for (let i = 0; i < data.winnerAmount; i++) {
 		if (raffleUsersEntered.length != 0) {
 			const random = Math.floor(Math.random() * raffleUsersEntered.length);
 			winnerArray.push(raffleUsersEntered[random]);
-			if (duplicateWinners.at(-1) == 0) {
+			if (data.duplicateWinners.at(-1) == 0) {
 				let i = 0;
 				const arrayItem = raffleUsersEntered[random];
 				while (i < raffleUsersEntered.length) {
@@ -249,10 +301,11 @@ const pickWinner = (winnerAmount, duplicateWinners) => {
 				raffleUsersEntered.splice(random, 1);
 			}
 
-			console.log(random, winnerArray, raffleUsersEntered);
+			console.log(random, data.winnerArray, data.raffleUsersEntered);
 		}
 	}
 	console.log(winnerArray);
+	postMessage('The winners of the raffle are: ' + winnerArray.join(', '), data.myAccount.at(-1))
 }
 
 checkTokens();
