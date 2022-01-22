@@ -1,38 +1,13 @@
 const { google } = require('googleapis');
-const util = require('util');
-const fs = require('fs')
 const dotenv = require('dotenv').config();
-const { initializeApp, applicationDefault, cert, getApps, getApp } = require('firebase-admin/app');
-const { getFirestore, Timestamp, FieldValue, setLogFunction } = require('firebase-admin/firestore');
+const { initializeApp, getApps, getApp } = require('firebase-admin/app');
+const { getFirestore } = require('firebase-admin/firestore');
 
 getApps().length === 0 ? initializeApp() : getApp();
 
 const db = getFirestore();
 
-const writeFilePromise = util.promisify(fs.writeFile);
-const readFilePromise = util.promisify(fs.readFile);
-
-let liveChatID;
-let channelID;
-let nextPage;
-const intervalTime = 5000;
-let interval;
-let chatMessages = [];
-let raffleUsersEntered = [];
-let raffleStarted = false;
-
-const save = async(path, data) => {
-	await writeFilePromise(path, data);
-	console.log('Succesfully saved');
-};
-
-const read = async path => {
-	const fileContents = await readFilePromise(path);
-	return JSON.parse(fileContents);
-};
-
 const youtube = google.youtube('v3');
-
 const Oauth2 = google.auth.OAuth2;
 
 const clientID = process.env.YR_CLIENTID;
@@ -41,12 +16,23 @@ const redirectURI = process.env.YR_REDIRECTURI;
 const apiKey = process.env.YR_APIKEY;
 
 const scope = [
-    "https://www.googleapis.com/auth/youtube",
-    "https://www.googleapis.com/auth/youtube.channel-memberships.creator"
+    'https://www.googleapis.com/auth/youtube',
+    'https://www.googleapis.com/auth/youtube.channel-memberships.creator'
 ];
 
 const userAuth = new Oauth2(clientID, clientSecret, redirectURI);
 const botAuth = new Oauth2(clientID, clientSecret, redirectURI);
+
+const testUser = 'EBSnlWXow3YeFaWxokmnXIijgkv2'
+const intervalTime = 5000;
+
+let liveChatID;
+let channelID;
+let nextPage;
+let interval;
+let chatMessages = [];
+let raffleUsersEntered = [];
+let raffleStarted = false;
 
 const youtubeRaffle = {};
 
@@ -63,16 +49,17 @@ youtubeRaffle.getTokensWithCode = async code => {
 	youtubeRaffle.authorize(credentials);
 };
 
-youtubeRaffle.authorize = ({tokens}) => {
-	userAuth.setCredentials(tokens);
+youtubeRaffle.authorize = ({raffle_tokens}) => {
+	userAuth.setCredentials(raffle_tokens);
 	console.log('Succesfully set credentials');
-	console.log('tokens', tokens);
-	save('./tokens.json', JSON.stringify(tokens));
+	db.collection('users').doc(testUser).collection('private_info').doc('youtube_tokens').set(raffle_tokens);
 };
 
 userAuth.on('tokens', (raffle_tokens) => {
 	console.log('New tokens received');
-	save('./tokens.json', JSON.stringify(raffle_tokens));
+	if (raffle_tokens.refresh_token) {
+		db.collection('users').doc(testUser).collection('private_info').doc('youtube_tokens').set(raffle_tokens);
+	}
 });
 
 botAuth.on('tokens', (raffle_tokens) => {
@@ -82,18 +69,13 @@ botAuth.on('tokens', (raffle_tokens) => {
 });
 
 // Check if previous tokens exist to avoid authentication every server restart
-const checkTokens = async () => {
-	try {
-		if (fs.existsSync('./tokens.json')) {
-			const tokens = await read('./tokens.json');
-			if (tokens) {
-				console.log('Setting tokens');
-				return userAuth.setCredentials(tokens);
-			}
-			console.log('No tokens found');
-		}
-	} catch(err) {
-		console.error(err);
+async function checkTokens() {
+	const doc = await db.collection('users').doc(testUser).collection('private_info').doc('youtube_tokens').get();
+	if (!doc.exists) {
+		console.log('No such document!');
+	} else {
+		console.log('Setting tokens');
+		userAuth.setCredentials(doc.data());
 	}
 }
 
@@ -111,7 +93,7 @@ youtubeRaffle.findActiveChat = async() => {
 	console.log('Chat ID found', liveChatID)
 }
 
-const checkSub = async channelId => {
+async function checkSub(channelId) {
 	try {
 		const response = await youtube.subscriptions.list({
 			key: apiKey,
@@ -129,7 +111,7 @@ const checkSub = async channelId => {
 	return false;
 }
 
-const checkMember = async channelId => {
+async function checkMember(channelId) {
 	try {
 		const response = await youtube.members.list({
 			auth: userAuth,
@@ -144,7 +126,7 @@ const checkMember = async channelId => {
 	return false
 }
 
-const respond = (newMessages, data) => {
+function respond(newMessages, data) {
 	newMessages.forEach(message => {
 		const messageText = message.snippet.displayMessage.toLowerCase();
 		const author = message.authorDetails.displayName;
@@ -192,7 +174,7 @@ const respond = (newMessages, data) => {
 	});
 }
 
-const getChatMessages = async(raffleData) => {
+async function getChatMessages(raffleData) {
 	console.log('Get chat');
 	const response = await youtube.liveChatMessages.list({
 		auth: userAuth,
@@ -215,7 +197,7 @@ const getChatMessages = async(raffleData) => {
 	}
 }
 
-const printMessage = message => {
+function printMessage(message) {
 	const d = new Date();
 	let hour = d.getUTCHours();
 	let minutes = d.getUTCMinutes();
@@ -224,7 +206,7 @@ const printMessage = message => {
 	return '[' + hour + ':' + minutes + '] ' + 'User: ' + user + ' | Message: ' + messageText;
 }
 
-const postMessage = async (messageText, myAccount) => {
+async function postMessage(messageText, myAccount) {
 	const botDoc = db.collection('bots').doc('JoJ3o');
 	const doc = await botDoc.get();
 	if (!doc.exists) {
@@ -250,13 +232,13 @@ const postMessage = async (messageText, myAccount) => {
 	})
 }
 
-const startTrackingChat = async(data) => {
+async function startTrackingChat(data) {
 	console.log('Start raffle');
 	postMessage('Raffle started! Type ' + data.enterMessage + ' to enter', Number(data.myAccount.at(-1)))
 	interval = setInterval(function() { getChatMessages(data); }, intervalTime);
 }
 
-const stopTrackingChat = async(data) => {
+async function stopTrackingChat(data) {
 	console.log('Stop raffle');
 	clearInterval(interval);
 	raffleStarted = false;
@@ -271,7 +253,7 @@ youtubeRaffle.startRaffle = async(data) => {
 	setTimeout(function() {stopTrackingChat(data);}, (data.duration * (60/2) * 1000));
 }
 
-const pickWinner = (data) => {
+function pickWinner(data) {
 	let winnerArray = [];
 	for (let i = 0; i < data.winnerAmount; i++) {
 		if (raffleUsersEntered.length != 0) {
