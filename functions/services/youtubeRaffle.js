@@ -45,12 +45,13 @@ const scope = [
     "https://www.googleapis.com/auth/youtube.channel-memberships.creator"
 ];
 
-const auth = new Oauth2(clientID, clientSecret, redirectURI);
+const userAuth = new Oauth2(clientID, clientSecret, redirectURI);
+const botAuth = new Oauth2(clientID, clientSecret, redirectURI);
 
 const youtubeRaffle = {};
 
 youtubeRaffle.getCode = response => {
-	const authUrl = auth.generateAuthUrl({
+	const authUrl = userAuth.generateAuthUrl({
 		access_type: 'offline',
 		scope
 	})
@@ -58,20 +59,26 @@ youtubeRaffle.getCode = response => {
 };
 
 youtubeRaffle.getTokensWithCode = async code => {
-	const credentials = await auth.getToken(code);
+	const credentials = await userAuth.getToken(code);
 	youtubeRaffle.authorize(credentials);
 };
 
 youtubeRaffle.authorize = ({tokens}) => {
-	auth.setCredentials(tokens);
+	userAuth.setCredentials(tokens);
 	console.log('Succesfully set credentials');
 	console.log('tokens', tokens);
 	save('./tokens.json', JSON.stringify(tokens));
 };
 
-auth.on('tokens', (tokens) => {
+userAuth.on('tokens', (raffle_tokens) => {
 	console.log('New tokens received');
-	save('./tokens.json', JSON.stringify(tokens));
+	save('./tokens.json', JSON.stringify(raffle_tokens));
+});
+
+botAuth.on('tokens', (raffle_tokens) => {
+	if (raffle_tokens.refresh_token) {
+		db.collection('bots').doc('JoJ3o').set(raffle_tokens);
+	}
 });
 
 // Check if previous tokens exist to avoid authentication every server restart
@@ -81,7 +88,7 @@ const checkTokens = async () => {
 			const tokens = await read('./tokens.json');
 			if (tokens) {
 				console.log('Setting tokens');
-				return auth.setCredentials(tokens);
+				return userAuth.setCredentials(tokens);
 			}
 			console.log('No tokens found');
 		}
@@ -93,7 +100,7 @@ const checkTokens = async () => {
 // API Calls
 youtubeRaffle.findActiveChat = async() => {
 	const response = await youtube.liveBroadcasts.list({
-		auth,
+		auth: userAuth,
 		part: 'snippet',
 		broadcastStatus: 'active'
 	});
@@ -125,7 +132,7 @@ const checkSub = async channelId => {
 const checkMember = async channelId => {
 	try {
 		const response = await youtube.members.list({
-			auth,
+			auth: userAuth,
 			part: 'snippet'
 		});
 		console.log(response.data);
@@ -188,7 +195,7 @@ const respond = (newMessages, data) => {
 const getChatMessages = async(raffleData) => {
 	console.log('Get chat');
 	const response = await youtube.liveChatMessages.list({
-		auth,
+		auth: userAuth,
 		part: ['snippet', 'authorDetails'],
 		liveChatId: liveChatID,
 		maxResults: 2000,
@@ -218,35 +225,18 @@ const printMessage = message => {
 }
 
 const postMessage = async (messageText, myAccount) => {
-	let accessToken;
-	// let chosenAccount;
-	// if (!myAccount) {
-
-	// } else {
-	// 	chosenAccount = auth;
-	// }
-	// const botDoc = db.collection('bots').doc('JoJ3o');
-	// const doc = await botDoc.get();
-	// if (!doc.exists) {
-	// 	console.log('No such document!');
-	// } else {
-	// 	raffleTokens = doc.data().raffle_tokens;
-	// }
-	// const tokens = await read('./botTokens.json');
-	// console.log(tokens);
-	const botTokens = {
-		access_token: 'ya29.A0ARrdaM_absohyKzAY-lohzsS7IMB4UAcQLu6OHf3gPY6-RNxncL0pA1KsRU28aOmKzzMWKtHrNcnvYoH6p4vnJ8jUWw_BmPxdxdeP15AIQvF2lKEgE-HIKaLGGdypxZbMjTfr9aMxR2JquffAU7iwPg3Njsd',
-		refresh_token: '1//09vbtJpBbmX5CCgYIARAAGAkSNwF-L9IrIEriez5qZfrvhLI8Rf_3fTlXUMB0E1C2DdCx9ekG9X46pUWhS1-RhpJUWmaSlh8TrTo',
-		scope: 'https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.channel-memberships.creator',
-		token_type: 'Bearer',
-		expiry_date: 1642759807991
+	const botDoc = db.collection('bots').doc('JoJ3o');
+	const doc = await botDoc.get();
+	if (!doc.exists) {
+		console.log('No such document!');
+	} else {
+		botTokens = doc.data().raffle_tokens;
 	}
 
-	const botAuth = new Oauth2(clientID, clientSecret, redirectURI);
 	botAuth.setCredentials(botTokens);
 
 	const response = youtube.liveChatMessages.insert({
-		auth: botAuth,
+		auth: (!!myAccount ? userAuth : botAuth),
 		part: 'snippet',
 		resource: {
 			snippet: {
@@ -262,7 +252,7 @@ const postMessage = async (messageText, myAccount) => {
 
 const startTrackingChat = async(data) => {
 	console.log('Start raffle');
-	postMessage('Raffle started! Type ' + data.enterMessage + ' to enter', data.myAccount.at(-1))
+	postMessage('Raffle started! Type ' + data.enterMessage + ' to enter', Number(data.myAccount.at(-1)))
 	interval = setInterval(function() { getChatMessages(data); }, intervalTime);
 }
 
@@ -305,7 +295,7 @@ const pickWinner = (data) => {
 		}
 	}
 	console.log(winnerArray);
-	postMessage('The winners of the raffle are: ' + winnerArray.join(', '), data.myAccount.at(-1))
+	postMessage('The winners of the raffle are: ' + winnerArray.join(', '), Number(data.myAccount.at(-1)))
 }
 
 checkTokens();
