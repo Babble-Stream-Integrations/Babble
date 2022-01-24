@@ -49,22 +49,23 @@ youtubeRaffle.getTokensWithCode = async code => {
 	youtubeRaffle.authorize(credentials);
 };
 
-youtubeRaffle.authorize = ({raffle_tokens}) => {
-	userAuth.setCredentials(raffle_tokens);
+youtubeRaffle.authorize = (raffle_tokens) => {
+	userAuth.setCredentials(raffle_tokens.tokens);
 	console.log('Succesfully set credentials');
-	db.collection('users').doc(testUser).collection('private_info').doc('youtube_tokens').set(raffle_tokens);
+	const response = db.collection('users').doc(testUser).collection('private_info').doc('youtube_tokens').set(raffle_tokens.tokens);
 };
 
 userAuth.on('tokens', (raffle_tokens) => {
 	console.log('New tokens received');
+	console.log('on', raffle_tokens);
 	if (raffle_tokens.refresh_token) {
-		db.collection('users').doc(testUser).collection('private_info').doc('youtube_tokens').set(raffle_tokens);
+		const response = db.collection('users').doc(testUser).collection('private_info').doc('youtube_tokens').set(raffle_tokens);
 	}
 });
 
 botAuth.on('tokens', (raffle_tokens) => {
 	if (raffle_tokens.refresh_token) {
-		db.collection('bots').doc('JoJ3o').set(raffle_tokens);
+		const response = db.collection('bots').doc('JoJ3o').set(raffle_tokens);
 	}
 });
 
@@ -93,85 +94,25 @@ youtubeRaffle.findActiveChat = async() => {
 	console.log('Chat ID found', liveChatID)
 }
 
-async function checkSub(channelId) {
-	try {
-		const response = await youtube.subscriptions.list({
-			key: apiKey,
-			part: ['snippet', 'contentDetails', 'subscriberSnippet'],
-			channelId: channelId,
-			forChannelId: channelID
-		});
-		if (response.data.pageInfo.totalResults >= 1) {
-			return true;
-		}
-	} catch (err) {
-		console.log('Catched bish');
-		console.log(err.message);
-	}
-	return false;
+youtubeRaffle.startRaffle = async(data) => {
+	console.log('Start raffle');
+	startTrackingChat(data);
+	setTimeout(function() {stopTrackingChat(data);}, (data.duration * (60/2) * 1000));
 }
 
-async function checkMember(channelId) {
-	try {
-		const response = await youtube.members.list({
-			auth: userAuth,
-			part: 'snippet'
-		});
-		console.log(response.data);
-
-	} catch (err) {
-		console.log('Catched!');
-		console.log(err.message);
-	}
-	return false
+async function startTrackingChat(data) {
+	console.log('Start tracking');
+	postMessage('Raffle started! Type ' + data.enterMessage + ' to enter', Number(data.myAccount.at(-1)), Number(data.announceWinners.at(-1)))
+	interval = setInterval(function() { getChatMessages(data); }, intervalTime);
 }
 
-function respond(newMessages, data) {
-	newMessages.forEach(message => {
-		const messageText = message.snippet.displayMessage.toLowerCase();
-		const author = message.authorDetails.displayName;
-		if (messageText == data.enterMessage && !raffleUsersEntered.includes(author)) {
-			if (data.subOnly.at(-1) == 1) {
-				checkSub(message.authorDetails.channelId).then(function(results){
-					if (results == true) {
-						console.log(author, 'is subscribed!');
-						for (let i = 0; i < data.subPrivilege; i++) {
-							raffleUsersEntered.push(author);
-						}
-					}
-				});
-			} else if (data.memberOnly.at(-1) == 1) {
-				checkMember(message.authorDetails.channelId).then(function(results){
-					if (results == true) {
-						console.log(author, 'is a Member!');
-						for (let i = 0; i < data.memberPrivilege; i++) {
-							raffleUsersEntered.push(author);
-						}
-					}
-				});
-			} else {
-				if (data.subPrivilege > 1 && data.subPrivilege > data.memberPrivilege) {
-					checkSub(message.authorDetails.channelId).then(function(results){
-						if (results == true) {
-							for (let i = 0; i < data.subPrivilege; i++) {
-								raffleUsersEntered.push(author);
-							}
-						}
-					});
-				} else if (data.memberPrivilege > data.subPrivilege) {
-					checkMember(message.authorDetails.channelId).then(function(results){
-						if (results == true) {
-							for (let i = 0; i < data.memberPrivilege; i++) {
-								raffleUsersEntered.push(author);
-							}
-						}
-					});
-				} else {
-					raffleUsersEntered.push(author);
-				}
-			}
-		}
-	});
+async function stopTrackingChat(data) {
+	console.log('Stop tracking');
+	clearInterval(interval);
+	raffleStarted = false;
+	console.log(raffleUsersEntered);
+	pickWinner(data);
+	raffleUsersEntered = [];
 }
 
 async function getChatMessages(raffleData) {
@@ -188,13 +129,18 @@ async function getChatMessages(raffleData) {
 	nextPage = data.nextPageToken;
 	if (raffleStarted) {
 		chatMessages.push(...newMessages);
-		respond(newMessages, raffleData);
+		console.log('Total chat messages:', chatMessages.length);
+		newMessages.forEach(message => {
+			printMessage(message);
+			const messageText = message.snippet.displayMessage.toLowerCase();
+			const enterMessage = raffleData.enterMessage.toLowerCase();
+			const author = message.authorDetails.displayName;
+			if (messageText == enterMessage && !raffleUsersEntered.includes(author)) {
+				enterRaffle(raffleData, message, author);
+			}
+		})
 	}
 	raffleStarted = true;
-	console.log('Total chat messages:', chatMessages.length);
-		for (let i=0;i<newMessages.length;i++) {
-		console.log(printMessage(newMessages[i]));
-	}
 }
 
 function printMessage(message) {
@@ -203,54 +149,110 @@ function printMessage(message) {
 	let minutes = d.getUTCMinutes();
 	let user = message.authorDetails.displayName;
 	let messageText = message.snippet.displayMessage;
-	return '[' + hour + ':' + minutes + '] ' + 'User: ' + user + ' | Message: ' + messageText;
+	console.log('[' + hour + ':' + minutes + '] ' + 'User: ' + user + ' | Message: ' + messageText);
 }
 
-async function postMessage(messageText, myAccount) {
-	const botDoc = db.collection('bots').doc('JoJ3o');
-	const doc = await botDoc.get();
-	if (!doc.exists) {
-		console.log('No such document!');
+function sortUser(author, channelId) {
+	checkMember(channelId).then(function(res){
+		if (res) {
+			console.log(author, 'is a Member!');
+			return 'Member'
+		}
+	});
+
+	checkSub(channelId).then(function(res){
+		if (res) {
+			console.log(author, 'is a Subscriber');
+			return 'Subscriber'
+		}
+	});
+
+	setTimeout(function() {
+		console.log(author, 'is a pleb!');
+		return 'pleb'
+	}, 2000);
+}
+
+function enterRaffle(data, message, author) {
+	const status = sortUser(author, message.authorDetails.channelId);
+
+	const memberOnly = (data.memberOnly.at(-1) === '1') ? true : false;
+	const subOnly = (data.subOnly.at(-1) === '1') ? true : false;
+
+	if (status === 'Member') {
+		for (let i = 0; i < data.memberPrivilege; i++) {
+			raffleUsersEntered.push(author);
+		}
+	} else if (status === 'Subscriber' && !memberOnly) {
+		for (let i = 0; i < data.followPrivilege; i++) {
+			raffleUsersEntered.push(author);
+		}
 	} else {
-		botTokens = doc.data().raffle_tokens;
+		if (!memberOnly && !subOnly) {
+			raffleUsersEntered.push(author);
+		}
 	}
+}
 
-	botAuth.setCredentials(botTokens);
+async function checkMember(channelId) {
+	try {
+		const response = await youtube.members.list({
+			auth: userAuth,
+			part: 'snippet'
+		});
+		console.log(response.data);
 
-	const response = youtube.liveChatMessages.insert({
-		auth: (!!myAccount ? userAuth : botAuth),
-		part: 'snippet',
-		resource: {
-			snippet: {
-				liveChatId: liveChatID,
-				type: 'textMessageEvent',
-				textMessageDetails: {
-					messageText
+	} catch (err) {
+		console.log('Could not check member!');
+		console.log(err.message);
+	}
+	return false
+}
+
+async function checkSub(channelId) {
+	try {
+		const response = await youtube.subscriptions.list({
+			key: apiKey,
+			part: ['snippet', 'contentDetails', 'subscriberSnippet'],
+			channelId: channelId,
+			forChannelId: channelID
+		});
+		if (response.data.pageInfo.totalResults >= 1) {
+			return true;
+		}
+	} catch (err) {
+		console.log('Could not check subscriber');
+		console.log(err.message);
+	}
+	return false;
+}
+
+async function postMessage(messageText, myAccount, announceWinners) {
+	if (announceWinners) {
+		const botDoc = db.collection('bots').doc('JoJ3o');
+		const doc = await botDoc.get();
+		if (!doc.exists) {
+			console.log('No such document!');
+		} else {
+			botTokens = doc.data();
+		}
+
+		botAuth.setCredentials(botTokens);
+
+		const response = youtube.liveChatMessages.insert({
+			auth: (!!myAccount ? userAuth : botAuth),
+			part: 'snippet',
+			resource: {
+				snippet: {
+					liveChatId: liveChatID,
+					type: 'textMessageEvent',
+					textMessageDetails: {
+						messageText
+					}
 				}
 			}
-		}
-	})
-}
-
-async function startTrackingChat(data) {
-	console.log('Start raffle');
-	postMessage('Raffle started! Type ' + data.enterMessage + ' to enter', Number(data.myAccount.at(-1)))
-	interval = setInterval(function() { getChatMessages(data); }, intervalTime);
-}
-
-async function stopTrackingChat(data) {
-	console.log('Stop raffle');
-	clearInterval(interval);
-	raffleStarted = false;
-	console.log(raffleUsersEntered);
-	pickWinner(data);
-	raffleUsersEntered = [];
-}
-
-youtubeRaffle.startRaffle = async(data) => {
-	console.log('Start');
-	startTrackingChat(data);
-	setTimeout(function() {stopTrackingChat(data);}, (data.duration * (60/2) * 1000));
+		})
+	}
 }
 
 function pickWinner(data) {
@@ -272,12 +274,11 @@ function pickWinner(data) {
 			} else {
 				raffleUsersEntered.splice(random, 1);
 			}
-
-			console.log(random, data.winnerArray, data.raffleUsersEntered);
+			console.log(random, winnerArray, raffleUsersEntered);
 		}
 	}
 	console.log(winnerArray);
-	postMessage('The winners of the raffle are: ' + winnerArray.join(', '), Number(data.myAccount.at(-1)))
+	postMessage('The winners of the raffle are: ' + winnerArray.join(', '), Number(data.myAccount.at(-1)), Number(data.announceWinners.at(-1)))
 }
 
 checkTokens();
