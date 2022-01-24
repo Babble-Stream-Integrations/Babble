@@ -152,29 +152,25 @@ function printMessage(message) {
 	console.log('[' + hour + ':' + minutes + '] ' + 'User: ' + user + ' | Message: ' + messageText);
 }
 
-function sortUser(author, channelId) {
-	checkMember(channelId).then(function(res){
-		if (res) {
-			console.log(author, 'is a Member!');
-			return 'Member'
-		}
-	});
+async function sortUser(author, channelId) {
+	if (await checkMember(channelId)) {
+		console.log(author, 'is a Member!');
+		return 'Member'
+	}
 
-	checkSub(channelId).then(function(res){
-		if (res) {
-			console.log(author, 'is a Subscriber');
-			return 'Subscriber'
-		}
-	});
+	if (await checkSub(channelId)) {
+		console.log(author, 'is a Subscriber');
+		return 'Subscriber'
+	}
 
-	setTimeout(function() {
-		console.log(author, 'is a pleb!');
-		return 'pleb'
-	}, 2000);
+	console.log(author, 'is a pleb!');
+	return 'pleb'
 }
 
-function enterRaffle(data, message, author) {
-	const status = sortUser(author, message.authorDetails.channelId);
+async function enterRaffle(data, message, author) {
+	const status = await sortUser(author, message.authorDetails.channelId);
+
+	console.log('status', status);
 
 	const memberOnly = (data.memberOnly.at(-1) === '1') ? true : false;
 	const subOnly = (data.subOnly.at(-1) === '1') ? true : false;
@@ -184,7 +180,7 @@ function enterRaffle(data, message, author) {
 			raffleUsersEntered.push(author);
 		}
 	} else if (status === 'Subscriber' && !memberOnly) {
-		for (let i = 0; i < data.followPrivilege; i++) {
+		for (let i = 0; i < data.subPrivilege; i++) {
 			raffleUsersEntered.push(author);
 		}
 	} else {
