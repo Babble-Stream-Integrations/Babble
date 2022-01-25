@@ -23,7 +23,7 @@ import RaffleSettings from './pages/RaffleSettings.js'
 /* Import Components */
 import Navigation from './components/navbar/Navigation.js';
 import Mnav from './components/mobilenav/Mnav.js';
-import Footer from "./components/footer/Footer.js"
+import Footer from './components/footer/Footer.js';
 
 //import function
 import { googlelogin } from './auth/firebase.js';

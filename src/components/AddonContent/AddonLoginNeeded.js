@@ -6,8 +6,9 @@ import AddonLoginNeededContent from '../addonContent/AddonLoginNeededContent.js'
 
 function AddonLoginNeeded() {
     return (
-        <Container className="H-max-width">
-            <Row className="page-row-positioning">
+
+        <Container>
+            <Row className="page-row-positioning addons-flex-gap">
                 <Col md="3" className="help-text flex-center">
                     <YourAddonsText />
                 </Col>
@@ -16,8 +17,9 @@ function AddonLoginNeeded() {
                 </Col>
                 <div className="col-md-3"></div>
             </Row>
-            
+
         </Container>
+
     )
 }
 

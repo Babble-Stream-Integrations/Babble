@@ -7,14 +7,14 @@ import { Row } from 'react-bootstrap';
 
 const Addons = () => {
     return (
-        <>
+        <div className="container H-max-width">
             <Row>
                 <AddonLoginNeeded />
             </Row>
             <Row>
                 <AddonsContent />
             </Row>
-        </>
+        </div>
     )
 }
 
