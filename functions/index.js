@@ -47,13 +47,17 @@ app.get('/api/function', (req, res) => {
 	console.log('Anton heeft zoveel ballen:', x);
 });
 
+app.post('/api/post', (req, res) => {
+	console.log('postTest: ', req.body);
+});
+
 app.post('/api/adduser', (req, res) => {
 	const data = {
 		email: req.body.email,
 		nick_name: req.body.displayName,
 		user_uid: req.body.uid
 		};
-		
+
 	// Add a new document in collection "users" with ID 'email'
 	const response = db.collection('users').doc(req.body.uid).set(data);
 	res.redirect('/');

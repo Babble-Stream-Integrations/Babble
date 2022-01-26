@@ -5,9 +5,14 @@ import { Button } from 'react-bootstrap'
 import './RaffleSettings.css';
 
 function RaffleSettingsAuthorizeBtn() {
+	console.log('Button pressed!');
+	const auth = () => {
+		fetch('/babble-d6ef3/europe-west1/app/api/function')
+	}
+
     return (
         <>
-            <Button className="authorize-button">
+            <Button className="authorize-button" onClick={() =>{auth()}}>
                 AUTHORIZE
             </Button>
         </>
