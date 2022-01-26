@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Form } from 'react-bootstrap'
 
 //style
 import './AddonSettings.css'
 
 function AddonSettingsOption2({ title, initialValue }) {
-    const [show, setShow] = useState(true);
+
+	const [show, setShow] = useState(initialValue);
+	const [switchValue, setSwitchValue] = useState(initialValue);
+
+	// console.log(switchValue)
+
     return (
         <>
             <Row>
@@ -16,9 +21,15 @@ function AddonSettingsOption2({ title, initialValue }) {
             <Row className="addon-settings-margin">
                 <Form>
                     <Form.Switch className="addon-settings-title-subtext addon-settings-switch"
-                        onClick={() => setShow(!show)}
-                        label={show ? 'off' : 'on'}
+                        onClick={
+							() => {
+								setSwitchValue((s) => !s);
+								setShow(!show);
+							}
+						}
+                        label={show ? 'on' : 'off'}
                         id="custom-switch"
+						defaultChecked={switchValue}
                     />
                 </Form>
             </Row>
@@ -27,7 +38,8 @@ function AddonSettingsOption2({ title, initialValue }) {
 }
 
 AddonSettingsOption2.defaultProps = {
-	title: "Switch setting"
+	title: "Switch setting",
+	initialValue: false
 }
 
 export default AddonSettingsOption2

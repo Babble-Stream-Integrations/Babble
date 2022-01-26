@@ -1,9 +1,9 @@
-import { Card, Image, Row, Col } from 'react-bootstrap'
+import { Card, Image, Row } from 'react-bootstrap'
 import ProfilePageSocials from './ProfilePageSocials.js';
 //style
 
 
-function ProfilePageContent(props) {
+function ProfilePageContent({ profilePicture, userName, email }) {
 
     return (
         <>
@@ -17,18 +17,18 @@ function ProfilePageContent(props) {
                         <div className="profile-content-title-text">
                             PROFILE PICTURE
                         </div>
-                        <Image src={props.profilePicture} roundedCircle className="profile-picture"/>
+                        <Image src={profilePicture} roundedCircle className="profile-picture"/>
                         <div className="profile-content-title-text">
                             USERNAME
                         </div>
                         <div className="profile-content-text padding-profile-page-content">
-                            {props.userName}
+                            {userName}
                         </div>
                         <div className="profile-content-title-text">
                             EMAIL
                         </div>
                         <div className="profile-content-text padding-profile-page-content">
-                            {props.email}
+                            {email}
                         </div>
                         <div className="profile-content-title-text">
                             CONNECTED ACCOUNTS

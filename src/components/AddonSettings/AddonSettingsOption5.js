@@ -12,7 +12,7 @@ function AddonSettingsOption5({ title, initialValue }) {
             <Row>
                 <Form className="addon-settings-margin">
                     <Form.Check className='addon-settings-title-subtext'
-                        enabled
+                        enabled='true'
                         type='checkbox'
                         label='Test'
                     />
