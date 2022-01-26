@@ -4,11 +4,11 @@ import { Row, Dropdown } from 'react-bootstrap'
 //style
 import './AddonSettings.css'
 
-function AddonSettingsOption3({ title }) {
+function AddonSettingsOption3({ title, initialValue }) {
     return (
         <>
             <Row>
-                <div className="addon-settings-title-text">
+                <div className="addon-settings-title-text uni-allcaps">
 					{title}
                 </div>
             </Row>

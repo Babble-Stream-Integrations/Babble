@@ -1,11 +1,11 @@
 import React from 'react'
 import { Row, Form } from 'react-bootstrap'
 
-function AddonSettingsOption5({ title }) {
+function AddonSettingsOption5({ title, initialValue }) {
     return (
         <>
             <Row>
-                <div className="addon-settings-title-text">
+                <div className="addon-settings-title-text uni-allcaps">
                     {title}
                 </div>
             </Row>

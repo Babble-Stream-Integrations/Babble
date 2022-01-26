@@ -4,12 +4,12 @@ import { Row, Form } from 'react-bootstrap'
 //style
 import './AddonSettings.css'
 
-function AddonSettingsOption2({ title }) {
+function AddonSettingsOption2({ title, initialValue }) {
     const [show, setShow] = useState(true);
     return (
         <>
             <Row>
-                <div className="addon-settings-title-text">
+                <div className="addon-settings-title-text uni-allcaps">
                     {title}
                 </div>
             </Row>
