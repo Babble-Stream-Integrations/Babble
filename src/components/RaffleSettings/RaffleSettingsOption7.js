@@ -2,23 +2,23 @@ import React from 'react'
 import { Row, Form } from 'react-bootstrap'
 
 //style
-import './AddonSettings.css'
+import '../addonSettings/AddonSettings.css'
 
-function AddonSettingsOption1() {
+function RaffleSettingsOption7() {
     return (
         <>
             <Row>
                 <div className="addon-settings-title-text">
-                    SETTING OPTION #1
+                    Amount of winners drawn
                 </div>
             </Row>
             <Row className="addon-settings-margin">
                 <Form>
-                    <Form.Control className="addon-settings-form-input-small"/>
+                    <Form.Control className="addon-settings-form-input-small" />
                 </Form>
             </Row>
         </>
     )
 }
 
-export default AddonSettingsOption1
+export default RaffleSettingsOption7

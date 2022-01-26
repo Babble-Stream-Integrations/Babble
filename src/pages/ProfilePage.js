@@ -1,9 +1,9 @@
 import React from 'react'
 
 //components
-import ProfilePageContent from '../components/ProfilePage/ProfilePageContent.js';
+import ProfilePageContent from '../components/profilePage/ProfilePageContent.js';
 import { Container, Row, Col } from 'react-bootstrap';
-import ProfilePageText from '../components/ProfilePage/ProfilePageText.js';
+import ProfilePageText from '../components/profilePage/ProfilePageText.js';
 
 function ProfilePage(props) {
     return (

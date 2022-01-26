@@ -1,14 +1,14 @@
 import React from 'react'
 
 //style
-import './AddonSettings.css'
+import './RaffleSettings.css'
 
-function ProfilePageText() {
+function RaffleSettings() {
     return (
         <div className="page-title-text">
-            Settings
+            Raffle settings
         </div>
     )
 }
 
-export default ProfilePageText
+export default RaffleSettings

@@ -13,16 +13,17 @@ import './App.css';
 import Home from './pages/Home'
 import Addons from './pages/Addons.js'
 import Help from './pages/Help.js'
-import Login from './components/Login-SignUp/Login'
+import Login from './components/login-SignUp/Login'
 import SignUpMenu from './pages/SignUpMenu.js'
 import ProfilePage from './pages/ProfilePage.js'
 import AddonSettings from './pages/AddonSettings.js'
+import RaffleSettings from './pages/RaffleSettings.js'
 
 
 /* Import Components */
 import Navigation from './components/navbar/Navigation.js';
 import Mnav from './components/mobilenav/Mnav.js';
-import Footer from "./components/Footer/Footer.js"
+import Footer from './components/footer/Footer.js';
 
 //import function
 import { googlelogin } from './auth/firebase.js';
@@ -113,11 +114,22 @@ function App() {
                     {/* addonsettings pagina */}
                     <Route path="/addonsettings">
                         <div className="bg-color">
-                            {isDesktop && <Navigation />}
+                            {isDesktop && <Navigation setTitle={setTitle} />}
                             {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
                             <div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
                                 {/* Hier staat de content in */}
                                 <AddonSettings />
+                            </div>
+                        </div>
+                        <Footer />
+                    </Route>
+                    <Route path="/rafflesettings">
+                        <div className="bg-color">
+                            {isDesktop && <Navigation setTitle={setTitle} />}
+                            {isPhone && <Mnav setIsNone={setIsNone} isNone={isNone} />}
+                            <div className="Mcontainer" style={{ position: isNone ? "static" : "fixed" }}>
+                                {/* Hier staat de content in */}
+                                <RaffleSettings />
                             </div>
                         </div>
                         <Footer />

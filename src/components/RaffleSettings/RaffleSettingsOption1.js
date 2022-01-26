@@ -2,14 +2,14 @@ import React from 'react'
 import { Row, Form } from 'react-bootstrap'
 
 //style
-import './AddonSettings.css'
+import '../addonSettings/AddonSettings.css'
 
-function AddonSettingsOption1() {
+function RaffleSettingsOption1() {
     return (
         <>
             <Row>
                 <div className="addon-settings-title-text">
-                    SETTING OPTION #1
+                    Duration (minutes)
                 </div>
             </Row>
             <Row className="addon-settings-margin">
@@ -21,4 +21,4 @@ function AddonSettingsOption1() {
     )
 }
 
-export default AddonSettingsOption1
+export default RaffleSettingsOption1

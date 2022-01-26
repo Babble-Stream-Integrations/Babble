@@ -1,5 +1,5 @@
 import React from 'react'
-import "../Footer/Footer.css"
+import "./Footer.css"
 import { Container, Row, Col } from 'react-bootstrap'
 
 const Footer = () => {
@@ -8,7 +8,7 @@ const Footer = () => {
             {/* <div className="container">
                 <div className="row">
                     <p className="col-md text-center">
-                        
+
                     </p>
                 </div>
             </div> */}
@@ -33,9 +33,9 @@ const Footer = () => {
                     <Col>
                         <h4 className="footer-headtext">Lorem Ipsum</h4>
                         <ul className="footer-list">
-                            <li>Je moeder</li>
+                            <li>Lorem</li>
                             <li>Lorem Ipsum</li>
-                            <li>Wat</li>
+                            <li>Ipsum</li>
                         </ul>
                     </Col>
                 </Row>

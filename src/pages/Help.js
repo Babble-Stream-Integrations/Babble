@@ -4,17 +4,17 @@ import React from "react";
 import { Container, Col, Row } from "react-bootstrap";
 
 // Components
-import AboutText from '../components/Help/AboutText.js';
-import AboutContent from '../components/Help/AboutContent.js';
+import AboutText from '../components/help/AboutText.js';
+import AboutContent from '../components/help/AboutContent.js';
 
-import HelpContent from '../components/Help/HelpContent.js';
-import HelpText from '../components/Help/HelpText.js';
+import HelpContent from '../components/help/HelpContent.js';
+import HelpText from '../components/help/HelpText.js';
 
-import ContactContent from "../components/Help/ContactContent.js";
-import ContactText from "../components/Help/ContactText.js";
+import ContactContent from "../components/help/ContactContent.js";
+import ContactText from "../components/help/ContactText.js";
 
 // Styles
-import '../components/Help/Help.css';
+import '../components/help/Help.css';
 
 function Help() {
 	return (

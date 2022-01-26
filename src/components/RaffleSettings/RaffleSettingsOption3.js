@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
 import { Row, Form } from 'react-bootstrap'
 
-//style
-import './AddonSettings.css'
-
-function AddonSettingsOption2() {
+function RaffleSettingsOption3() {
     const [show, setShow] = useState(true);
     return (
         <>
             <Row>
                 <div className="addon-settings-title-text">
-                    SETTING OPTION #2
+                    Subscribers only mode
                 </div>
             </Row>
             <Row className="addon-settings-margin">
@@ -26,4 +23,4 @@ function AddonSettingsOption2() {
     )
 }
 
-export default AddonSettingsOption2
+export default RaffleSettingsOption3

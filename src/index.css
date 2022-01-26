@@ -53,7 +53,7 @@ body {
 	background-color: var(--mg);
 	height: 100vh;
 
-	overflow-y: overlay
+	overflow-y: overlay;
 }
 
 /* Universal Colors */
