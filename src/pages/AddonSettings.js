@@ -4,10 +4,29 @@ import React from 'react'
 import AddonSettingsContent from "../components/addonSettings/AddonSettingsContent";
 import AddonSettingsText from "../components/addonSettings/AddonSettingsText";
 import { Container, Row, Col } from 'react-bootstrap';
+import { useCreateSettings } from '../helpers/useCreateSettings';
 
 
 function AddonSettings() {
-    return (
+
+	let dummydata1 = {
+		"announceWinners": true,
+		"duplicateWinners": true,
+		"duration": 1,
+		"enterMessage": "!join",
+		"memberOnly": false,
+		"memberPrivilege": 1,
+		"platform": "youtube",
+		"subOnly": false,
+		"subPrivilege": 2,
+		"useMyAccount": false,
+		"winnerAmount": 3
+	};
+
+	let currentaddonsetting = useCreateSettings(dummydata1);
+	// console.log(currentaddonsetting)
+
+	return (
         <>
             <Container className="profile-max-width title-font-size">
                 <Row className="page-row-positioning">
@@ -15,7 +34,7 @@ function AddonSettings() {
                         <AddonSettingsText />
                     </Col>
                     <Col md="6" className="profile-page-content">
-                        <AddonSettingsContent />
+                        <AddonSettingsContent currentaddonsetting={currentaddonsetting} />
                     </Col>
                 </Row>
             </Container>

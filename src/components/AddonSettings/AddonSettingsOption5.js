@@ -1,12 +1,12 @@
 import React from 'react'
 import { Row, Form } from 'react-bootstrap'
 
-function AddonSettingsOption5() {
+function AddonSettingsOption5({ title }) {
     return (
         <>
             <Row>
                 <div className="addon-settings-title-text">
-                    SETTING OPTION #4
+                    {title}
                 </div>
             </Row>
             <Row>
@@ -20,6 +20,10 @@ function AddonSettingsOption5() {
             </Row>
         </>
     )
+}
+
+AddonSettingsOption5.defaultProps = {
+	title: "Checkbox setting"
 }
 
 export default AddonSettingsOption5

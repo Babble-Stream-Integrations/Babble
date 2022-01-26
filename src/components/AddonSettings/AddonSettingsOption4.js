@@ -4,12 +4,12 @@ import { Row, Form } from 'react-bootstrap'
 //style
 import './AddonSettings.css'
 
-function AddonSettingsOption4() {
+function AddonSettingsOption4({ title }) {
     return (
         <>
             <Row>
                 <div className="addon-settings-title-text">
-                    SETTING OPTION #4
+                    {title}
                 </div>
             </Row>
             <Row className="addon-settings-margin">
@@ -19,6 +19,10 @@ function AddonSettingsOption4() {
             </Row>
         </>
     )
+}
+
+AddonSettingsOption4.defaultProps = {
+	title: "Long input"
 }
 
 export default AddonSettingsOption4

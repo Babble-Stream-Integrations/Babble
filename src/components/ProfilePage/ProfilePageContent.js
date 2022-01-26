@@ -1,6 +1,4 @@
 import { Card, Image, Row, Col } from 'react-bootstrap'
-
-import testlogo from "../../assets/img/test-profile-picture.png";
 import ProfilePageSocials from './ProfilePageSocials.js';
 //style
 
@@ -12,7 +10,7 @@ function ProfilePageContent(props) {
             <Card className="profile-card">
                 <Card.Body className="profile-card-body">
                     <div className="profile-content-wrapper">
-                        
+
                         <div className="edit-button-desktop profile-content-title-text">
                             EDIT ✏️
                         </div>
@@ -45,8 +43,8 @@ function ProfilePageContent(props) {
 
                             {/* <Row>
                                 <div>
-                                    Youtube    
-                                </div>                      
+                                    Youtube
+                                </div>
                             </Row>
                             <Row>
                                 <div>

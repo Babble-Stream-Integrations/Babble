@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-
 export const useDynamicGrid = (itemlist, amountRows = 2) => {
 	let SettingsRows = {};
 	let SettingsCounter = 1;

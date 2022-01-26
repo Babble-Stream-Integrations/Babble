@@ -4,12 +4,12 @@ import { Row, Form } from 'react-bootstrap'
 //style
 import './AddonSettings.css'
 
-function AddonSettingsOption1() {
+function AddonSettingsOption1({ title }) {
     return (
         <>
             <Row>
                 <div className="addon-settings-title-text">
-                    SETTING OPTION #1
+                    {title}
                 </div>
             </Row>
             <Row className="addon-settings-margin">
@@ -19,6 +19,10 @@ function AddonSettingsOption1() {
             </Row>
         </>
     )
+}
+
+AddonSettingsOption1.defaultProps = {
+	title: "Small input"
 }
 
 export default AddonSettingsOption1

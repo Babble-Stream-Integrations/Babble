@@ -15,12 +15,11 @@ import AddonSettingsSaveButton from './AddonSettingsSaveButton.js';
 //style
 
 
-function ProfilePageContent() {
+function ProfilePageContent({currentaddonsetting}) {
 
 	let dummyarray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-
-	let rows = useDynamicGrid(dummyarray, 6);
+	let rows = useDynamicGrid(currentaddonsetting, 2);
 
     return (
         <>

@@ -4,18 +4,18 @@ import { Row, Dropdown } from 'react-bootstrap'
 //style
 import './AddonSettings.css'
 
-function AddonSettingsOption3() {
+function AddonSettingsOption3({ title }) {
     return (
         <>
             <Row>
                 <div className="addon-settings-title-text">
-                    SETTING OPTION #3
+					{title}
                 </div>
             </Row>
             <Row>
                 <Dropdown className="addon-settings-margin">
                     <Dropdown.Toggle className="addon-settings-dropdown-button">
-                        dropdown
+                        Select
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu className="addon-settings-dropdown-menu">
@@ -30,6 +30,10 @@ function AddonSettingsOption3() {
             </Row>
         </>
     )
+}
+
+AddonSettingsOption3.defaultProps = {
+	title: "Dropdown Setting"
 }
 
 export default AddonSettingsOption3

@@ -4,13 +4,13 @@ import { Row, Form } from 'react-bootstrap'
 //style
 import './AddonSettings.css'
 
-function AddonSettingsOption2() {
+function AddonSettingsOption2({ title }) {
     const [show, setShow] = useState(true);
     return (
         <>
             <Row>
                 <div className="addon-settings-title-text">
-                    SETTING OPTION #2
+                    {title}
                 </div>
             </Row>
             <Row className="addon-settings-margin">
@@ -24,6 +24,10 @@ function AddonSettingsOption2() {
             </Row>
         </>
     )
+}
+
+AddonSettingsOption2.defaultProps = {
+	title: "Switch setting"
 }
 
 export default AddonSettingsOption2
