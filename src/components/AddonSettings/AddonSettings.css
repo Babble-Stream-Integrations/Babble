@@ -145,13 +145,19 @@
 }
 
 .save-button {
-    margin-left: 40px;
-    width: 25%;
+    /* margin-left: 40px; */
+    /* width: 25%; */
+	max-width: 80%;
     background-color: var(--mo);
     border-color: var(--mo);
     border-radius: 10px;
     color: var(--black);
     font-weight: bold;
+}
+
+.setting-save-button {
+	justify-content: center;
+	
 }
 
 /* @media screen 
