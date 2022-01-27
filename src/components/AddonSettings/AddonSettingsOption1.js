@@ -8,7 +8,7 @@ function AddonSettingsOption1({ title, initialValue }) {
 
 	const [smallInputValue, setSmallInputValue] = useState(initialValue)
 
-	// console.log(smallInputValue)
+	console.log(smallInputValue)
 
     return (
         <>
@@ -22,7 +22,7 @@ function AddonSettingsOption1({ title, initialValue }) {
                     <Form.Control
 						className="addon-settings-form-input-small"
 						defaultValue={smallInputValue}
-						name={title}
+						// name={title}
 						onChange={e => {
 							setSmallInputValue(e.target.value)
 						}}

@@ -53,7 +53,7 @@
 }
 
 /* Setting option #3 */
-.addon-settings-title-text{   
+.addon-settings-title-text{
     font-family: 'Segoe UI';
     font-weight: bold;
     font-size: 23px;
@@ -95,13 +95,13 @@
 .addon-settings-dropdown-menu-items {
     color: var(--white);
     border-color: var(--white);
-    border-width: 2px; 
+    border-width: 2px;
 }
 
 .addon-settings-dropdown-menu-items:active {
     color: var(--white);
     border-color: var(--white);
-    border-width: 2px; 
+    border-width: 2px;
     background-color: var(--lg);
 }
 
@@ -125,8 +125,6 @@
 /* Save button */
 
 .save-button:hover {
-    margin-left: 40px;
-    /* width: 25%; */
     background-color: var(--mo);
     border-color: var(--mo);
     border-radius: 10px;
@@ -135,8 +133,6 @@
 }
 
 .save-button:focus {
-    margin-left: 40px;
-    /* width: 25%; */
     background-color: var(--mo);
     border-color: var(--mo);
     border-radius: 10px;
@@ -145,8 +141,6 @@
 }
 
 .save-button {
-    /* margin-left: 40px; */
-    /* width: 25%; */
 	max-width: 80%;
     background-color: var(--mo);
     border-color: var(--mo);
@@ -157,13 +151,13 @@
 
 .setting-save-button {
 	justify-content: center;
-	
+
 }
 
-/* @media screen 
-    and (min-device-width: 1200px) 
-    and (max-device-width: 1600px) 
-    and (-webkit-min-device-pixel-ratio: 1) { 
+/* @media screen
+    and (min-device-width: 1200px)
+    and (max-device-width: 1600px)
+    and (-webkit-min-device-pixel-ratio: 1) {
 
     .addon-settings-card {
         width:100%;
@@ -183,6 +177,6 @@
     background-color: var(--lg);
     border-radius: 15px;
     width: 100%;
-    
+
 }
 }
