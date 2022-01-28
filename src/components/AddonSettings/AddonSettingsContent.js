@@ -15,7 +15,7 @@ import AddonSettingsSaveButton from './AddonSettingsSaveButton.js';
 //style
 
 
-function ProfilePageContent({currentaddonsetting}) {
+function AddonSettingsContent({ currentaddonsetting }) {
 
 	// let dummyarray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
@@ -46,4 +46,4 @@ function ProfilePageContent({currentaddonsetting}) {
     )
 }
 
-export default ProfilePageContent
+export default AddonSettingsContent
