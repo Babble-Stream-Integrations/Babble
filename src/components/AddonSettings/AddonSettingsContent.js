@@ -25,28 +25,6 @@ function ProfilePageContent({currentaddonsetting}) {
         <>
             <Card className="addon-settings-card">
                 <Card.Body className="addon-settings-card-body">
-                    {/* <Row className="setting-option-component-margin-row">
-                        <Col className="setting-option-component-margin-col">
-                            <AddonSettingsOption1 />
-                        </Col>
-                        <Col className="setting-option-component-margin-col">
-                            <AddonSettingsOption2 />
-                        </Col>
-                    </Row>
-                    <Row className="setting-option-component-margin-row">
-                        <Col className="setting-option-component-margin-col">
-                            <AddonSettingsOption3 />
-                        </Col>
-                        <Col className="setting-option-component-margin-col">
-                            <AddonSettingsOption4 />
-                        </Col>
-                    </Row>
-                    <Row className="setting-option-component-margin-row">
-                        <Col className="setting-option-component-margin-col">
-                            <AddonSettingsOption5 />
-                        </Col>
-                    </Row> */}
-
 					{Object.keys(rows).map(row => {
 						return (
 							<Row className="setting-option-component-margin-row" key={row}>

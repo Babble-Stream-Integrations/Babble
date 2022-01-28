@@ -1,8 +1,8 @@
 import AddonSettingsOption1 from '../components/addonSettings/AddonSettingsOption1.js';
 import AddonSettingsOption2 from '../components/addonSettings/AddonSettingsOption2.js';
-import AddonSettingsOption3 from '../components/addonSettings/AddonSettingsOption3.js';
+// import AddonSettingsOption3 from '../components/addonSettings/AddonSettingsOption3.js';
 import AddonSettingsOption4 from '../components/addonSettings/AddonSettingsOption4.js';
-import AddonSettingsOption5 from '../components/addonSettings/AddonSettingsOption5.js';
+// import AddonSettingsOption5 from '../components/addonSettings/AddonSettingsOption5.js';
 
 export const useCreateSettings = (data) => {
 	let SettingsArray = [];
