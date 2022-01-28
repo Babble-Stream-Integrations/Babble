@@ -1,15 +1,15 @@
 import React from 'react'
-import { Card, Image, Row, Col } from 'react-bootstrap'
+import { Card, Row, Col } from 'react-bootstrap'
 
 // Helpers
 import { useDynamicGrid } from '../../helpers/useDynamicGrid.js';
 
 //components
-import AddonSettingsOption1 from '../addonSettings/AddonSettingsOption1.js';
-import AddonSettingsOption2 from '../addonSettings/AddonSettingsOption2.js';
-import AddonSettingsOption3 from '../addonSettings/AddonSettingsOption3.js';
-import AddonSettingsOption4 from '../addonSettings/AddonSettingsOption4.js';
-import AddonSettingsOption5 from '../addonSettings/AddonSettingsOption5.js';
+// import AddonSettingsOption1 from '../addonSettings/AddonSettingsOption1.js';
+// import AddonSettingsOption2 from '../addonSettings/AddonSettingsOption2.js';
+// import AddonSettingsOption3 from '../addonSettings/AddonSettingsOption3.js';
+// import AddonSettingsOption4 from '../addonSettings/AddonSettingsOption4.js';
+// import AddonSettingsOption5 from '../addonSettings/AddonSettingsOption5.js';
 import AddonSettingsSaveButton from './AddonSettingsSaveButton.js';
 
 //style
