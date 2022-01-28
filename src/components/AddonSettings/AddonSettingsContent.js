@@ -17,7 +17,7 @@ import AddonSettingsSaveButton from './AddonSettingsSaveButton.js';
 
 function ProfilePageContent({currentaddonsetting}) {
 
-	let dummyarray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+	// let dummyarray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 	let rows = useDynamicGrid(currentaddonsetting, 2);
 
