@@ -8,14 +8,14 @@ import { Row } from 'react-bootstrap';
 
 const Addons = () => {
     return (
-        <>
+        <div className="container H-max-width">
             <Row>
                 <YourAddons />
             </Row>
             <Row>
                 <AddonsContent />
             </Row>
-        </>
+        </div>
     )
 }
 
