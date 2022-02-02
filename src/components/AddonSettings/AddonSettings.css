@@ -141,7 +141,7 @@
 }
 
 .save-button {
-	max-width: 80%;
+	max-width: 40%;
     background-color: var(--mo);
     border-color: var(--mo);
     border-radius: 10px;
@@ -151,6 +151,7 @@
 
 .setting-save-button {
 	justify-content: center;
+	gap: 25px;
 
 }
 

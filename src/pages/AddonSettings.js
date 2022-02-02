@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-//components
+// Helpers
+import { useDataFetch } from '../auth/firebase';
+
+// Components
 import AddonSettingsContent from "../components/addonSettings/AddonSettingsContent";
 import AddonSettingsText from "../components/addonSettings/AddonSettingsText";
 import { Container, Row, Col } from 'react-bootstrap';
@@ -8,6 +11,8 @@ import { useCreateSettings } from '../helpers/useCreateSettings';
 
 
 function AddonSettings() {
+	const [dataRecieved, setDataRecieved] = useState(false);
+
 
 	let dummydata1 = {
 		"announceWinners": true,
