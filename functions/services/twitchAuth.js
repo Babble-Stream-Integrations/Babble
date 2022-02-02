@@ -1,6 +1,12 @@
 const { default: axios } = require('axios');
 const fs = require('fs');
 const dotenv = require('dotenv').config();
+const { initializeApp, applicationDefault, cert, getApps, getApp } = require('firebase-admin/app');
+const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
+
+getApps().length === 0 ? initializeApp() : getApp();
+
+const db = getFirestore();
 
 const twitchAuth = {};
 
@@ -37,6 +43,9 @@ twitchAuth.getTokensWithCode = async (response, code) => {
 		} catch (err) {
 			console.error(err)
 		}
+		db.collection('users').doc('joas.boevink@kpnmail.nl').collection('private_info').doc('twitch_tokens').set({
+			raffle_refresh_token: response.data.refresh_token
+		})
 	})
 	.catch(error => {
 		console.log(error.response)

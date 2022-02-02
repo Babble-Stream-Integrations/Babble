@@ -1,32 +1,13 @@
 const { google } = require('googleapis');
-const util = require('util');
-const fs = require('fs')
 const dotenv = require('dotenv').config();
+const { initializeApp, getApps, getApp } = require('firebase-admin/app');
+const { getFirestore } = require('firebase-admin/firestore');
 
-const writeFilePromise = util.promisify(fs.writeFile);
-const readFilePromise = util.promisify(fs.readFile);
+getApps().length === 0 ? initializeApp() : getApp();
 
-let liveChatID;
-let channelID;
-let nextPage;
-const intervalTime = 5000;
-let interval;
-let chatMessages = [];
-let raffleUsersEntered = [];
-let raffleStarted = false;
-
-const save = async(path, data) => {
-	await writeFilePromise(path, data);
-	console.log('Succesfully saved');
-};
-
-const read = async path => {
-	const fileContents = await readFilePromise(path);
-	return JSON.parse(fileContents);
-};
+const db = getFirestore();
 
 const youtube = google.youtube('v3');
-
 const Oauth2 = google.auth.OAuth2;
 
 const clientID = process.env.YR_CLIENTID;
@@ -34,14 +15,29 @@ const clientSecret = process.env.YR_CLIENTSECRET;
 const redirectURI = process.env.YR_REDIRECTURI;
 const apiKey = process.env.YR_APIKEY;
 
-const scope = process.env.YR_SCOPES;
+const scope = [
+    'https://www.googleapis.com/auth/youtube',
+    'https://www.googleapis.com/auth/youtube.channel-memberships.creator'
+];
 
-const auth = new Oauth2(clientID, clientSecret, redirectURI);
+const userAuth = new Oauth2(clientID, clientSecret, redirectURI);
+const botAuth = new Oauth2(clientID, clientSecret, redirectURI);
+
+const testUser = 'EBSnlWXow3YeFaWxokmnXIijgkv2'
+const intervalTime = 5000;
+
+let liveChatID;
+let channelID;
+let nextPage;
+let interval;
+let chatMessages = [];
+let raffleUsersEntered = [];
+let raffleStarted = false;
 
 const youtubeRaffle = {};
 
 youtubeRaffle.getCode = response => {
-	const authUrl = auth.generateAuthUrl({
+	const authUrl = userAuth.generateAuthUrl({
 		access_type: 'offline',
 		scope
 	})
@@ -49,42 +45,45 @@ youtubeRaffle.getCode = response => {
 };
 
 youtubeRaffle.getTokensWithCode = async code => {
-	const credentials = await auth.getToken(code);
-	youtubeService.authorize(credentials);
+	const credentials = await userAuth.getToken(code);
+	youtubeRaffle.authorize(credentials);
 };
 
-youtubeRaffle.authorize = ({tokens}) => {
-	auth.setCredentials(tokens);
+youtubeRaffle.authorize = (raffle_tokens) => {
+	userAuth.setCredentials(raffle_tokens.tokens);
 	console.log('Succesfully set credentials');
-	console.log('tokens', tokens);
-	save('./tokens.json', JSON.stringify(tokens));
+	const response = db.collection('users').doc(testUser).collection('private_info').doc('youtube_tokens').set(raffle_tokens.tokens);
 };
 
-auth.on('tokens', (tokens) => {
+userAuth.on('tokens', (raffle_tokens) => {
 	console.log('New tokens received');
-	save('./tokens.json', JSON.stringify(tokens));
+	console.log('on', raffle_tokens);
+	if (raffle_tokens.refresh_token) {
+		const response = db.collection('users').doc(testUser).collection('private_info').doc('youtube_tokens').set(raffle_tokens);
+	}
+});
+
+botAuth.on('tokens', (raffle_tokens) => {
+	if (raffle_tokens.refresh_token) {
+		const response = db.collection('bots').doc('JoJ3o').set(raffle_tokens);
+	}
 });
 
 // Check if previous tokens exist to avoid authentication every server restart
-const checkTokens = async () => {
-	try {
-		if (fs.existsSync('./tokens.json')) {
-			const tokens = await read('./tokens.json');
-			if (tokens) {
-				console.log('Setting tokens');
-				return auth.setCredentials(tokens);
-			}
-			console.log('No tokens found');
-		}
-	} catch(err) {
-		console.error(err);
+async function checkTokens() {
+	const doc = await db.collection('users').doc(testUser).collection('private_info').doc('youtube_tokens').get();
+	if (!doc.exists) {
+		console.log('No such document!');
+	} else {
+		console.log('Setting tokens');
+		userAuth.setCredentials(doc.data());
 	}
 }
 
 // API Calls
 youtubeRaffle.findActiveChat = async() => {
 	const response = await youtube.liveBroadcasts.list({
-		auth,
+		auth: userAuth,
 		part: 'snippet',
 		broadcastStatus: 'active'
 	});
@@ -95,7 +94,118 @@ youtubeRaffle.findActiveChat = async() => {
 	console.log('Chat ID found', liveChatID)
 }
 
-const checkSub = async channelId => {
+youtubeRaffle.startRaffle = async(data) => {
+	console.log('Start raffle');
+	startTrackingChat(data);
+	setTimeout(function() {stopTrackingChat(data);}, (data.duration * (60/2) * 1000));
+}
+
+async function startTrackingChat(data) {
+	console.log('Start tracking');
+	postMessage('Raffle started! Type ' + data.enterMessage + ' to enter', Number(data.myAccount.at(-1)), Number(data.announceWinners.at(-1)))
+	interval = setInterval(function() { getChatMessages(data); }, intervalTime);
+}
+
+async function stopTrackingChat(data) {
+	console.log('Stop tracking');
+	clearInterval(interval);
+	raffleStarted = false;
+	console.log(raffleUsersEntered);
+	pickWinner(data);
+	raffleUsersEntered = [];
+}
+
+async function getChatMessages(raffleData) {
+	console.log('Get chat');
+	const response = await youtube.liveChatMessages.list({
+		auth: userAuth,
+		part: ['snippet', 'authorDetails'],
+		liveChatId: liveChatID,
+		maxResults: 2000,
+		pageToken: nextPage
+	});
+	const {data} = response;
+	const newMessages = data.items;
+	nextPage = data.nextPageToken;
+	if (raffleStarted) {
+		chatMessages.push(...newMessages);
+		console.log('Total chat messages:', chatMessages.length);
+		newMessages.forEach(message => {
+			printMessage(message);
+			const messageText = message.snippet.displayMessage.toLowerCase();
+			const enterMessage = raffleData.enterMessage.toLowerCase();
+			const author = message.authorDetails.displayName;
+			if (messageText == enterMessage && !raffleUsersEntered.includes(author)) {
+				enterRaffle(raffleData, message, author);
+			}
+		})
+	}
+	raffleStarted = true;
+}
+
+function printMessage(message) {
+	const d = new Date();
+	let hour = d.getUTCHours();
+	let minutes = d.getUTCMinutes();
+	let user = message.authorDetails.displayName;
+	let messageText = message.snippet.displayMessage;
+	console.log('[' + hour + ':' + minutes + '] ' + 'User: ' + user + ' | Message: ' + messageText);
+}
+
+async function sortUser(author, channelId) {
+	if (await checkMember(channelId)) {
+		console.log(author, 'is a Member!');
+		return 'Member'
+	}
+
+	if (await checkSub(channelId)) {
+		console.log(author, 'is a Subscriber');
+		return 'Subscriber'
+	}
+
+	console.log(author, 'is a pleb!');
+	return 'pleb'
+}
+
+async function enterRaffle(data, message, author) {
+	const status = await sortUser(author, message.authorDetails.channelId);
+
+	console.log('status', status);
+
+	const memberOnly = (data.memberOnly.at(-1) === '1') ? true : false;
+	const subOnly = (data.subOnly.at(-1) === '1') ? true : false;
+
+	if (status === 'Member') {
+		for (let i = 0; i < data.memberPrivilege; i++) {
+			raffleUsersEntered.push(author);
+		}
+	} else if (status === 'Subscriber' && !memberOnly) {
+		for (let i = 0; i < data.subPrivilege; i++) {
+			raffleUsersEntered.push(author);
+		}
+	} else {
+		if (!memberOnly && !subOnly) {
+			raffleUsersEntered.push(author);
+		}
+	}
+}
+
+async function checkMember(channelId) {
+	try {
+		const response = await youtube.members.list({
+			auth: userAuth,
+			part: 'snippet'
+		});
+		console.log(response.data);
+
+	} catch (err) {
+		console.log('Could not check member!');
+		console.log(err.message);
+	}
+	return false
+}
+
+async function checkSub(channelId) {
 	try {
 		const response = await youtube.subscriptions.list({
 			key: apiKey,
@@ -107,135 +217,47 @@ const checkSub = async channelId => {
 			return true;
 		}
 	} catch (err) {
-		console.log('Catched bish');
+		console.log('Could not check subscriber');
 		console.log(err.message);
 	}
 	return false;
 }
 
-const checkMember = async channelId => {
-	try {
-		const response = await youtube.members.list({
-			auth,
-			part: 'snippet'
-		});
-		console.log(response.data);
+async function postMessage(messageText, myAccount, announceWinners) {
+	if (announceWinners) {
+		const botDoc = db.collection('bots').doc('JoJ3o');
+		const doc = await botDoc.get();
+		if (!doc.exists) {
+			console.log('No such document!');
+		} else {
+			botTokens = doc.data();
+		}
 
-	} catch (err) {
-		console.log('Catched!');
-		console.log(err.message);
-	}
-	return false
-}
+		botAuth.setCredentials(botTokens);
 
-const respond = (newMessages, data) => {
-	newMessages.forEach(message => {
-		const messageText = message.snippet.displayMessage.toLowerCase();
-		const author = message.authorDetails.displayName;
-		console.log('Message:', messageText, ' || Author:', author);
-		if (messageText == data.enterMessage && !raffleUsersEntered.includes(author)) {
-			if (data.subOnly.at(-1) == 1) {
-				checkSub(message.authorDetails.channelId).then(function(results){
-					if (results == true) {
-						console.log(author, 'is subscribed!');
-						for (let i = 0; i < data.subPrivilege; i++) {
-							raffleUsersEntered.push(author);
-						}
+		const response = youtube.liveChatMessages.insert({
+			auth: (!!myAccount ? userAuth : botAuth),
+			part: 'snippet',
+			resource: {
+				snippet: {
+					liveChatId: liveChatID,
+					type: 'textMessageEvent',
+					textMessageDetails: {
+						messageText
 					}
-				});
-			} else if (data.memberOnly.at(-1) == 1) {
-				checkMember(message.authorDetails.channelId).then(function(results){
-					if (results == true) {
-						console.log(author, 'is a Member!');
-						for (let i = 0; i < data.memberPrivilege; i++) {
-							raffleUsersEntered.push(author);
-						}
-					}
-				});
-			} else {
-				if (data.subPrivilege > 1 && data.subPrivilege > data.memberPrivilege) {
-					checkSub(message.authorDetails.channelId).then(function(results){
-						if (results == true) {
-							for (let i = 0; i < data.subPrivilege; i++) {
-								raffleUsersEntered.push(author);
-							}
-						}
-					});
-				} else if (data.memberPrivilege > data.subPrivilege) {
-					checkMember(message.authorDetails.channelId).then(function(results){
-						if (results == true) {
-							for (let i = 0; i < data.memberPrivilege; i++) {
-								raffleUsersEntered.push(author);
-							}
-						}
-					});
-				} else {
-					raffleUsersEntered.push(author);
 				}
 			}
-		}
-	});
-}
-
-const getChatMessages = async(raffleData) => {
-	console.log('Get chat');
-	const response = await youtube.liveChatMessages.list({
-		auth,
-		part: ['snippet', 'authorDetails'],
-		liveChatId: liveChatID,
-		maxResults: 2000,
-		pageToken: nextPage
-	});
-	const {data} = response;
-	const newMessages = data.items;
-	nextPage = data.nextPageToken;
-	if (raffleStarted) {
-		chatMessages.push(...newMessages);
-		respond(newMessages, raffleData);
-	}
-	raffleStarted = true;
-	console.log('Total chat messages:', chatMessages.length);
-		for (let i=0;i<newMessages.length;i++) {
-		console.log(printMessage(newMessages[i]));
+		})
 	}
 }
 
-const printMessage = message => {
-	const d = new Date();
-	let hour = d.getUTCHours();
-	let minutes = d.getUTCMinutes();
-	let user = message.authorDetails.displayName;
-	let messageText = message.snippet.displayMessage;
-	return '[' + hour + ':' + minutes + '] ' + 'User: ' + user + ' | Message: ' + messageText;
-}
-
-const startTrackingChat = async(data) => {
-	console.log('Start raffle');
-	interval = setInterval(function() { getChatMessages(data); }, intervalTime);
-}
-
-const stopTrackingChat = async(winnerAmount, duplicateWinners) => {
-	console.log('Stop raffle');
-	clearInterval(interval);
-	raffleStarted = false;
-	console.log(raffleUsersEntered);
-	pickWinner(winnerAmount, duplicateWinners);
-	raffleUsersEntered = [];
-}
-
-youtubeRaffle.startRaffle = async(data) => {
-	console.log('Start');
-	startTrackingChat(data);
-	setTimeout(function() {stopTrackingChat(data.winnerAmount, data.duplicateWinners);}, (data.duration * (60/2) * 1000));
-}
-
-const pickWinner = (winnerAmount, duplicateWinners) => {
+function pickWinner(data) {
 	let winnerArray = [];
-	for (let i = 0; i < winnerAmount; i++) {
+	for (let i = 0; i < data.winnerAmount; i++) {
 		if (raffleUsersEntered.length != 0) {
 			const random = Math.floor(Math.random() * raffleUsersEntered.length);
 			winnerArray.push(raffleUsersEntered[random]);
-			if (duplicateWinners.at(-1) == 0) {
+			if (data.duplicateWinners.at(-1) == 0) {
 				let i = 0;
 				const arrayItem = raffleUsersEntered[random];
 				while (i < raffleUsersEntered.length) {
@@ -248,11 +270,11 @@ const pickWinner = (winnerAmount, duplicateWinners) => {
 			} else {
 				raffleUsersEntered.splice(random, 1);
 			}
-
 			console.log(random, winnerArray, raffleUsersEntered);
 		}
 	}
 	console.log(winnerArray);
+	postMessage('The winners of the raffle are: ' + winnerArray.join(', '), Number(data.myAccount.at(-1)), Number(data.announceWinners.at(-1)))
 }
 
 checkTokens();
