@@ -8,9 +8,9 @@ function RaffleSettingsSubmitBtn() {
     return (
         <>
             <Button onClick={() => {
-                let data = {
-                    "duration": 5,
-                    "enterMessage": "!Joas"
+                let dataa = {
+                    path: (users, user, settings, MyRaffleName1),
+					data: {}
                 }
                 fetch('babble-d6ef3/europe-west1/app/api/post', {
                     method: 'POST',

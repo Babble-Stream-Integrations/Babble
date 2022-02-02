@@ -6,8 +6,10 @@ import './RaffleSettings.css';
 
 function RaffleSettingsAuthorizeBtn() {
 	console.log('Button pressed!');
-	const auth = () => {
-		fetch('/babble-d6ef3/europe-west1/app/api/function')
+	const auth = async () => {
+		fetch('babble-d6ef3/europe-west1/app/api/message').then((res) => {
+			console.log('res: ', res);
+		})
 	}
 
     return (
