@@ -35,7 +35,8 @@ function LoginContent({ setUserState}) {
 			// props.setProfilePicture(user.photoURL);
 			setUserState(user.displayName, user.email, user.photoURL)
 			console.log(setUserState);
-			console.log(user.displayName);
+			console.log(user);
+			// post addData(user.email, user.displayName, user.uid);
 			// ...
 		}).catch((error) => {
 			// Handle Errors here.
