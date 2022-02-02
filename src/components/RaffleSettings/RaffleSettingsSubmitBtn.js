@@ -7,7 +7,7 @@ import './RaffleSettings.css';
 function RaffleSettingsSubmitBtn() {
     return (
         <>
-            <Button className="submit-button">
+            <Button>
                 SUBMIT
             </Button>
         </>
