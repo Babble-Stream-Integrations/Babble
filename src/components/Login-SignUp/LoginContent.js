@@ -7,7 +7,7 @@ import { auth, provider } from '../../auth/firebase';
 import { Link } from 'react-router-dom'
 
 //style
-import "../Login-SignUp/Login.css";
+import "./Login.css";
 
 //firebase
 // import { fblogin, googlelogin } from '../../auth/firebase.js'
@@ -35,7 +35,8 @@ function LoginContent({ setUserState}) {
 			// props.setProfilePicture(user.photoURL);
 			setUserState(user.displayName, user.email, user.photoURL)
 			console.log(setUserState);
-			console.log(user.displayName);
+			console.log(user);
+			// post addData(user.email, user.displayName, user.uid);
 			// ...
 		}).catch((error) => {
 			// Handle Errors here.

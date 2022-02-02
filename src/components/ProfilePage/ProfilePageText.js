@@ -1,7 +1,7 @@
 import React from 'react'
 
 //style
-import '../ProfilePage/ProfilePage.css'
+import '../profilePage/ProfilePage.css'
 
 function ProfilePageText() {
     return (

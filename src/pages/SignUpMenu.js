@@ -2,7 +2,7 @@
 import { Container } from 'react-bootstrap'
 
 // Components
-import SignUp from '../components/Login-SignUp/SignUp.js';
+import SignUp from '../components/login-SignUp/SignUp.js';
 
 function SignUpMenu() {
 	return (

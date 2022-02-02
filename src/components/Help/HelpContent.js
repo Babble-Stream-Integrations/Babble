@@ -8,19 +8,19 @@ const HelpContent = () => {
 				<Accordion.Item className="help-accordion-item" eventKey="0">
 					<Accordion.Header className="help-accordion-header">Faq #1</Accordion.Header>
 					<Accordion.Body className="help-accordion-body">
-						Finn
+						That's a good question. I have no idea
 					</Accordion.Body>
 				</Accordion.Item>
 				<Accordion.Item className="help-accordion-item" eventKey="1">
 					<Accordion.Header className="help-accordion-header">Faq #2</Accordion.Header>
 					<Accordion.Body className="help-accordion-body">
-						Anton
+						That's a good question. I have no idea
 					</Accordion.Body>
 				</Accordion.Item>
 				<Accordion.Item className="help-accordion-item" eventKey="2">
 					<Accordion.Header className="help-accordion-header">Faq #3</Accordion.Header>
 					<Accordion.Body className="help-accordion-body">
-						Je aardige moeder
+						That's a good question. I have no idea
 					</Accordion.Body>
 				</Accordion.Item>
 			</Accordion>

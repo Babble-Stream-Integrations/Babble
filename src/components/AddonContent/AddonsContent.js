@@ -4,7 +4,7 @@ import React from 'react'
 import './AddonsContent.css'
 
 /* Import Components */
-import AddonCard from '../AddonCard/AddonCard.js'
+import AddonCard from '../addonCard/AddonCard.js'
 
 /* Import Images */
 import AutoTitleImg from '../../assets/img/auto-stream-title-background.png'

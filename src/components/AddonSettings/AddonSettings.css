@@ -17,13 +17,21 @@
     margin-right: 20px;
 }
 
-.test-test {
-    width: 200px;
-}
-
 /* Setting option #1 */
 .addon-settings-form-input-small {
     width: 25%;
+    color: var(--white);
+    background-color: var(--lg);
+    border-radius: 10px;
+    border-width: 2px;
+}
+
+.addon-settings-form-input-small:focus {
+    width: 25%;
+    color: var(--white);
+    background-color: var(--lg);
+    border-radius: 10px;
+    border-width: 2px;
 }
 
 /* Setting option #2 */
@@ -74,30 +82,59 @@
 }
 
 
-.addon-settings-margin{
+.addon-settings-margin {
     margin-top: 15px;
 }
 
-.addon-settings-dropdown-menu{
+.addon-settings-dropdown-menu {
     background-color: var(--lg);
     border-color: var(--white);
     border-width: 2px;
 }
 
-.addon-settings-dropdown-menu-items{
+.addon-settings-dropdown-menu-items {
     color: var(--white);
     border-color: var(--white);
     border-width: 2px; 
 }
 
+.addon-settings-dropdown-menu-items:active {
+    color: var(--white);
+    border-color: var(--white);
+    border-width: 2px; 
+    background-color: var(--lg);
+}
+
 /* Setting option #4 */
 .addon-settings-form-input-large {
     width: 75%;
+    color: var(--white);
+    background-color: var(--lg);
+    border-radius: 10px;
+    border-width: 2px;
+}
+
+.addon-settings-form-input-large:focus {
+    width: 75%;
+    color: var(--white);
+    background-color: var(--lg);
+    border-radius: 10px;
+    border-width: 2px;
 }
 
 /* Save button */
 
 .save-button:hover {
+    margin-left: 40px;
+    width: 25%;
+    background-color: var(--mo);
+    border-color: var(--mo);
+    border-radius: 10px;
+    color: var(--black);
+    font-weight: bold;
+}
+
+.save-button:focus {
     margin-left: 40px;
     width: 25%;
     background-color: var(--mo);

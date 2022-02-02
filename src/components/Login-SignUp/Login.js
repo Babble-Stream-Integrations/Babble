@@ -2,7 +2,7 @@ import React, {useRef} from 'react'
 import { Container, Row, Col} from "react-bootstrap"
 
 //components
-import "../Login-SignUp/Login.css"
+import "./Login.css"
 import LoginText from "./LoginText.js";
 import LoginContent from './LoginContent.js';
 

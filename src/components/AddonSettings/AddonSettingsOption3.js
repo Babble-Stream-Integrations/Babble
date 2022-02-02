@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Dropdown } from 'react-bootstrap'
 
 //style
-import '../AddonSettings/AddonSettings.css'
+import './AddonSettings.css'
 
 function AddonSettingsOption3() {
     return (

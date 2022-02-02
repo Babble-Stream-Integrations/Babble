@@ -4,8 +4,19 @@
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+	  "YetFilledIn.md",
+	  "README.old.md"
     ],
-	"rewrites": [{ "source": "/api/**", "function": "app" }]
+	"rewrites": [
+		{
+		  "source": "**",
+		  "destination": "/index.html"
+		},
+		{ 
+			"source": "/api/**", 
+			"function": "app" 
+		}
+	]
   }
 }

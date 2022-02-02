@@ -32,6 +32,20 @@
     padding-top: 20px;
 }
 
+.form-input-login-style {
+    color: var(--white);
+    background-color: var(--lg);
+    border-radius: 15px;
+    border-width: 2px;
+}
+
+.form-input-login-style:focus {
+    color: var(--white);
+    background-color: var(--lg);
+    border-radius: 15px;
+    border-width: 2px;
+}
+
 .login-button:hover {
     background-color: var(--mo);
     border-color: var(--mo);
