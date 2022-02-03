@@ -27,5 +27,4 @@ router.post('/start', (req, res) => {
 	res.redirect('http://localhost:5001/babble-d6ef3/europe-west1/app/api/raffle/twitch');
 });
 
-module.exports.router = router;
-module.exports.raffleData = raffleData;
+module.exports = router;
