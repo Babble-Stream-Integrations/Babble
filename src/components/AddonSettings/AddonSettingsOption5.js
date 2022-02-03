@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Form } from 'react-bootstrap'
 
-function AddonSettingsOption5({ title, initialValue }) {
+function AddonSettingsOption5({ title, initialValue, getSettings }) {
     return (
         <>
             <Row>

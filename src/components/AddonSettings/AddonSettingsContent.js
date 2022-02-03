@@ -1,23 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, Row, Col } from 'react-bootstrap'
 
 // Helpers
 import { useDynamicGrid } from '../../helpers/useDynamicGrid.js';
 
 //components
-// import AddonSettingsOption1 from '../addonSettings/AddonSettingsOption1.js';
-// import AddonSettingsOption2 from '../addonSettings/AddonSettingsOption2.js';
-// import AddonSettingsOption3 from '../addonSettings/AddonSettingsOption3.js';
-// import AddonSettingsOption4 from '../addonSettings/AddonSettingsOption4.js';
-// import AddonSettingsOption5 from '../addonSettings/AddonSettingsOption5.js';
 import AddonSettingsSaveButton from './AddonSettingsSaveButton.js';
 
 //style
 
 
-function AddonSettingsContent({ currentaddonsetting }) {
-
-	// let dummyarray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+function AddonSettingsContent({ currentaddonsetting, getSettings, setGetSettings, settingsObj }) {
 
 	let rows = useDynamicGrid(currentaddonsetting, 2);
 
@@ -38,7 +31,7 @@ function AddonSettingsContent({ currentaddonsetting }) {
 					})}
 
                     <Row className="setting-save-button">
-                        <AddonSettingsSaveButton />
+                        <AddonSettingsSaveButton settingsObj={settingsObj} setGetSettings={setGetSettings}/>
                     </Row>
                 </Card.Body>
             </Card>

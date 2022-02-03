@@ -4,12 +4,17 @@ import { Row, Form } from 'react-bootstrap'
 //style
 import './AddonSettings.css'
 
-function AddonSettingsOption2({ title, initialValue }) {
+function AddonSettingsOption2({ title, initialValue, getSettings, setSettingsObj }) {
 
 	const [show, setShow] = useState(initialValue);
 	const [switchValue, setSwitchValue] = useState(initialValue);
-
 	// console.log(switchValue)
+
+	useEffect(() => {
+		if (getSettings === true) {
+			setSettingsObj(prevSettingsObj => ({...prevSettingsObj, [title] : switchValue}))
+		}
+	}, [getSettings])
 
     return (
         <>

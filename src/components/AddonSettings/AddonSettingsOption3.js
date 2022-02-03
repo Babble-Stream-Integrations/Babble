@@ -4,7 +4,7 @@ import { Row, Dropdown } from 'react-bootstrap'
 //style
 import './AddonSettings.css'
 
-function AddonSettingsOption3({ title, initialValue }) {
+function AddonSettingsOption3({ title, initialValue, getSettings }) {
     return (
         <>
             <Row>

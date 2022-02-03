@@ -1,12 +1,12 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 
-function AddonSettingsSaveButton() {
+function AddonSettingsSaveButton({ setGetSettings, settingsObj }) {
     return (
         <>
             <Button className="save-button" onClick={() => {
-				// Data ophalen
 				// firebase PUT call
+				setGetSettings(true)
 			}}>
 				SAVE
             </Button>

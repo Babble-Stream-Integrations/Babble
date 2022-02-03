@@ -1,14 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Form } from 'react-bootstrap'
 
 //style
 import './AddonSettings.css'
 
-function AddonSettingsOption1({ title, initialValue }) {
+function AddonSettingsOption1({ title, initialValue, getSettings, setSettingsObj}) {
 
 	const [smallInputValue, setSmallInputValue] = useState(initialValue)
 
-	console.log(smallInputValue)
+	useEffect(() => {
+		if (getSettings === true) {
+			// console.log(settingsArFunc)
+			// setSettingsObj(settingsObj[title] = smallInputValue);
+			setSettingsObj(prevSettingsObj => ({...prevSettingsObj, [title] : smallInputValue}))
+		}
+	}, [getSettings])
 
     return (
         <>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // Helpers
 import { useDataFetch } from '../auth/firebase';
@@ -12,6 +12,23 @@ import { useCreateSettings } from '../helpers/useCreateSettings';
 
 function AddonSettings() {
 	const [dataRecieved, setDataRecieved] = useState(false);
+	const [getSettings, setGetSettings] = useState(false);
+	const [settingsObj, setSettingsObj] = useState({});
+	console.log(settingsObj)
+
+	// const user = "EBSnlWXow3YeFaWxokmnXIijgkv2";
+	// const addonname = "MyRaffleName1";
+
+	// useEffect(() => {
+	// 	const fetchsettings = () => {
+	// 		fetch("")
+	// 			.then((response) => response.json())
+	// 			.then((data) => console.log(data))
+	// 	}
+
+	// 	fetchsettings()
+	// }, [])
+
 
 
 	let dummydata1 = {
@@ -28,7 +45,7 @@ function AddonSettings() {
 		"winnerAmount": 3
 	};
 
-	let currentaddonsetting = useCreateSettings(dummydata1);
+	let currentaddonsetting = useCreateSettings(dummydata1, getSettings, settingsObj, setSettingsObj);
 	// console.log(currentaddonsetting)
 
 	return (
@@ -39,7 +56,7 @@ function AddonSettings() {
                         <AddonSettingsText />
                     </Col>
                     <Col md="6" className="profile-page-content">
-                        <AddonSettingsContent currentaddonsetting={currentaddonsetting} />
+                        <AddonSettingsContent currentaddonsetting={currentaddonsetting} getSettings={getSettings} setGetSettings={setGetSettings} settingsObj={settingsObj} />
                     </Col>
                 </Row>
             </Container>
