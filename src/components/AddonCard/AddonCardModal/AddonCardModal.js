@@ -9,6 +9,7 @@ import { useMatchMedia } from '../../../helpers/useMatchMedia.js';
 
 /* Import Dependencies */
 import { Modal } from 'react-bootstrap'
+import { AddonCardButton } from './AddonCardButton.jsx';
 
 /* Import Standard Image */
 import StandardImage from '../../../assets/img/noimage.jpg'
@@ -19,8 +20,8 @@ import TwitchLogo from '../../../assets/icons/TwitchGlitchPurple.png'
 import { GrClose } from 'react-icons/gr'
 
 function AddonCardModal( props ) {
-    
-    const { setModalShow, twitchShow, youtubeShow, ...rest } = props;
+
+    const { madeAddon, setModalShow, twitchShow, youtubeShow, ...rest } = props;
 
     const PhoneSize = useMatchMedia("(max-width:968px)", true)
 
@@ -60,7 +61,7 @@ function AddonCardModal( props ) {
                     </div>
                 </div>
                 {PhoneSize && <button className="uni-allcaps addoncard-modal-button" disabled={ true }>Customize Desktop Only</button>}
-                {!PhoneSize && <button className="uni-allcaps addoncard-modal-button" disabled={ false }>Customize</button>}
+                {!PhoneSize && <AddonCardButton madeAddon={madeAddon} />}
             </Modal.Body>
         </Modal>
     );

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 import { Card, Row, Col } from 'react-bootstrap';
 
@@ -23,6 +23,25 @@ import RaffleSettingsOption9 from './RaffleSettingsOption9.js';
 
 
 function RaffleSettingsContent() {
+	let data = {}
+
+    useEffect(() => {
+        fetch('babble-d6ef3/europe-west1/app/api/v1/users/EBSnlWXow3YeFaWxokmnXIijgkv3/addons/MyRaffleAddon1', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			}
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log('Succes: ', data);
+		})
+		.catch((error) => {
+			console.log('Error', error);
+		})
+    }, [])
+
+
     return (
         <>
             <Card className="raffle-settings-card">

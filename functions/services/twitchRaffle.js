@@ -1,20 +1,14 @@
 const { default: axios } = require('axios');
 const tmi = require('tmi.js');
-const dotenv = require('dotenv').config();
 const fs = require('fs');
 const qs = require('qs')
 const twitchAuth = require('./twitchAuth');
 
 const twitchRaffle = {};
 
-twitchRaffle.startRaffle = async(data) => {
+twitchRaffle.startRaffle = async() => {
 	console.log('Start Twitch Raffle');
-	console.log(data);
-
-	// if (process.env.TWITCH_ACCESS_TOKEN == undefined) {
-	// 	throw new Error('No Twitch User Acess Token')
-	// }
-
+	
 	let userName = process.env.TBOT_NAME
 	let userPassword = process.env.TBOT_TOKEN
 

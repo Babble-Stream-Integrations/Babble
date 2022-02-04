@@ -1,30 +1,50 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, Row, Col } from 'react-bootstrap'
 
 // Helpers
-import { useDynamicGrid } from '../../helpers/useDynamicGrid.js';
-
+import { getDynamicGrid } from '../../helpers/getDynamicGrid.js';
+import { getCreateSettings } from '../../helpers/getCreateSettings';
 //components
-// import AddonSettingsOption1 from '../addonSettings/AddonSettingsOption1.js';
-// import AddonSettingsOption2 from '../addonSettings/AddonSettingsOption2.js';
-// import AddonSettingsOption3 from '../addonSettings/AddonSettingsOption3.js';
-// import AddonSettingsOption4 from '../addonSettings/AddonSettingsOption4.js';
-// import AddonSettingsOption5 from '../addonSettings/AddonSettingsOption5.js';
 import AddonSettingsSaveButton from './AddonSettingsSaveButton.js';
 
 //style
 
 
-function AddonSettingsContent({ currentaddonsetting }) {
+function AddonSettingsContent() {
+	const [getSettings, setGetSettings] = useState(false);
+	const [settingsObj, setSettingsObj] = useState({});
+	const [retrievedData, setRetrievedData] = useState(null);
 
-	// let dummyarray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+	const user = "EBSnlWXow3YeFaWxokmnXIijgkv3";
+	const addonname = "MyRaffleAddon1";
 
-	let rows = useDynamicGrid(currentaddonsetting, 2);
+	useEffect(() => {
+		const fetchsettingsdata = async () => {
+			fetch(`/babble-d6ef3/europe-west1/app/api/v1/users/${user}/addons/${addonname}/settings`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+			})
+			.then(response => response.json())
+			.then(data => {
+				// console.log('Succes: ', data);
+				setRetrievedData(data);
+			})
+			.catch((error) => {
+				console.log('Error', error);
+			})
+		}
+		fetchsettingsdata();
+	}, [])
 
-    return (
-        <>
-            <Card className="addon-settings-card">
-                <Card.Body className="addon-settings-card-body">
+	let currentaddonsetting = getCreateSettings(retrievedData, getSettings, settingsObj, setSettingsObj);
+	let rows = getDynamicGrid(currentaddonsetting, 2);
+
+	return (
+		<>
+			<Card className="addon-settings-card">
+				<Card.Body className="addon-settings-card-body">
 					{Object.keys(rows).map(row => {
 						return (
 							<Row className="setting-option-component-margin-row" key={row}>
@@ -37,13 +57,13 @@ function AddonSettingsContent({ currentaddonsetting }) {
 						);
 					})}
 
-                    <Row className="setting-save-button">
-                        <AddonSettingsSaveButton />
-                    </Row>
-                </Card.Body>
-            </Card>
-        </>
-    )
+					<Row className="setting-save-button">
+						<AddonSettingsSaveButton settingsObj={settingsObj} setGetSettings={setGetSettings} user={user} addonname={addonname} />
+					</Row>
+				</Card.Body>
+			</Card>
+		</>
+	)
 }
 
 export default AddonSettingsContent

@@ -10,7 +10,7 @@ import AddonCardModal from './addonCardModal/AddonCardModal.js'
 /* Import Standard Image */
 import StandardImage from '../../assets/img/noimage.jpg'
 
-const AddonCard = ({ name, background, platforms, description }) => {
+const AddonCard = ({ name, background, platforms, description, madeAddon }) => {
 
     const [modalShow, setModalShow] = useState(false);
     const [twitchShow, setTwitchShow] = useState(false);
@@ -48,6 +48,8 @@ const AddonCard = ({ name, background, platforms, description }) => {
                 addonplatforms={ platforms }
                 addonname={ name }
                 addonbackground={ background }
+
+				madeAddon={madeAddon}
             />
         </div>
     )
