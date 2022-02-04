@@ -8,10 +8,6 @@ import './RaffleSettings.css';
 function RaffleSettingsAuthorizeBtn() {
 	console.log('Button pressed!');
 	const auth = async () => {
-		let data = {
-			user: 'EBSnlWXow3YeFaWxokmnXIijgkv3',
-			addon: 'MyRaffleAddon1'
-		}
 		fetch('babble-d6ef3/europe-west1/app/api/v1/youtube/auth', {
 			method: 'GET',
 			mode: 'no-cors',
@@ -30,12 +26,12 @@ function RaffleSettingsAuthorizeBtn() {
 	}
 
 	const auth2 = async () => {
-		let data = {
-			duration: 1,
-			enterMessage: '!join'
+		const data = {
+			user: 'EBSnlWXow3YeFaWxokmnXIijgkv3',
+			addon: 'MyRaffleAddon1'
 		}
-		fetch('babble-d6ef3/europe-west1/app/api/v1/users/EBSnlWXow3YeFaWxokmnXIijgkv3/addons/MyRaffleAddon3/settings', {
-			method: 'PUT',
+		fetch('babble-d6ef3/europe-west1/app/api/v1/raffle/start', {
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},

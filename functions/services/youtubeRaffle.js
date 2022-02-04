@@ -23,7 +23,7 @@ const scope = [
 const userAuth = new Oauth2(clientID, clientSecret, redirectURI);
 const botAuth = new Oauth2(clientID, clientSecret, redirectURI);
 
-const testUser = 'EBSnlWXow3YeFaWxokmnXIijgkv2'
+const testUser = 'EBSnlWXow3YeFaWxokmnXIijgkv3'
 const intervalTime = 5000;
 
 let liveChatID;
@@ -81,7 +81,9 @@ async function checkTokens() {
 }
 
 // API Calls
-youtubeRaffle.findActiveChat = async() => {
+async function findActiveChat() {
+	const doc = await db.collection('users').doc(testUser).collection('tokens').doc('youtube').get();
+	userAuth.setCredentials(doc.data());
 	const response = await youtube.liveBroadcasts.list({
 		auth: userAuth,
 		part: 'snippet',
@@ -94,15 +96,17 @@ youtubeRaffle.findActiveChat = async() => {
 	console.log('Chat ID found', liveChatID)
 }
 
-youtubeRaffle.startRaffle = async(data) => {
+youtubeRaffle.startRaffle = async(data, tokens) => {
 	console.log('Start raffle');
-	startTrackingChat(data);
-	setTimeout(function() {stopTrackingChat(data);}, (data.duration * (60/2) * 1000));
+	console.log('data: ', data);
+	await findActiveChat();
+	startTrackingChat(data, tokens);
+	setTimeout(function() {stopTrackingChat(data);}, (data.duration * (60) * 1000));
 }
 
-async function startTrackingChat(data) {
+async function startTrackingChat(data, tokens) {
 	console.log('Start tracking');
-	postMessage('Raffle started! Type ' + data.enterMessage + ' to enter', Number(data.myAccount.at(-1)), Number(data.announceWinners.at(-1)))
+	postMessage('Raffle started! Type ' + data.enterMessage + ' to enter', data.useMyAccount, data.announceWinners)
 	interval = setInterval(function() { getChatMessages(data); }, intervalTime);
 }
 
@@ -117,6 +121,8 @@ async function stopTrackingChat(data) {
 
 async function getChatMessages(raffleData) {
 	console.log('Get chat');
+	const doc = await db.collection('users').doc(testUser).collection('tokens').doc('youtube').get();
+	userAuth.setCredentials(doc.data());
 	const response = await youtube.liveChatMessages.list({
 		auth: userAuth,
 		part: ['snippet', 'authorDetails'],
@@ -172,19 +178,16 @@ async function enterRaffle(data, message, author) {
 
 	console.log('status', status);
 
-	const memberOnly = (data.memberOnly.at(-1) === '1') ? true : false;
-	const subOnly = (data.subOnly.at(-1) === '1') ? true : false;
-
 	if (status === 'Member') {
 		for (let i = 0; i < data.memberPrivilege; i++) {
 			raffleUsersEntered.push(author);
 		}
-	} else if (status === 'Subscriber' && !memberOnly) {
+	} else if (status === 'Subscriber' && !data.memberOnly) {
 		for (let i = 0; i < data.subPrivilege; i++) {
 			raffleUsersEntered.push(author);
 		}
 	} else {
-		if (!memberOnly && !subOnly) {
+		if (!data.memberOnly && !data.subOnly) {
 			raffleUsersEntered.push(author);
 		}
 	}
@@ -233,6 +236,8 @@ async function postMessage(messageText, myAccount, announceWinners) {
 			botTokens = doc.data();
 		}
 
+		const tokens = await db.collection('users').doc(testUser).collection('tokens').doc('youtube').get();
+		userAuth.setCredentials(tokens.data());
 		botAuth.setCredentials(botTokens);
 
 		const response = youtube.liveChatMessages.insert({
@@ -257,7 +262,7 @@ function pickWinner(data) {
 		if (raffleUsersEntered.length != 0) {
 			const random = Math.floor(Math.random() * raffleUsersEntered.length);
 			winnerArray.push(raffleUsersEntered[random]);
-			if (data.duplicateWinners.at(-1) == 0) {
+			if (!data.duplicateWinners) {
 				let i = 0;
 				const arrayItem = raffleUsersEntered[random];
 				while (i < raffleUsersEntered.length) {
@@ -274,7 +279,7 @@ function pickWinner(data) {
 		}
 	}
 	console.log(winnerArray);
-	postMessage('The winners of the raffle are: ' + winnerArray.join(', '), Number(data.myAccount.at(-1)), Number(data.announceWinners.at(-1)))
+	postMessage('The winners of the raffle are: ' + winnerArray.join(', '), data.myAccount, data.announceWinners);
 }
 
 checkTokens();
