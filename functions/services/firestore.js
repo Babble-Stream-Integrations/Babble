@@ -15,7 +15,7 @@ firestore.getUsers = async() => {
 
 firestore.addUser = async(user, data) => {
 	const doc = await db.collection('users').doc(user).set(data);
-	return {hello: "world!"}
+	return ['user ' + user + ' added to database!']
 }
 
 firestore.getUser = async(user) => {
@@ -23,17 +23,20 @@ firestore.getUser = async(user) => {
 	return doc.data()
 }
 
-firestore.deleteUser = async() => {
-
+firestore.deleteUser = async(user) => {
+	const doc = await db.collection('users').doc(user).delete();
+	return ['user ' + user + ' deleted from database!']
 }
 
 // UserAddons functions
-firestore.getAddons = async() => {
-
+firestore.getAddons = async(user) => {
+	const col = await db.collection('users').doc(user).collection('addons').get();
+	return (col.docs.map(doc => doc.id))
 }
 
-firestore.addAddon = async() => {
-
+firestore.addAddon = async(user, addon, data) => {
+	const doc = await db.collection('users').doc(user).collection('addons').doc(addon).set(data);
+	return ['addon ' + addon + ' added to ' + user + '']
 }
 
 firestore.getAddon = async(user, addon) => {
@@ -41,37 +44,42 @@ firestore.getAddon = async(user, addon) => {
 	return doc.data()
 }
 
-firestore.updateAddon = async() => {
-
+firestore.deleteAddon = async(user, addon) => {
+	const doc = await db.collection('users').doc(user).collection('addons').doc(addon).delete();
+	return ['addon ' + addon + ' deleted from ' + user + '']
 }
 
-firestore.deleteAddon = async() => {
-
+firestore.updateSettings = async(user, addon, data) => {
+	const doc = await db.collection('users').doc(user).collection('addons').doc(addon).set({
+		settings: data
+	}, {merge: true});
+	return ['addon ' + addon + ' updated in ' + user + '']
 }
 
-firestore.updateSettings = async() => {
-
-}
-
-firestore.getSettings = async() => {
-
+firestore.getSettings = async(user, addon) => {
+	const doc = await db.collection('users').doc(user).collection('addons').doc(addon).get('settings');
+	return doc.data().settings;
 }
 
 // UserToken functions
-firestore.getTokens = async() => {
-
+firestore.getTokens = async(user) => {
+	const col = await db.collection('users').doc(user).collection('tokens').get();
+	return (col.docs.map(doc => doc.id))
 }
 
-firestore.addToken = async() => {
-
+firestore.addToken = async(user, platform, data) => {
+	const doc = await db.collection('users').doc(user).collection('tokens').doc(platform).set(data);
+	return ['' + platform + ' tokens added to ' + user + '']
 }
 
-firestore.getToken = async() => {
-
+firestore.getToken = async(user, platform) => {
+	const doc = await db.collection('users').doc(user).collection('tokens').doc(platform).get();
+	return doc.data()
 }
 
-firestore.deleteToken = async() => {
-
+firestore.deleteToken = async(user, platform) => {
+	const doc = await db.collection('users').doc(user).collection('tokens').doc(platform).delete();
+	return ['' + platform + ' tokens deleted from ' + user + '']
 }
 
 module.exports = firestore;

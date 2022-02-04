@@ -8,15 +8,15 @@ function RaffleSettingsAuthorizeBtn() {
 	console.log('Button pressed!');
 	const auth = async () => {
 		let data = {
-			displayName: 'Yoass',
-			email: 'joas.boevink@kpnmail.nl'
+			duration: 1,
+			enterMessage: '!enter'
 		}
-		fetch('babble-d6ef3/europe-west1/app/api/v1/users/JoJo123', {
+		fetch('babble-d6ef3/europe-west1/app/api/v1/users/EBSnlWXow3YeFaWxokmnXIijgkv3/addons/MyRaffleAddon2/settings', {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify(data),
+			body: JSON.stringify(data)
 		})
 		.then(response => response.json())
 		.then(data => {
@@ -29,15 +29,17 @@ function RaffleSettingsAuthorizeBtn() {
 
 	const auth2 = async () => {
 		let data = {
-			displayName: 'Yoass',
-			email: 'joas.boevink@kpnmail.nl'
+			type: 'raffle',
+			platform: 'youtube',
+			settings: {
+				duration: 1
+			}
 		}
-		fetch('babble-d6ef3/europe-west1/app/api/v1/users/JoJo123', {
-			method: 'PUT',
+		fetch('babble-d6ef3/europe-west1/app/api/v1/users/EBSnlWXow3YeFaWxokmnXIijgkv3/addons/MyRaffleAddon3', {
+			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(data),
+			}
 		})
 		.then(response => response.json())
 		.then(data => {
@@ -49,16 +51,11 @@ function RaffleSettingsAuthorizeBtn() {
 	}
 
 	const auth3 = async () => {
-		let data = {
-			displayName: 'Yoass',
-			email: 'joas.boevink@kpnmail.nl'
-		}
-		fetch('babble-d6ef3/europe-west1/app/api/v1/users/JoJo123', {
-			method: 'PUT',
+		fetch('babble-d6ef3/europe-west1/app/api/v1/users/EBSnlWXow3YeFaWxokmnXIijgkv3/addons/MyRaffleAddon1', {
+			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(data),
+			}
 		})
 		.then(response => response.json())
 		.then(data => {
