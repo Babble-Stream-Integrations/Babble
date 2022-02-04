@@ -17,6 +17,7 @@ function AddonSettingsSaveButton({ setGetSettings, settingsObj, user, addonname 
 		.then(response => response.json())
 		.then(data => {
 			console.log('Succes: ', data);
+
 		})
 		.catch((error) => {
 			console.log('Error', error);
@@ -27,7 +28,6 @@ function AddonSettingsSaveButton({ setGetSettings, settingsObj, user, addonname 
         <>
             <Button className="save-button"
 				onClick={() => {
-				// firebase PUT call
 				setTimeout(() => {
 					putSettings().then(setGetSettings(false));
 				}, 1000)
