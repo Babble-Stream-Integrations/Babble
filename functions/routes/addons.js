@@ -33,3 +33,5 @@ router.post('/raffle/start', async(req, res) => {
 		}
 	}
 });
+
+module.exports = router;
