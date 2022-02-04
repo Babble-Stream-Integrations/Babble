@@ -11,7 +11,6 @@ import AddonSettingsSaveButton from './AddonSettingsSaveButton.js';
 
 
 function AddonSettingsContent() {
-	const [loading, isLoading] = useState(false);
 	const [getSettings, setGetSettings] = useState(false);
 	const [settingsObj, setSettingsObj] = useState({});
 	const [retrievedData, setRetrievedData] = useState(null);
@@ -29,14 +28,14 @@ function AddonSettingsContent() {
 			})
 			.then(response => response.json())
 			.then(data => {
-				console.log('Succes: ', data);
+				// console.log('Succes: ', data);
 				setRetrievedData(data);
 			})
 			.catch((error) => {
 				console.log('Error', error);
 			})
 		}
-		fetchsettingsdata().then(() => {isLoading(true)})
+		fetchsettingsdata();
 	}, [])
 
 	let currentaddonsetting = getCreateSettings(retrievedData, getSettings, settingsObj, setSettingsObj);
@@ -59,7 +58,7 @@ function AddonSettingsContent() {
 					})}
 
 					<Row className="setting-save-button">
-						<AddonSettingsSaveButton settingsObj={settingsObj} setGetSettings={setGetSettings}/>
+						<AddonSettingsSaveButton settingsObj={settingsObj} setGetSettings={setGetSettings} user={user} addonname={addonname} />
 					</Row>
 				</Card.Body>
 			</Card>

@@ -7,14 +7,14 @@ import './AddonSettings.css'
 function AddonSettingsOption1({ title, initialValue, getSettings, setSettingsObj}) {
 
 	const [smallInputValue, setSmallInputValue] = useState(initialValue)
+	// console.log(typeof(smallInputValue))
+
 
 	useEffect(() => {
-		if (getSettings === true) {
 			// console.log(settingsArFunc)
 			// setSettingsObj(settingsObj[title] = smallInputValue);
-			setSettingsObj(prevSettingsObj => ({...prevSettingsObj, [title] : smallInputValue}))
-		}
-	}, [getSettings])
+			setSettingsObj(prevSettingsObj => ({...prevSettingsObj, [title] : Number(smallInputValue)}))
+	}, [smallInputValue])
 
     return (
         <>

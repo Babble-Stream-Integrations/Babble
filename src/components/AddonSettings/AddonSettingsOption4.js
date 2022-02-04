@@ -10,12 +10,10 @@ function AddonSettingsOption4({ title, initialValue, getSettings, setSettingsObj
 	// console.log(largeInputValue)
 
 	useEffect(() => {
-		if (getSettings === true) {
-			// console.log(settingsArFunc)
-			// setSettingsObj(settingsObj[title] = smallInputValue);
-			setSettingsObj(prevSettingsObj => ({...prevSettingsObj, [title] : largeInputValue}))
-		}
-	}, [getSettings])
+		// console.log(settingsArFunc)
+		// setSettingsObj(settingsObj[title] = smallInputValue);
+		setSettingsObj(prevSettingsObj => ({...prevSettingsObj, [title] : largeInputValue}))
+	}, [largeInputValue])
 
     return (
         <>

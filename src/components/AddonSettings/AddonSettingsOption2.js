@@ -8,13 +8,11 @@ function AddonSettingsOption2({ title, initialValue, getSettings, setSettingsObj
 
 	const [show, setShow] = useState(initialValue);
 	const [switchValue, setSwitchValue] = useState(initialValue);
-	// console.log(switchValue)
+	// console.log(typeof(switchValue))
 
 	useEffect(() => {
-		if (getSettings === true) {
-			setSettingsObj(prevSettingsObj => ({...prevSettingsObj, [title] : switchValue}))
-		}
-	}, [getSettings])
+		setSettingsObj(prevSettingsObj => ({...prevSettingsObj, [title] : switchValue}))
+	}, [switchValue])
 
     return (
         <>
