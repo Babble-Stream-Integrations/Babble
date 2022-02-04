@@ -8,11 +8,11 @@ function RaffleSettingsAuthorizeBtn() {
 	console.log('Button pressed!');
 	const auth = async () => {
 		let data = {
-			duration: 1,
-			enterMessage: '!enter'
+			user: 'EBSnlWXow3YeFaWxokmnXIijgkv3',
+			addon: 'MyRaffleAddon1'
 		}
-		fetch('babble-d6ef3/europe-west1/app/api/v1/users/EBSnlWXow3YeFaWxokmnXIijgkv3/addons/MyRaffleAddon2/settings', {
-			method: 'PUT',
+		fetch('babble-d6ef3/europe-west1/app/api/v1/raffle/start', {
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -29,17 +29,15 @@ function RaffleSettingsAuthorizeBtn() {
 
 	const auth2 = async () => {
 		let data = {
-			type: 'raffle',
-			platform: 'youtube',
-			settings: {
-				duration: 1
-			}
+			duration: 1,
+			enterMessage: '!join'
 		}
-		fetch('babble-d6ef3/europe-west1/app/api/v1/users/EBSnlWXow3YeFaWxokmnXIijgkv3/addons/MyRaffleAddon3', {
-			method: 'DELETE',
+		fetch('babble-d6ef3/europe-west1/app/api/v1/users/EBSnlWXow3YeFaWxokmnXIijgkv3/addons/MyRaffleAddon3/settings', {
+			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
-			}
+			},
+			body: JSON.stringify(data)
 		})
 		.then(response => response.json())
 		.then(data => {
@@ -51,7 +49,7 @@ function RaffleSettingsAuthorizeBtn() {
 	}
 
 	const auth3 = async () => {
-		fetch('babble-d6ef3/europe-west1/app/api/v1/users/EBSnlWXow3YeFaWxokmnXIijgkv3/addons/MyRaffleAddon1', {
+		fetch('babble-d6ef3/europe-west1/app/api/v1/users/EBSnlWXow3YeFaWxokmnXIijgkv3/addons/MyRaffleAddon1/settings', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',

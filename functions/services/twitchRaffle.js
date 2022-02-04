@@ -3,18 +3,23 @@ const tmi = require('tmi.js');
 const fs = require('fs');
 const qs = require('qs')
 const twitchAuth = require('./twitchAuth');
+const { initializeApp, getApps, getApp } = require('firebase-admin/app');
+const { getFirestore } = require('firebase-admin/firestore');
+
+getApps().length === 0 ? initializeApp() : getApp();
+const db = getFirestore();
 
 const twitchRaffle = {};
 
-twitchRaffle.startRaffle = async() => {
+twitchRaffle.startRaffle = async(data, accessToken) => {
 	console.log('Start Twitch Raffle');
-	
+
 	let userName = process.env.TBOT_NAME
 	let userPassword = process.env.TBOT_TOKEN
 
 	axios.get('https://api.twitch.tv/helix/users', {
 		headers: {
-			Authorization : 'Bearer ' + process.env.TWITCH_ACCESS_TOKEN,
+			Authorization : 'Bearer ' + accessToken,
 			'Client-Id' : process.env.TR_CLIENTID
 		}
 	}).then(response => {
@@ -22,7 +27,7 @@ twitchRaffle.startRaffle = async() => {
 		userID = response.data.data[0].id;
 		if (data.myAccount.at(-1) === '1') {
 			userName = response.data.data[0].login;
-			userPassword = 'oauth:' + process.env.TWITCH_ACCESS_TOKEN
+			userPassword = 'oauth:' + accessToken;
 		}
 
 		const client = new tmi.Client({
@@ -36,18 +41,9 @@ twitchRaffle.startRaffle = async() => {
 			channels: [ response.data.data[0].login ]
 		});
 
+		client.connect().then(() => {client.say(userChannel, 'Raffle started! Type !join to enter')});
+
 		let raffleUsersEntered = [];
-		let noDefaults = false;
-
-		client.connect().then(() => {
-			if (Object.keys(data).length === 1) {
-				client.say(userChannel, 'Please enter default values in the Babble editor first');
-				noDefaults = true;
-			} else {
-				client.say(userChannel, 'Raffle started! Type !join to enter');
-			}
-		});
-
 
 		client.on('message', (channel, tags, message, self) => {
 			// Ignore echoed messages.
@@ -73,49 +69,29 @@ twitchRaffle.startRaffle = async() => {
 	.catch(error => {
 		console.log(error.message)
 		console.log(error.response.status);
-		if (error.response.status === 401) {
-			if (fs.existsSync('./twitchToken.txt')) {
-				let refreshToken;
-				try {
-					refreshToken = fs.readFileSync('./twitchToken.txt', 'utf8')
-					console.log(data)
-				} catch (err) {
-					console.error(err)
-				}
-
-				axios({
-					method: 'post',
-					url: 'https://id.twitch.tv/oauth2/token',
-					data: qs.stringify({
-						grant_type: 'refresh_token',
-						refresh_token: refreshToken,
-						client_id: process.env.TR_CLIENTID,
-						client_secret: process.env.TR_CLIENTSECRET
-					}),
-					headers: {
-						'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
-					}
-				})
-				.then(function (response) {
-					console.log(response.data);
-					process.env.TWITCH_ACCESS_TOKEN = response.data.access_token;
-					twitchRaffle.startRaffle(data);
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
-			} else {
-				axios.get('http://localhost:5001/babble-d6ef3/europe-west1/app/api/raffle/twitch/auth')
-				.then(function (response) {
-					// handle success
-					console.log(response);
-				})
-				.catch(function (error) {
-					// handle error
-					console.log(error);
-				})
-			}
-		}
+		// if (error.response.status === 401) {
+		// 	axios({
+		// 		method: 'post',
+		// 		url: 'https://id.twitch.tv/oauth2/token',
+		// 		data: qs.stringify({
+		// 			grant_type: 'refresh_token',
+		// 			refresh_token: refreshToken,
+		// 			client_id: process.env.TR_CLIENTID,
+		// 			client_secret: process.env.TR_CLIENTSECRET
+		// 		}),
+		// 		headers: {
+		// 			'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+		// 		}
+		// 	})
+		// 	.then(function (response) {
+		// 		console.log(response.data);
+		// 		process.env.TWITCH_ACCESS_TOKEN = response.data.access_token;
+		// 		twitchRaffle.startRaffle(data);
+		// 	})
+		// 	.catch(function (error) {
+		// 		console.log(error);
+		// 	});
+		// }
 	})
 }
 
@@ -133,7 +109,7 @@ function sortUser(data, raffleUsersEntered, displayName, viewerID, streamerID, i
 		// Is the viewer following?
 		axios.get('https://api.twitch.tv/helix/users/follows?from_id='+viewerID+'&to_id='+streamerID+'', {
 			headers: {
-			Authorization : 'Bearer ' + process.env.TWITCH_ACCESS_TOKEN,
+			Authorization : 'Bearer ' + accessToken,
 			'Client-Id' : process.env.TR_CLIENTID
 		}
 		}).then(response => {
@@ -155,7 +131,7 @@ function sortUser(data, raffleUsersEntered, displayName, viewerID, streamerID, i
 	}
 }
 
-const enterRaffle = async(data, raffleUsersEntered, displayName, status) => {
+function enterRaffle(data, raffleUsersEntered, displayName, status) {
 	const followOnly = (data.followOnly.at(-1) === '1') ? true : false;
 	const subOnly = (data.subOnly.at(-1) === '1') ? true : false;
 

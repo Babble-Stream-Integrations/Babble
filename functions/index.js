@@ -13,7 +13,7 @@ app.use(express.urlencoded({
 
 // twitchService.checkChat();
 app.use('/api/v1', userRoutes);
-// app.use('/api/v1', addonRoutes);
+app.use('/api/v1', addonRoutes);
 // app.use('/api/v1', authRoutes);
 
 app.get('/', (req, res) =>
