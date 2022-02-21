@@ -1,17 +1,9 @@
 const { default: axios } = require('axios');
 const tmi = require('tmi.js');
-const fs = require('fs');
-const qs = require('qs')
-const twitchAuth = require('./twitchAuth');
-const { initializeApp, getApps, getApp } = require('firebase-admin/app');
-const { getFirestore } = require('firebase-admin/firestore');
-
-getApps().length === 0 ? initializeApp() : getApp();
-const db = getFirestore();
 
 const twitchRaffle = {};
 
-twitchRaffle.startRaffle = async(data, accessToken) => {
+twitchRaffle.startRaffle = async(data, credentials) => {
 	console.log('Start Twitch Raffle');
 
 	let userName = process.env.TBOT_NAME
@@ -19,15 +11,15 @@ twitchRaffle.startRaffle = async(data, accessToken) => {
 
 	axios.get('https://api.twitch.tv/helix/users', {
 		headers: {
-			Authorization : 'Bearer ' + accessToken,
+			Authorization : 'Bearer ' + credentials.access_token,
 			'Client-Id' : process.env.TR_CLIENTID
 		}
 	}).then(response => {
 		const userChannel = '#' + response.data.data[0].login;
 		userID = response.data.data[0].id;
-		if (data.myAccount.at(-1) === '1') {
+		if (data.useMyAccount) {
 			userName = response.data.data[0].login;
-			userPassword = 'oauth:' + accessToken;
+			userPassword = 'oauth:' + credentials.access_token;
 		}
 
 		const client = new tmi.Client({
@@ -55,16 +47,10 @@ twitchRaffle.startRaffle = async(data, accessToken) => {
 		});
 
 		setTimeout(function() {
-			if (noDefaults == true) {
-				client.disconnect();
-				return;
-			}
-			if (data.announceWinners.at(-1) === '1') {
-				client.say(userChannel, 'The winners of the raffle are: ' +
-				pickWinner(raffleUsersEntered, parseInt(data.winnerAmount), data.duplicateWinners).join(', '))
-			};
+			const winners = pickWinner(raffleUsersEntered, parseInt(data.winnerAmount), data.duplicateWinners);
+			if (data.announceWinners) {client.say(userChannel, 'The winners of the raffle are: ' + winners.join(', '))};
 			client.disconnect();
-		}, (data.duration * (60/4) * 1000));
+		}, (data.duration * 60 * 1000));
 	})
 	.catch(error => {
 		console.log(error.message)
@@ -132,19 +118,16 @@ function sortUser(data, raffleUsersEntered, displayName, viewerID, streamerID, i
 }
 
 function enterRaffle(data, raffleUsersEntered, displayName, status) {
-	const followOnly = (data.followOnly.at(-1) === '1') ? true : false;
-	const subOnly = (data.subOnly.at(-1) === '1') ? true : false;
-
 	if (status === 'Subscriber') {
 		for (let i = 0; i < data.subPrivilege; i++) {
 			raffleUsersEntered.push(displayName);
 		}
-	} else if (status === 'Follower' && !subOnly) {
+	} else if (status === 'Follower' && !data.subOnly) {
 		for (let i = 0; i < data.followPrivilege; i++) {
 			raffleUsersEntered.push(displayName);
 		}
 	} else {
-		if (!subOnly && !followOnly) {
+		if (!data.subOnly && !data.followOnly) {
 			raffleUsersEntered.push(displayName);
 		}
 	}
@@ -158,7 +141,7 @@ function pickWinner(raffleUsersEntered, winnerAmount, duplicateWinners) {
 		if (raffleUsersEntered.length !== 0) {
 			const random = Math.floor(Math.random() * raffleUsersEntered.length);
 			winnerArray.push(raffleUsersEntered[random]);
-			if (duplicateWinners.at(-1) === '0') {
+			if (!duplicateWinners) {
 				let i = 0;
 				const arrayItem = raffleUsersEntered[random];
 				while (i < raffleUsersEntered.length) {

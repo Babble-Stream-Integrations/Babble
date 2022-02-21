@@ -12,24 +12,28 @@ const router = express.Router();
 router.post('/raffle/start', async(req, res) => {
 	const doc = await db.collection('users').doc(req.body.user).collection('addons').doc(req.body.addon).get();
 	if (!doc.exists) {
-		new Error('addon document not found');
+		throw new Error('addon document not found');
+	} else if (doc.data().type != "raffle") {
+		throw new Error('Wrong type of addon: expected raffle addon')
 	} else {
 		if (doc.data().platform === 'youtube') {
 			const tokens = await db.collection('users').doc(req.body.user).collection('tokens').doc('youtube').get();
 			if (!doc.exists) {
-				new Error('youtube tokens not found');
+				throw new Error('youtube tokens not found');
 			} else {
 				youtubeRaffle.startRaffle(doc.data().settings, tokens.data());
+				res.redirect('http://localhost:3000/rafflesettings');
 			}
 		} else if (doc.data().platform === 'twitch') {
 			const tokens = await db.collection('users').doc(req.body.user).collection('tokens').doc('twitch').get();
 			if (!doc.exists) {
-				new Error('twitch tokens not found');
+				throw new Error('twitch tokens not found');
 			} else {
-				twitchRaffle.startRaffle(doc.data().settings, tokens.data().refreshToken);
+				twitchRaffle.startRaffle(doc.data().settings, tokens.data());
+				res.redirect('http://localhost:3000/rafflesettings');
 			}
 		} else {
-			new Error('no platform detected');
+			throw new Error('no platform detected');
 		}
 	}
 });

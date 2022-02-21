@@ -17,6 +17,7 @@ router.get('/youtube/auth', (req, res) => {
 router.get('/youtube/callback', (req, res) => {
 	const {code} = req.query;
 	youtubeAuth.getTokensWithCode(code);
+	res.redirect('http://localhost:3000/rafflesettings');
 });
 
 // Twitch routes
@@ -27,6 +28,7 @@ router.get('/twitch/auth', (req, res) => {
 router.get('/twitch/callback', (req, res) => {
 	const code = req.query;
 	twitchAuth.getTokensWithCode(res, code);
+	res.redirect('http://localhost:3000/rafflesettings');
 });
 
 module.exports = router;

@@ -96,7 +96,7 @@ async function findActiveChat() {
 	console.log('Chat ID found', liveChatID)
 }
 
-youtubeRaffle.startRaffle = async(data, tokens) => {
+youtubeRaffle.startRaffle = async(data, credentials) => {
 	console.log('Start raffle');
 	console.log('data: ', data);
 	await findActiveChat();

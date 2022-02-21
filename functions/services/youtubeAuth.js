@@ -28,14 +28,12 @@ youtubeAuth.getCode = response => {
 		access_type: 'offline',
 		scope
 	})
-	console.log(authUrl);
 	response.send({url: authUrl});
 };
 
 youtubeAuth.getTokensWithCode = async code => {
 	const credentials = await userAuth.getToken(code);
-	console.log('credentials: ', credentials);
-	const response = db.collection('users').doc(testUser).collection('tokens').doc('youtube').set(credentials);
+	const response = db.collection('users').doc(testUser).collection('tokens').doc('youtube').set(credentials.tokens);
 };
 
 module.exports = youtubeAuth;

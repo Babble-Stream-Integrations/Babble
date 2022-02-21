@@ -7,10 +7,10 @@ import './RaffleSettings.css';
 
 function RaffleSettingsAuthorizeBtn() {
 	console.log('Button pressed!');
+	// Buttone 1 authentication
 	const auth = async () => {
-		fetch('babble-d6ef3/europe-west1/app/api/v1/youtube/auth', {
+		fetch('babble-d6ef3/europe-west1/app/api/v1/twitch/auth', {
 			method: 'GET',
-			mode: 'no-cors',
 			headers: {
 				'Content-Type': 'application/json',
 			}
@@ -24,7 +24,7 @@ function RaffleSettingsAuthorizeBtn() {
 			console.log('Error', error);
 		})
 	}
-
+	// Buttone 2 start raffle
 	const auth2 = async () => {
 		const data = {
 			user: 'EBSnlWXow3YeFaWxokmnXIijgkv3',
