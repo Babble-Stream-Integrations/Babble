@@ -28,7 +28,7 @@ function RaffleSettingsAuthorizeBtn() {
 	const auth2 = async () => {
 		const data = {
 			user: 'EBSnlWXow3YeFaWxokmnXIijgkv3',
-			addon: 'MyRaffleAddon1'
+			addon: 'MyRaffleAddon2'
 		}
 		fetch('babble-d6ef3/europe-west1/app/api/v1/raffle/start', {
 			method: 'POST',
@@ -65,13 +65,13 @@ function RaffleSettingsAuthorizeBtn() {
     return (
         <>
             <Button className="authorize-button" onClick={() =>{auth()}}>
-                AUTHORIZE
+                Authorize
             </Button>
 			<Button className="authorize-button" onClick={() =>{auth2()}}>
-                AUTHORIZE
+                Start Raffle
             </Button>
 			<Button className="authorize-button" onClick={() =>{auth3()}}>
-                AUTHORIZE
+                kut anton
             </Button>
         </>
     )

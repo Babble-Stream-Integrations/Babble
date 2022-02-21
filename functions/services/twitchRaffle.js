@@ -33,7 +33,7 @@ twitchRaffle.startRaffle = async(data, credentials) => {
 			channels: [ response.data.data[0].login ]
 		});
 
-		client.connect().then(() => {client.say(userChannel, 'Raffle started! Type !join to enter')});
+		client.connect().then(() => {client.say(userChannel, 'Raffle started! Type ' + data.enterMessage + ' to enter')});
 
 		let raffleUsersEntered = [];
 
