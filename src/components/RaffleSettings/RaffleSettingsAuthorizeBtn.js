@@ -9,7 +9,7 @@ function RaffleSettingsAuthorizeBtn() {
 	console.log('Button pressed!');
 	// Buttone 1 authentication
 	const auth = async () => {
-		fetch('babble-d6ef3/europe-west1/app/api/v1/twitch/auth', {
+		fetch('babble-d6ef3/europe-west1/app/api/v1/twitch/auth?addon=autoStreamTitle', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -47,11 +47,16 @@ function RaffleSettingsAuthorizeBtn() {
 	}
 
 	const auth3 = async () => {
-		fetch('babble-d6ef3/europe-west1/app/api/v1/users/EBSnlWXow3YeFaWxokmnXIijgkv3/addons/MyRaffleAddon1/settings', {
-			method: 'GET',
+		const data = {
+			user: 'EBSnlWXow3YeFaWxokmnXIijgkv3',
+			addon: 'AutoTitleTurtle'
+		}
+		fetch('babble-d6ef3/europe-west1/app/api/v1/autotitle/start', {
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-			}
+			},
+			body: JSON.stringify(data)
 		})
 		.then(response => response.json())
 		.then(data => {
@@ -64,14 +69,14 @@ function RaffleSettingsAuthorizeBtn() {
 
     return (
         <>
-            <Button className="authorize-button" onClick={() =>{auth()}}>
+            {/* <Button className="authorize-button" onClick={() =>{auth()}}>
                 Authorize
             </Button>
 			<Button className="authorize-button" onClick={() =>{auth2()}}>
                 Start Raffle
-            </Button>
+            </Button> */}
 			<Button className="authorize-button" onClick={() =>{auth3()}}>
-                kut anton
+                Change Channel Info test
             </Button>
         </>
     )
