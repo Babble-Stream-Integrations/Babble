@@ -28,10 +28,9 @@ async function getAchievementData() {
     }
   }
 
-async function getTotalAchievments() {
+async function getTotalAchievements() {
     let achievedAchievements = 0;
     const achievements = await getAchievementData()
-    const currentGame = (await getCurrentGameName())[0]
 
     for (let i = 0; i < achievements.length; i++) {
         const achievedBoolean = achievements[i].achieved
@@ -42,7 +41,15 @@ async function getTotalAchievments() {
     }
 
     const totalAchievements = achievements.length
-    console.log(`You have ${achievedAchievements} of the ${totalAchievements} achievements for the game ${currentGame}`)
+    console.log(totalAchievements)
+    return [achievedAchievements, totalAchievements]
 }
 
-getTotalAchievments()
+async function getStreamTitle() {
+    const currentGame = (await getCurrentGameName())[0]
+    const [achievedAchievements, totalAchievements] = await getTotalAchievements()
+
+    return ` | ${currentGame} | ${achievedAchievements} / ${totalAchievements}`
+}
+
+module.exports = {getCurrentGameName, getStreamTitle}

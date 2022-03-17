@@ -1,13 +1,16 @@
 const { default: axios } = require('axios');
 const dotenv = require('dotenv').config();
 
+//imports current game name and stream title
+const steamApi = require('./steamApi')
+
 const twitchAutoTitle = {};
 
 twitchAutoTitle.changeChannelInfo = async (credentials) => {
 	const accessToken = credentials.access_token;
 	const id = await getStreamerId(accessToken);
-	const title = 'Hello handsome ;)'
-	const game = 'Counter-Strike: Global Offensive'
+	const title = 'Hello handsome ;)' + steamApi.getStreamTitle();
+	const game = steamApi.getCurrentGameName();
 	changeTitle(accessToken, id, title);
 
 	const gameId = await getGameId(accessToken, game)
