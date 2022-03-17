@@ -2,7 +2,6 @@ const express = require('express');
 const firestore = require('../services/firestore');
 const { initializeApp, getApps, getApp } = require('firebase-admin/app');
 const { getFirestore } = require('firebase-admin/firestore');
-const { UserRefreshClient } = require('google-auth-library');
 
 getApps().length === 0 ? initializeApp() : getApp();
 const db = getFirestore();

@@ -1,18 +1,37 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
+import { useNavigate } from "react-router-dom";
 
 //style
 import './RaffleSettings.css';
 
 function RaffleSettingsAuthorizeBtn() {
 	console.log('Button pressed!');
+	// Buttone 1 authentication
 	const auth = async () => {
-		let data = {
-			duration: 1,
-			enterMessage: '!enter'
+		fetch('babble-d6ef3/europe-west1/app/api/v1/youtube/auth', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			}
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log('Succes: ', data);
+			window.location.href = data.url;
+		})
+		.catch((error) => {
+			console.log('Error', error);
+		})
+	}
+	// Buttone 2 start raffle
+	const auth2 = async () => {
+		const data = {
+			user: 'EBSnlWXow3YeFaWxokmnXIijgkv3',
+			addon: 'MyRaffleAddon2'
 		}
-		fetch('babble-d6ef3/europe-west1/app/api/v1/users/EBSnlWXow3YeFaWxokmnXIijgkv3/addons/MyRaffleAddon2/settings', {
-			method: 'PUT',
+		fetch('babble-d6ef3/europe-west1/app/api/v1/raffle/start', {
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -27,35 +46,17 @@ function RaffleSettingsAuthorizeBtn() {
 		})
 	}
 
-	const auth2 = async () => {
-		let data = {
-			type: 'raffle',
-			platform: 'youtube',
-			settings: {
-				duration: 1
-			}
-		}
-		fetch('babble-d6ef3/europe-west1/app/api/v1/users/EBSnlWXow3YeFaWxokmnXIijgkv3/addons/MyRaffleAddon3', {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-			}
-		})
-		.then(response => response.json())
-		.then(data => {
-			console.log('Succes: ', data);
-		})
-		.catch((error) => {
-			console.log('Error', error);
-		})
-	}
-
 	const auth3 = async () => {
-		fetch('babble-d6ef3/europe-west1/app/api/v1/users/EBSnlWXow3YeFaWxokmnXIijgkv3/addons/MyRaffleAddon1', {
-			method: 'GET',
+		const data = {
+			user: 'EBSnlWXow3YeFaWxokmnXIijgkv3',
+			addon: 'AutoTitleTurtle'
+		}
+		fetch('babble-d6ef3/europe-west1/app/api/v1/autotitle/start', {
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-			}
+			},
+			body: JSON.stringify(data)
 		})
 		.then(response => response.json())
 		.then(data => {
@@ -69,13 +70,13 @@ function RaffleSettingsAuthorizeBtn() {
     return (
         <>
             <Button className="authorize-button" onClick={() =>{auth()}}>
-                AUTHORIZE
+                Authorize
             </Button>
 			<Button className="authorize-button" onClick={() =>{auth2()}}>
-                AUTHORIZE
+                Start Raffle
             </Button>
 			<Button className="authorize-button" onClick={() =>{auth3()}}>
-                AUTHORIZE
+                Test
             </Button>
         </>
     )
