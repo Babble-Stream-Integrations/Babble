@@ -8,7 +8,7 @@ const twitchRaffle = {};
 
 twitchRaffle.startRaffle = async() => {
 	console.log('Start Twitch Raffle');
-	
+
 	let userName = process.env.TBOT_NAME
 	let userPassword = process.env.TBOT_TOKEN
 
