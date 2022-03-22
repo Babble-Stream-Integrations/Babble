@@ -42,15 +42,12 @@ router.get('raffle/listen', (req, res) => {
   	};
   	clients.push(client);
 
-  	console.log(`Client connected: ${id}`);
-
 	req.on("close", () => {
-		console.log(`Client disconnected: ${id}`);
 		clients = clients.filter((client) => client.id !== id);
 	});
 
 	clients.forEach((client) => {
-    	client.res.write("event: start");
+    	client.res.write("event: start /n/n");
 	});
 });
 

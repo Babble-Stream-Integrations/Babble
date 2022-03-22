@@ -66,6 +66,7 @@ twitchRaffle.startRaffle = async() => {
 			if (data.announceWinners.at(-1) === '1') {
 				client.say(userChannel, 'The winners of the raffle are: ' +
 				pickWinner(raffleUsersEntered, parseInt(data.winnerAmount), data.duplicateWinners).join(', '))
+				//raffle end
 			};
 			client.disconnect();
 		}, (data.duration * (60/4) * 1000));
