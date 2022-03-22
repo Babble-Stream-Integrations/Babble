@@ -6,17 +6,33 @@ const steamApi = require('./steamApi')
 
 const twitchAutoTitle = {};
 
-twitchAutoTitle.changeChannelInfo = async (credentials) => {
-	const accessToken = credentials.access_token;
-	const id = await getStreamerId(accessToken);
-	const title = 'Hello handsome ;)' + steamApi.getStreamTitle();
-	const game = steamApi.getCurrentGameName();
-	changeTitle(accessToken, id, title);
+twitchAutoTitle.changeChannelInfo = async() => {
+	// const accessToken = credentials.access_token;
+	// const id = await getStreamerId(accessToken);
+	const title = 'Hello handsome ;)' + (await steamApi.getStreamTitle());
+	let game = (await steamApi.getCurrentGameName())[0];
+	callSteamApiFunctions(game)
+	// changeTitle(accessToken, id, title);
 
-	const gameId = await getGameId(accessToken, game)
-	if (gameId) {
-		changeGame(accessToken, id, gameId);
+	// const gameId = await getGameId(accessToken, game)
+	// if (gameId) {
+	// 	changeGame(accessToken, id, gameId);
+	// }
+
+	
+}
+
+async function callSteamApiFunctions(game) {
+	setTimeout(function(){}, 2000)
+	let newGameName = (await steamApi.getCurrentGameName())[0];
+
+	if (newGameName != game) {
+		console.log("nieuwe game")
 	}
+	else {
+		console.log("niet nieuwe game")
+	}
+	return callSteamApiFunctions(newGameName)
 }
 
 async function getStreamerId(accessToken) {
@@ -77,5 +93,7 @@ async function changeGame(accessToken, id, gameId) {
 		console.log(error.response);
 	}
 }
+
+twitchAutoTitle.changeChannelInfo()
 
 module.exports = twitchAutoTitle;

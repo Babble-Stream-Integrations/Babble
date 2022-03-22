@@ -41,7 +41,6 @@ async function getTotalAchievements() {
     }
 
     const totalAchievements = achievements.length
-    console.log(totalAchievements)
     return [achievedAchievements, totalAchievements]
 }
 
