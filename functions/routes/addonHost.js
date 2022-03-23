@@ -47,7 +47,8 @@ router.get('raffle/listen', (req, res) => {
 	});
 
 	clients.forEach((client) => {
-    	client.res.write("event: start /n/n");
+    	client.res.write("event: start /n");
+		client.res.write("data: test /n/n");
 	});
 });
 
