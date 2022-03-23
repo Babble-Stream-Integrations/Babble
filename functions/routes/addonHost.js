@@ -21,14 +21,12 @@ router.post('/raffle/:USER/:NAME', async (req, res) => {
 	  res.send('succes')
 });
 
-router.get('/raffle', async (req, res) => {res.sendFile(path.join(__dirname, '/raffleTest.html'))});
-
 router.get('/raffle/:USER/:ID', async (req, res) => {
 	const settings = await db.collection('users').doc(req.params.USER).collection('addons').where('uniqueString', '==', req.params.ID).get();
 	res.send(settings.docs.map(doc => doc.data()));
 });
 
-router.get('raffle/listen', (req, res) => {
+router.get('/raffle/listen', (req, res) => {
 	const headers = {
 		"Content-Type": "text/event-stream",
 		Connection: "keep-alive",
@@ -44,12 +42,22 @@ router.get('raffle/listen', (req, res) => {
 
 	req.on("close", () => {
 		clients = clients.filter((client) => client.id !== id);
+		console.log("fuck");
 	});
+	setInterval(test, 3000);
 
-	clients.forEach((client) => {
-    	client.res.write("event: start /n");
-		client.res.write("data: test /n/n");
-	});
+	function test() {
+		clients.forEach((client) => {
+    	client.res.write("event: end /n");		
+		client.res.write('data: ["hoi", "test"] /n/n');
+		});
+	}
+});
+
+router.get('/raffle', async (req, res) => {res.sendFile(path.join(__dirname, '/index.html'))});
+router.get('/test/js', async (req, res) => {res.sendFile(path.join(__dirname, '/test.js'))});
+router.get('/test/value/:ID', async (req, res) => {
+	res.send({result: req.params.ID});
 });
 
 
