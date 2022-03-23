@@ -29,7 +29,8 @@ router.get('/raffle/:USER/:ID', async (req, res) => {
 router.get('/raffle/listen', (req, res) => {
 	const headers = {
 		"Content-Type": "text/event-stream",
-		Connection: "keep-alive",
+		"Connection": "keep-alive",
+		"Cache-Control": "no-cache"
 	};
 	res.writeHead(200, headers);
 
@@ -48,7 +49,7 @@ router.get('/raffle/listen', (req, res) => {
 
 	function test() {
 		clients.forEach((client) => {
-    	client.res.write("event: end /n");		
+    	client.res.write("event: end /n");
 		client.res.write('data: ["hoi", "test"] /n/n');
 		});
 	}
