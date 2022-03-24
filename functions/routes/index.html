@@ -105,14 +105,14 @@
 			rotate: -360,
 			duration: 3000
 		}, 13000)
-		
+
 		const startRaffle = () => {
 			fullAnimation.play();
 			return 'Done';
 		};
 
 		//Leg connectie Back-end
-		const evtSource = new EventSource("http://localhost:5001/babble-d6ef3/europe-west1/app/api/v1/raffle/listen/5", { withCredentials: true } );
+		const evtSource = new EventSource("http://localhost:5001/babble-d6ef3/europe-west1/app/api/v1/raffle/listen", { withCredentials: true } );
 
 		const dummyarray = ['Osjesleben', 'Blamant'];
 
