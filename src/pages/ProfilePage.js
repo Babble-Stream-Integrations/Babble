@@ -14,7 +14,7 @@ function ProfilePage(props) {
                         <ProfilePageText />
                     </Col>
                     <Col md="6" className="profile-page-content">
-                        <ProfilePageContent userName = {props.userName} email = {props.email} profilePicture = {props.profilePicture}  />
+                        <ProfilePageContent userName={props.userName} email={props.email} profilePicture={props.profilePicture}  />
                     </Col>
                 </Row>
             </Container>

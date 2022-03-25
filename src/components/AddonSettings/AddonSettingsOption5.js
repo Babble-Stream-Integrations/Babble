@@ -1,18 +1,18 @@
 import React from 'react'
 import { Row, Form } from 'react-bootstrap'
 
-function AddonSettingsOption5() {
+function AddonSettingsOption5({ title, initialValue, getSettings }) {
     return (
         <>
             <Row>
-                <div className="addon-settings-title-text">
-                    SETTING OPTION #4
+                <div className="addon-settings-title-text uni-allcaps">
+                    {title}
                 </div>
             </Row>
             <Row>
                 <Form className="addon-settings-margin">
                     <Form.Check className='addon-settings-title-subtext'
-                        enabled
+                        enabled='true'
                         type='checkbox'
                         label='Test'
                     />
@@ -20,6 +20,10 @@ function AddonSettingsOption5() {
             </Row>
         </>
     )
+}
+
+AddonSettingsOption5.defaultProps = {
+	title: "Checkbox setting"
 }
 
 export default AddonSettingsOption5

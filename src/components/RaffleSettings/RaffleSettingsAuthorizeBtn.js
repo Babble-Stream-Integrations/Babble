@@ -1,9 +1,9 @@
-import React from 'react'
-import { Button } from 'react-bootstrap'
+import React from "react";
+import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 //style
-import './RaffleSettings.css';
+import "./RaffleSettings.css";
 
 function RaffleSettingsAuthorizeBtn() {
 	console.log('Button pressed!');
@@ -80,6 +80,43 @@ function RaffleSettingsAuthorizeBtn() {
             </Button>
         </>
     )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Succes: ", data);
+      })
+      .catch((error) => {
+        console.log("Error", error);
+      });
+  };
+
+  return (
+    <>
+      <Button
+        className="authorize-button"
+        onClick={() => {
+          auth();
+        }}
+      >
+        Authorize
+      </Button>
+      <Button
+        className="authorize-button"
+        onClick={() => {
+          auth2();
+        }}
+      >
+        Start Raffle
+      </Button>
+      <Button
+        className="authorize-button"
+        onClick={() => {
+          auth3();
+        }}
+      >
+        anton
+      </Button>
+    </>
+  );
 }
 
-export default RaffleSettingsAuthorizeBtn
+export default RaffleSettingsAuthorizeBtn;

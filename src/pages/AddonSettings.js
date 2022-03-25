@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 
-//components
+// Helpers
+// import { useDataFetch } from '../auth/firebase';
+
+// Components
 import AddonSettingsContent from "../components/addonSettings/AddonSettingsContent";
 import AddonSettingsText from "../components/addonSettings/AddonSettingsText";
 import { Container, Row, Col } from 'react-bootstrap';
 
 
+
 function AddonSettings() {
-    return (
-        <>
+	return (
+		<>
             <Container className="profile-max-width title-font-size">
                 <Row className="page-row-positioning">
                     <Col md="3" className="flex-center">
@@ -20,6 +24,7 @@ function AddonSettings() {
                 </Row>
             </Container>
         </>
+
     )
 }
 

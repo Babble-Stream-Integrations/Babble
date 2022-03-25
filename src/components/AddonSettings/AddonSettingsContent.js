@@ -1,51 +1,69 @@
-import React from 'react'
-import { Card, Image, Row, Col } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Card, Row, Col } from 'react-bootstrap'
 
+// Helpers
+import { getDynamicGrid } from '../../helpers/getDynamicGrid.js';
+import { getCreateSettings } from '../../helpers/getCreateSettings';
 //components
-import AddonSettingsOption1 from '../addonSettings/AddonSettingsOption1.js';
-import AddonSettingsOption2 from '../addonSettings/AddonSettingsOption2.js';
-import AddonSettingsOption3 from '../addonSettings/AddonSettingsOption3.js';
-import AddonSettingsOption4 from '../addonSettings/AddonSettingsOption4.js';
-import AddonSettingsOption5 from '../addonSettings/AddonSettingsOption5.js';
 import AddonSettingsSaveButton from './AddonSettingsSaveButton.js';
 
 //style
 
 
-function ProfilePageContent() {
+function AddonSettingsContent() {
+	const [getSettings, setGetSettings] = useState(false);
+	const [settingsObj, setSettingsObj] = useState({});
+	const [retrievedData, setRetrievedData] = useState(null);
 
-    return (
-        <>
-            <Card className="addon-settings-card">
-                <Card.Body className="addon-settings-card-body">
-                    <Row className="setting-option-component-margin-row">
-                        <Col className="setting-option-component-margin-col">
-                            <AddonSettingsOption1 />
-                        </Col>
-                        <Col className="setting-option-component-margin-col">
-                            <AddonSettingsOption2 />
-                        </Col>
-                    </Row>
-                    <Row className="setting-option-component-margin-row">
-                        <Col className="setting-option-component-margin-col">
-                            <AddonSettingsOption3 />
-                        </Col>
-                        <Col className="setting-option-component-margin-col">
-                            <AddonSettingsOption4 />
-                        </Col>
-                    </Row>
-                    <Row className="setting-option-component-margin-row">
-                        <Col className="setting-option-component-margin-col">
-                            <AddonSettingsOption5 />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <AddonSettingsSaveButton />
-                    </Row>
-                </Card.Body>
-            </Card>
-        </>
-    )
+	const user = "EBSnlWXow3YeFaWxokmnXIijgkv3";
+	const addonname = "MyRaffleAddon1";
+
+	useEffect(() => {
+		const fetchsettingsdata = async () => {
+			fetch(`/babble-d6ef3/europe-west1/app/api/v1/users/${user}/addons/${addonname}/settings`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+			})
+			.then(response => response.json())
+			.then(data => {
+				// console.log('Succes: ', data);
+				setRetrievedData(data);
+			})
+			.catch((error) => {
+				console.log('Error', error);
+			})
+		}
+		fetchsettingsdata();
+	}, [])
+
+	let currentaddonsetting = getCreateSettings(retrievedData, getSettings, settingsObj, setSettingsObj);
+	let rows = getDynamicGrid(currentaddonsetting, 2);
+
+	return (
+		<>
+			<Card className="addon-settings-card">
+				<Card.Body className="addon-settings-card-body">
+					{Object.keys(rows).map(row => {
+						return (
+							<Row className="setting-option-component-margin-row" key={row}>
+								{rows[row].map(item => {
+									return (
+										<Col className="setting-option-component-margin-col">{item}</Col>
+									)
+								})}
+							</Row>
+						);
+					})}
+
+					<Row className="setting-save-button">
+						<AddonSettingsSaveButton settingsObj={settingsObj} setGetSettings={setGetSettings} user={user} addonname={addonname} />
+					</Row>
+				</Card.Body>
+			</Card>
+		</>
+	)
 }
 
-export default ProfilePageContent
+export default AddonSettingsContent
