@@ -15,15 +15,35 @@ const clientID = process.env.TR_CLIENTID;
 const clientSecret = process.env.TR_CLIENTSECRET;
 const redirectURL = process.env.TR_REDIRECTURI;
 const state = process.env.TR_STATE;
-const scopes = process.env.TR_SCOPES;
 
-twitchAuth.getCode = response => {
+async function getPrevScopes() {
+	const scopesRef = db.collection('users').doc(testUser).collection('tokens').doc('twitch');
+	const doc = await scopesRef.get();
+	if (!doc.exists) {
+		console.log('No scopes found!');
+		return ''
+	} else {
+		console.log('Document data:', doc.data());
+		if (!('scope' in doc.data())) {
+			return ''
+		}
+		return doc.data().scope.join(' ');
+	}
+}
+
+async function getNextScope(scope) {
+	const doc = await db.collection('addons').doc(scope).get();
+	if (!doc.exists) {new Error('Wrong addon specified!')};
+	return doc.data().scope
+}
+
+twitchAuth.getCode = async (response, scope) => {
 	const authUrl = 'https://id.twitch.tv/oauth2/authorize' +
 		'?response_type=' + 'code' +
 		'&force_verify=' + 'true' +
 		'&client_id=' + clientID +
 		'&redirect_uri=' + redirectURL +
-		'&scope=' + scopes +
+		'&scope=' + (await getPrevScopes() + ' ' + await getNextScope(scope)) +
 		'&state=' + state + ''
 	response.send({url: authUrl});
 }

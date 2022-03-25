@@ -1,5 +1,6 @@
 const { default: axios } = require('axios');
 const tmi = require('tmi.js');
+const dotenv = require('dotenv').config();
 
 const twitchRaffle = {};
 
