@@ -4,6 +4,7 @@ const express = require('express');
 const userRoutes = require('./routes/users');
 const addonRoutes = require('./routes/addons');
 const authRoutes = require('./routes/auth');
+const layoutRoutes = require('./routes/layout');
 
 const app = express();
 
