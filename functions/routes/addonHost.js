@@ -18,7 +18,7 @@ router.post('/raffle/:USER/:NAME', async (req, res) => {
 
 	  // Add a new document in collection "cities" with ID 'LA'
 	  const fireres = await db.collection('users').doc(req.params.USER).collection('addons').doc(req.params.NAME).set(data);
-	  res.send('succes')
+	  res.send('succes');
 });
 
 router.get('/raffle/:USER/:ID', async (req, res) => {
@@ -29,8 +29,7 @@ router.get('/raffle/:USER/:ID', async (req, res) => {
 router.get('/raffle/listen', (req, res) => {
 	const headers = {
 		"Content-Type": "text/event-stream",
-		"Connection": "keep-alive",
-		"Cache-Control": "no-cache"
+		Connection: "keep-alive",
 	};
 	res.writeHead(200, headers);
 
@@ -45,12 +44,12 @@ router.get('/raffle/listen', (req, res) => {
 		clients = clients.filter((client) => client.id !== id);
 		console.log("fuck");
 	});
-	setInterval(test, 3000);
+	setInterval(test, 30000);
 
 	function test() {
 		clients.forEach((client) => {
-			client.res.write("event: end /n");
-			client.res.write('data: ["hoi", "test"] /n/n');
+			client.res.write("event: end\n");		
+			client.res.write('data: ["hoi", "test"]\n\n');
 		});
 	}
 });

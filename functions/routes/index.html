@@ -139,12 +139,13 @@
 			const data = JSON.parse(event.data);
 			console.log(data);
 			console.log("test");
+			RaffleResults(data);
 		});
 
-		evtSource.onmessage = function(event) {
-			let data = event.data;
-			console.log(data)
-		}
+		// evtSource.onmessage = function(event) {
+		// 	let data = event.data;
+		// 	console.log(data);
+		// }
 
 	</script>
 </html>
