@@ -1,3 +1,5 @@
 // const Sse = {};
 
-// Sse.
+// Sse.clients = [];
+
+// Sse.connect = async()
