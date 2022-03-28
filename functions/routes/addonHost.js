@@ -26,39 +26,36 @@ router.get('/raffle/:USER/:ID', async (req, res) => {
 	res.send(settings.docs.map(doc => doc.data()));
 });
 
-router.get('/raffle/listen', (req, res) => {
-	const headers = {
-		"Content-Type": "text/event-stream",
-		Connection: "keep-alive",
-	};
-	res.writeHead(200, headers);
+// router.get('/raffle/listen', (req, res) => {
+// 	const headers = {
+// 		"Content-Type": "text/event-stream",
+// 		Connection: "keep-alive",
+// 	};
+// 	res.writeHead(200, headers);
 
-	const id = Date.now();
-  	const client = {
-		id,
-		res,
-  	};
-  	clients.push(client);
+// 	const id = Date.now();
+//   	const client = {
+// 		id,
+// 		res,
+//   	};
+//   	clients.push(client);
 
-	req.on("close", () => {
-		clients = clients.filter((client) => client.id !== id);
-		console.log("fuck");
-	});
-	setInterval(test, 30000);
+// 	req.on("close", () => {
+// 		clients = clients.filter((client) => client.id !== id);
+// 		console.log("fuck");
+// 	});
+// 	setInterval(test, 30000);
 
-	function test() {
-		clients.forEach((client) => {
-			client.res.write("event: end\n");		
-			client.res.write('data: ["hoi", "test"]\n\n');
-		});
-	}
-});
+// 	function test() {
+// 		clients.forEach((client) => {
+// 			client.res.write("event: end\n");
+// 			client.res.write('data: ["hoi", "test"]\n\n');
+// 		});
+// 	}
+// });
 
 router.get('/raffle', async (req, res) => {res.sendFile(path.join(__dirname, '/index.html'))});
-router.get('/test/js', async (req, res) => {res.sendFile(path.join(__dirname, '/test.js'))});
-router.get('/test/value/:ID', async (req, res) => {
-	res.send({result: req.params.ID});
-});
+
 
 
 module.exports = router;
