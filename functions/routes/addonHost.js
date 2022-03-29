@@ -2,29 +2,28 @@ const express = require('express');
 const path = require('path');
 const { getFirestore } = require('firebase-admin/firestore');
 const db = getFirestore();
+const Sse = require('../services/serverSentEvents');
 
 const router = express.Router();
 
-const randomstring = require("randomstring");
+// const randomstring = require("randomstring");
 
-let clients = [];
+// router.post('/raffle/:USER/:NAME', async (req, res) => {
 
-router.post('/raffle/:USER/:NAME', async (req, res) => {
+// 	const data = {
+// 		"uniquestring": randomstring.generate(),
+// 		"test": "blue"
+// 	  };
 
-	const data = {
-		"uniquestring": randomstring.generate(),
-		"test": "blue"
-	  };
+// 	  // Add a new document in collection "cities" with ID 'LA'
+// 	  const fireres = await db.collection('users').doc(req.params.USER).collection('addons').doc(req.params.NAME).set(data);
+// 	  res.send('succes');
+// });
 
-	  // Add a new document in collection "cities" with ID 'LA'
-	  const fireres = await db.collection('users').doc(req.params.USER).collection('addons').doc(req.params.NAME).set(data);
-	  res.send('succes');
-});
-
-router.get('/raffle/:USER/:ID', async (req, res) => {
-	const settings = await db.collection('users').doc(req.params.USER).collection('addons').where('uniqueString', '==', req.params.ID).get();
-	res.send(settings.docs.map(doc => doc.data()));
-});
+// router.get('/raffle/:USER/:ID', async (req, res) => {
+// 	const settings = await db.collection('users').doc(req.params.USER).collection('addons').where('uniqueString', '==', req.params.ID).get();
+// 	res.send(settings.docs.map(doc => doc.data()));
+// });
 
 // router.get('/raffle/listen', (req, res) => {
 // 	const headers = {
@@ -55,7 +54,11 @@ router.get('/raffle/:USER/:ID', async (req, res) => {
 // });
 
 router.get('/raffle', async (req, res) => {res.sendFile(path.join(__dirname, '/index.html'))});
-
+router.get('/raffle/listen', async (req, res) => {
+	id = req.query.id;
+	Sse.connect(id, res);
+	req.on("close", Sse.disconnect(id));
+});
 
 
 module.exports = router;
