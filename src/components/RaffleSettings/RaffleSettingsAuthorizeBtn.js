@@ -9,7 +9,7 @@ function RaffleSettingsAuthorizeBtn() {
 	console.log('Button pressed!');
 	// Buttone 1 authentication
 	const auth = async () => {
-		fetch('babble-d6ef3/europe-west1/app/api/v1/youtube/auth', {
+		fetch('babble-d6ef3/europe-west1/app/api/v1/twitch/auth?=raffle', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
