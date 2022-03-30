@@ -1,11 +1,14 @@
 const { default: axios } = require('axios');
 const tmi = require('tmi.js');
 const dotenv = require('dotenv').config();
+const Sse = require('./serverSentEvents.js');
 
 const twitchRaffle = {};
 
-twitchRaffle.startRaffle = async(data, credentials) => {
+twitchRaffle.startRaffle = async(data, credentials, id) => {
 	console.log('Start Twitch Raffle');
+
+	Sse.start(id, date.now(), data.duration);
 
 	let userName = process.env.TBOT_NAME
 	let userPassword = process.env.TBOT_TOKEN
@@ -51,6 +54,7 @@ twitchRaffle.startRaffle = async(data, credentials) => {
 			//raffle end
 			const winners = pickWinner(raffleUsersEntered, parseInt(data.winnerAmount), data.duplicateWinners);
 			if (data.announceWinners) {client.say(userChannel, 'The winners of the raffle are: ' + winners.join(', '))};
+			Sse.end(id, winners);
 			client.disconnect();
 		}, (data.duration * (60/4) * 1000));
 	})

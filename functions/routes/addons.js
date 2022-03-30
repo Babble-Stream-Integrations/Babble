@@ -31,7 +31,7 @@ router.post('/raffle/start', async(req, res) => {
 			if (!doc.exists) {
 				throw new Error('twitch tokens not found');
 			} else {
-				twitchRaffle.startRaffle(doc.data().settings, tokens.data());
+				twitchRaffle.startRaffle(doc.data().settings, tokens.data(), doc.data().uniqueString);
 				res.redirect('http://localhost:3000/rafflesettings');
 			}
 		} else {

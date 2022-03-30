@@ -7,7 +7,9 @@ Sse.connect = async(id, res) => {
 		id,
 		res,
 	};
+
 	Sse.clients.push(client);
+	// setInterval(function () {client.res.write(":\n\n")}, 1000);
 }
 
 Sse.disconnect = async(id) => {
@@ -31,3 +33,5 @@ Sse.end = async(id, winners) => {
 		}
 	});
 }
+
+module.exports = Sse;
