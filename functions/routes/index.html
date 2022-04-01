@@ -126,7 +126,7 @@
 			}
 			for (let i = 0; i < winnaars.length; i++) {
 				winnerstr = winnerstr + winnaars[i] + "<br>"
-				console.log(winnerstr);
+				// console.log(winnerstr);
 			};
 			x.innerHTML = winnerstr;
 			// startRaffle();
@@ -136,9 +136,9 @@
 		// RaffleResults(dummyarray);
 
 		evtSource.addEventListener("end", (event) => {
-			const data = JSON.parse(event.data);
+			const data = (event.data);
 			console.log(data);
-			console.log("test");
+			// console.log("test");
 			RaffleResults(data);
 		});
 

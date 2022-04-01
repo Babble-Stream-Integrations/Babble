@@ -55,12 +55,6 @@ const router = express.Router();
 
 router.get('/raffle', async (req, res) => {res.sendFile(path.join(__dirname, '/index.html'))});
 router.get('/raffle/listen', async (req, res) => {
-	const headers = {
-		"Content-Type": "text/event-stream",
-		Connection: "keep-alive",
-	};
-	res.writeHead(200, headers);
-	setInterval(function () {res.write(":\n\n");}, 40000);
 	id = req.query.id;
 	Sse.connect(id, res);
 	req.on("close", Sse.disconnect.bind(id));

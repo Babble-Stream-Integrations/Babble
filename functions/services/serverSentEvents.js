@@ -1,15 +1,23 @@
 const Sse = {};
 
+//todo: dictionary van maken
 Sse.clients = [];
 
 Sse.connect = async(id, res) => {
+	const headers = {
+		"Content-Type": "text/event-stream",
+		Connection: "keep-alive",
+	};
+	res.writeHead(200, headers);
+	setInterval(function () {client.res.write("event:end\n"); client.res.write("data:hello\n\n");}, 4000);
+	// setInterval(function () {client.res.write(":\n\n");}, 4000);
+
+
 	const client = {
 		id,
 		res,
 	};
-
 	Sse.clients.push(client);
-	// setInterval(function () {client.res.write(":\n\n")}, 1000);
 }
 
 Sse.disconnect = async(id) => {
