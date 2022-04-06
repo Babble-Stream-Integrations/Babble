@@ -8,6 +8,9 @@ const router = express.Router();
 
 const randomstring = require("randomstring");
 
+router.get('/raffle', async (req, res) => {res.sendFile(path.join(__dirname, '/index.html'))});
+
+// dit is een testroute
 router.post('/raffle/:USER/:NAME', async (req, res) => {
 
 	const data = {
@@ -31,7 +34,7 @@ router.get('/raffle/listen', (req, res) => {
 	};
 	res.writeHead(200, headers);
 
-	const id = Date.now();
+	const id = req.query.id;
   	const client = {
 		id,
 		res,
@@ -51,18 +54,17 @@ router.get('/raffle/listen', (req, res) => {
 	}
 });
 
-router.get('/raffle', async (req, res) => {res.sendFile(path.join(__dirname, '/index.html'))});
-router.get('/raffle/listen', async (req, res) => {
-	const headers = {
-		"Content-Type": "text/event-stream",
-		Connection: "keep-alive",
-	};
-	res.writeHead(200, headers);
-	setInterval(function () {res.write(":\n\n");}, 40000);
-	id = req.query.id;
-	Sse.connect(id, res);
-	req.on("close", Sse.disconnect.bind(id));
-});
+// router.get('/raffle/listen', async (req, res) => {
+// 	const headers = {
+// 		"Content-Type": "text/event-stream",
+// 		Connection: "keep-alive",
+// 	};
+// 	res.writeHead(200, headers);
+// 	setInterval(function () {res.write(":\n\n");}, 40000);
+// 	id = req.query.id;
+// 	Sse.connect(id, res);
+// 	req.on("close", Sse.disconnect.bind(id));
+// });
 
 
 module.exports = router;
