@@ -7,6 +7,7 @@ const Sse = require('../services/serverSentEvents');
 const router = express.Router();
 
 const randomstring = require("randomstring");
+const clients = [];
 
 router.get('/raffle', async (req, res) => {res.sendFile(path.join(__dirname, '/index.html'))});
 
@@ -40,11 +41,12 @@ router.get('/raffle/listen', (req, res) => {
 		res,
   	};
   	clients.push(client);
+	const testinterval = setInterval(test, 30000);
 
 	req.on("close", () => {
 		clients = clients.filter((client) => client.id !== id);
+		clearInterval(testinterval);
 	});
-	setInterval(test, 30000);
 
 	function test() {
 		clients.forEach((client) => {
@@ -53,18 +55,5 @@ router.get('/raffle/listen', (req, res) => {
 		});
 	}
 });
-
-// router.get('/raffle/listen', async (req, res) => {
-// 	const headers = {
-// 		"Content-Type": "text/event-stream",
-// 		Connection: "keep-alive",
-// 	};
-// 	res.writeHead(200, headers);
-// 	setInterval(function () {res.write(":\n\n");}, 40000);
-// 	id = req.query.id;
-// 	Sse.connect(id, res);
-// 	req.on("close", Sse.disconnect.bind(id));
-// });
-
 
 module.exports = router;
