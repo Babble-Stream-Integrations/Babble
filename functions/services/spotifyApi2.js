@@ -1,4 +1,7 @@
-let redirect_uri = "http://google.com/callback"
+// import axios from 'axios';
+// const qs = require('qs');
+
+let redirect_uri = "http://127.0.0.1:5500/functions/services/spotifyRedirectTest.html"
 
 let client_id = "";
 let client_secret = "";
@@ -20,4 +23,39 @@ function requestAuthorization() {
     url += "&show_dialog=true";
     url += "&scope=user-read-private user-read-email user-modify-playback-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-read-private";
     window.location.href = url; // Show Spotify's authorization screen
+    refresh_token = localStorage.getItem("refresh_token");
+
+    console.log(localStorage.getItem("refresh_token"))
+};
+
+async function getToken() {
+    const response = await fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: { 'Authorization' : 'Basic' + btoa('f817d73abc5c47e9b9af069bca544631:a32e61b0576d4cf691c90eaf3f3d2016')}
+    });
+    const data = await response.json();
+    console.log(data.access_token);
 }
+
+async function requestCurrentSong() {
+    const response = await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, {
+        method: 'GET',
+        headers: { 'Authorization' : 'Bearer '}
+    });
+    const data = await response.json();
+    console.log(data);
+};
+
+
+
+//     try{
+//         const response = await axios.get(api_url, {
+//             headers: {
+//                 'Authorization': `Bearer $`
+//             }
+//         });
+//         console.log(response.data);
+//     }catch(error){
+//         console.log(error);
+//     }
+// };
