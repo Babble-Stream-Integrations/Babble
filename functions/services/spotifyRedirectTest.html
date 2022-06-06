@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <script src="spotifyApi2.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="col">
-        <input class="btn btn-primary btn-lg" type="button" onclick="getRefreshToken()" value="Refresh token"><br/>
-        <input class="btn btn-primary btn-lg" type="button" onclick="requestCurrentSong()" value="Request current song"><br/>
-        <input class="btn btn-primary btn-lg" type="button" onclick="getToken()" value="Get token"><br/>
+      <input
+        class="btn btn-primary btn-lg"
+        type="button"
+        onclick="getCode()"
+        value="Refresh token"
+      /><br />
+      <input
+        class="btn btn-primary btn-lg"
+        type="button"
+        onclick="requestCurrentSong()"
+        value="Request current song"
+      /><br />
+      <input
+        class="btn btn-primary btn-lg"
+        type="button"
+        onclick="getToken()"
+        value="Get token"
+      /><br />
     </div>
-</body>
+  </body>
+</html>
