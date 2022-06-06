@@ -41,19 +41,18 @@ function getCode() {
 
 async function getToken() {
   const code = getCode();
-  var data = new URLSearchParams();
-  data.append('grant_type', 'authorization_code');
-  data.append('code', code);
-  data.append('redirect_uri', 'http://127.0.0.1:5500/functions/services/spotifyRedirectTest.html');
-  data.append('client_id', 'f817d73abc5c47e9b9af069bca544631');
-  data.append('client_secret', 'a32e61b0576d4cf691c90eaf3f3d2016');
-
   fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: data,
+    body: new URLSearchParams({
+        "grant_type": "authorization_code",
+        "code": code,
+        "redirect_uri": "http://127.0.0.1:5500/functions/services/spotifyRedirectTest.html",
+        "client_id": "f817d73abc5c47e9b9af069bca544631",
+        "client_secret": "a32e61b0576d4cf691c90eaf3f3d2016"
+      }),
   })
     .then((res) => res.json())
     .then((res) => {
