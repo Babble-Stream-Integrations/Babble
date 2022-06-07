@@ -26,7 +26,6 @@ function requestAuthorization() {
     "&scope=user-read-private user-read-email user-modify-playback-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-read-private";
   window.location.href = url; // Show Spotify's authorization screen
 
-  console.log(localStorage.getItem("refresh_token"));
 }
 
 function getCode() {
@@ -41,6 +40,7 @@ function getCode() {
 
 async function getToken() {
   const code = getCode();
+
   fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
     headers: {
@@ -56,20 +56,34 @@ async function getToken() {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
+      localStorage.setItem("access_token", res.access_token)
     });
 }
 
 async function requestCurrentSong() {
-  const response = await fetch(
-    `https://api.spotify.com/v1/me/player/currently-playing`,
-    {
+  const access_token = localStorage.getItem("access_token")
+
+  fetch("https://api.spotify.com/v1/me/player/currently-playing", {
       method: "GET",
-      headers: { Authorization: "Bearer" },
-    }
-  );
-  const data = await response.json();
-  console.log(data);
+      headers: { Authorization: "Bearer " + access_token },
+    })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res.)
+  });
+}
+
+async function recentlyPlayed() {
+  const access_token = localStorage.getItem("access_token")
+
+  fetch("https://api.spotify.com/v1/me/player/recently-played", {
+    method: "GET",
+    headers: { Authorization: "Bearer " + access_token},
+  })
+  .then((res) => res.json())
+  .then((res) => {
+    console.log(res)
+  });
 }
 
 //     try{
