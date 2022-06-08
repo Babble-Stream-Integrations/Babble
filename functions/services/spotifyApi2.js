@@ -1,6 +1,3 @@
-// import axios from 'axios';
-// const qs = require('qs');
-
 let redirect_uri =
   "http://127.0.0.1:5500/functions/services/spotifyRedirectTest.html";
 
@@ -15,8 +12,6 @@ function requestAuthorization() {
   localStorage.setItem("client_id", client_id);
   localStorage.setItem("client_secret", client_secret);
 
-  console.log(client_id);
-
   let url = AUTHORIZE;
   url += "?client_id=" + client_id;
   url += "&response_type=code";
@@ -25,7 +20,6 @@ function requestAuthorization() {
   url +=
     "&scope=user-read-private user-read-email user-modify-playback-state user-read-playback-position user-library-read streaming user-read-playback-state user-read-recently-played playlist-read-private";
   window.location.href = url; // Show Spotify's authorization screen
-
 }
 
 function getCode() {
@@ -69,7 +63,7 @@ async function requestCurrentSong() {
     })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res.)
+      console.log(res)
   });
 }
 
@@ -78,22 +72,10 @@ async function recentlyPlayed() {
 
   fetch("https://api.spotify.com/v1/me/player/recently-played", {
     method: "GET",
-    headers: { Authorization: "Bearer " + access_token},
+    headers: { Authorization: "Bearer " + access_token },
   })
   .then((res) => res.json())
   .then((res) => {
     console.log(res)
   });
 }
-
-//     try{
-//         const response = await axios.get(api_url, {
-//             headers: {
-//                 'Authorization': `Bearer $`
-//             }
-//         });
-//         console.log(response.data);
-//     }catch(error){
-//         console.log(error);
-//     }
-// };
